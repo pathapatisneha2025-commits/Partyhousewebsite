@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Footer } from "../component/footersection";
-import RoomsPage from "./RoomPage";
 import RoomsSection from "../component/roomcard";
 
 export default function BookingPage() {
