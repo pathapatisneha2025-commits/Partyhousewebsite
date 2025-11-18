@@ -1,7 +1,6 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { Phone, Mail, MapPin, Send } from "lucide-react";
-import { toast } from "sonner";
 
 export function ContactSection() {
   const [formData, setFormData] = useState({
@@ -18,11 +17,11 @@ export function ContactSection() {
     e.preventDefault();
 
     if (!formData.name || !formData.email || !formData.phone || !formData.venue) {
-      toast.error("Please fill in all required fields");
+      alert.error("Please fill in all required fields");
       return;
     }
 
-    toast.success("Booking inquiry submitted successfully!");
+    alert.success("Booking inquiry submitted successfully!");
     setFormData({
       name: "",
       email: "",
