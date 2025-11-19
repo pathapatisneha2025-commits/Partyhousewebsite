@@ -9,81 +9,85 @@ export function AboutSection() {
     { icon: Heart, number: "100%", label: "Satisfaction Rate" },
   ];
 
- const styles = {
-  section: {
-    padding: "64px 16px", // reduced padding for mobile
-    background: "linear-gradient(to bottom, white, #fff8f2)",
-  },
-  container: {
-    maxWidth: "1280px",
-    margin: "0 auto",
-    padding: "0 16px", // smaller side padding for mobile
-  },
-  badge: {
-    display: "inline-block",
-    padding: "6px 20px", // smaller badge
-    background: "rgba(197, 157, 95, 0.1)",
-    color: "#c59d5f",
-    borderRadius: "999px",
-    marginBottom: "16px",
-    fontWeight: 600,
-    fontSize: "14px", // smaller font for mobile
-  },
-  heading: {
-    fontSize: "32px", // reduced for mobile
-    fontWeight: 700,
-    marginBottom: "24px",
-    lineHeight: 1.3,
-  },
-  headingHighlight: {
-    color: "#c59d5f",
-  },
-  paragraph: {
-    color: "#555",
-    fontSize: "16px",
-    maxWidth: "600px",
-    margin: "0 auto",
-    lineHeight: 1.6,
-  },
-  statsGrid: {
-    display: "grid",
-    gridTemplateColumns: "repeat(2, 1fr)", // always 2 per row
-    gap: "16px", // smaller gap for mobile
-    marginTop: "32px",
-  },
-  statCard: {
-    background: "white",
-    padding: "24px", // smaller padding for mobile
-    borderRadius: "20px",
-    boxShadow: "0px 4px 20px rgba(0,0,0,0.1)",
-    textAlign: "center",
-    transition: "all 0.3s ease",
-    cursor: "pointer",
-  },
-  iconWrapper: {
-    width: "56px", // slightly smaller on mobile
-    height: "56px",
-    background: "rgba(197,157,95,0.1)",
-    borderRadius: "50%",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    margin: "0 auto 12px",
-    transition: "background 0.3s ease",
-  },
-  statNumber: {
-    fontSize: "28px", // smaller for mobile
-    fontWeight: 700,
-    color: "#222",
-    marginBottom: "6px",
-  },
-  statLabel: {
-    fontSize: "14px", // smaller for mobile
-    color: "#666",
-    fontWeight: 500,
-  },
-};
-
+  const styles = {
+    section: {
+      padding: "96px 0",
+      background: "linear-gradient(to bottom, white, #fff8f2)",
+    },
+    container: {
+      maxWidth: "1280px",
+      margin: "0 auto",
+      padding: "0 24px",
+    },
+    badge: {
+      display: "inline-block",
+      padding: "8px 24px",
+      background: "rgba(197, 157, 95, 0.1)",
+      color: "#c59d5f",
+      borderRadius: "999px",
+      marginBottom: "16px",
+      fontWeight: 600,
+    },
+    heading: {
+      fontSize: "40px",
+      fontWeight: 700,
+      marginBottom: "24px",
+      lineHeight: 1.2,
+    },
+    headingHighlight: {
+      color: "#c59d5f",
+    },
+    paragraph: {
+      color: "#555",
+      fontSize: "18px",
+      maxWidth: "700px",
+      margin: "0 auto",
+      lineHeight: 1.7,
+    },
+    statsGrid: {
+      display: "grid",
+      gridTemplateColumns: "repeat(2, 1fr)",
+      gap: "24px",
+      marginTop: "48px",
+    },
+    statCard: {
+      background: "white",
+      padding: "32px",
+      borderRadius: "20px",
+      boxShadow: "0px 4px 20px rgba(0,0,0,0.1)",
+      textAlign: "center",
+      transition: "all 0.3s ease",
+      cursor: "pointer",
+    },
+    iconWrapper: {
+      width: "64px",
+      height: "64px",
+      background: "rgba(197,157,95,0.1)",
+      borderRadius: "50%",
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      margin: "0 auto 16px",
+      transition: "background 0.3s ease",
+    },
+    statNumber: {
+      fontSize: "36px",
+      fontWeight: 700,
+      color: "#222",
+      marginBottom: "8px",
+    },
+    statLabel: {
+      fontSize: "16px",
+      color: "#666",
+      fontWeight: 500,
+    },
+    // Responsive
+    responsiveLg: {
+      "@media(min-width: 1024px)": {
+        gridTemplateColumns: "repeat(4, 1fr)",
+      },
+    },
+  };
 
   return (
     <section id="about" style={styles.section}>
