@@ -1,4 +1,4 @@
-import { motion } from "framer-motion"; 
+import { motion } from "framer-motion";
 import { Sparkles, Users, Award, Heart } from "lucide-react";
 import { useState, useEffect } from "react";
 
@@ -50,7 +50,9 @@ export function AboutSection() {
       marginBottom: "24px",
       lineHeight: 1.2,
     },
-    headingHighlight: { color: "#c59d5f" },
+    headingHighlight: {
+      color: "#c59d5f",
+    },
     paragraph: {
       color: "#555",
       fontSize: "18px",
@@ -100,6 +102,7 @@ export function AboutSection() {
   return (
     <section id="about" style={styles.section}>
       <div style={styles.container}>
+        {/* Top text block */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -108,12 +111,14 @@ export function AboutSection() {
           style={{ textAlign: "center", marginBottom: "64px" }}
         >
           <span style={styles.badge}>About Us</span>
+
           <h2 style={styles.heading}>
             Creating Unforgettable <br />
             <span style={styles.headingHighlight}>
               Celebrations Since 2010
             </span>
           </h2>
+
           <p style={styles.paragraph}>
             At Royal Celebration Party Hall, we believe every event deserves to
             be extraordinary. With our elegant venues, exceptional service, and
@@ -122,9 +127,11 @@ export function AboutSection() {
           </p>
         </motion.div>
 
+        {/* Stats */}
         <div style={styles.statsGrid}>
           {stats.map((stat, index) => {
             const Icon = stat.icon;
+
             return (
               <motion.div
                 key={index}
@@ -152,6 +159,7 @@ export function AboutSection() {
                 <div className="icon-wrapper" style={styles.iconWrapper}>
                   <Icon size={32} color="#c59d5f" />
                 </div>
+
                 <h3 style={styles.statNumber}>{stat.number}</h3>
                 <p style={styles.statLabel}>{stat.label}</p>
               </motion.div>
