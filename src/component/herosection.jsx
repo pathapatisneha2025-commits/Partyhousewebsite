@@ -1,6 +1,48 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 export default function Hero() {
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  // Responsive font sizes based on window width
+  const getResponsiveStyles = () => {
+    let titleSize = "3.5rem";
+    let subtitleSize = "1.5rem";
+    let buttonPadding = "16px 40px";
+    let buttonFontSize = "18px";
+    let sectionPadding = "120px 20px";
+
+    if (windowWidth <= 1024) {
+      titleSize = "3rem";
+      subtitleSize = "1.3rem";
+      buttonPadding = "14px 32px";
+      buttonFontSize = "16px";
+    }
+    if (windowWidth <= 768) {
+      titleSize = "2.2rem";
+      subtitleSize = "1.1rem";
+      buttonPadding = "12px 28px";
+      buttonFontSize = "15px";
+      sectionPadding = "80px 16px";
+    }
+    if (windowWidth <= 480) {
+      titleSize = "1.8rem";
+      subtitleSize = "1rem";
+      buttonPadding = "10px 24px";
+      buttonFontSize = "14px";
+      sectionPadding = "60px 12px";
+    }
+
+    return { titleSize, subtitleSize, buttonPadding, buttonFontSize, sectionPadding };
+  };
+
+  const { titleSize, subtitleSize, buttonPadding, buttonFontSize, sectionPadding } = getResponsiveStyles();
+
   const styles = {
     hero: {
       height: "100vh",
@@ -8,14 +50,13 @@ export default function Hero() {
       alignItems: "center",
       justifyContent: "center",
       textAlign: "center",
-      padding: "120px 20px", // added horizontal padding for mobile
+      padding: sectionPadding,
       backgroundImage: "url('/heroimage.jpeg')",
       backgroundSize: "cover",
       backgroundPosition: "center",
       backgroundRepeat: "no-repeat",
       position: "relative",
     },
-
     overlay: {
       position: "absolute",
       top: 0,
@@ -25,7 +66,6 @@ export default function Hero() {
       background: "rgba(0,0,0,0.45)",
       zIndex: 1,
     },
-
     heroContent: {
       position: "relative",
       zIndex: 2,
@@ -34,83 +74,37 @@ export default function Hero() {
       maxWidth: "900px",
       margin: "0 auto",
     },
-
     title: {
-      fontSize: "3.5rem",
+      fontSize: titleSize,
       fontWeight: 800,
       marginBottom: "20px",
       textShadow: "0 4px 20px rgba(0,0,0,0.6)",
     },
-
     subtitle: {
-      fontSize: "1.5rem",
+      fontSize: subtitleSize,
       marginBottom: "30px",
       textShadow: "0 3px 15px rgba(0,0,0,0.5)",
     },
-
     button: {
       display: "inline-block",
       background: "#c59d5f",
-      padding: "16px 40px",
+      padding: buttonPadding,
       borderRadius: "50px",
       fontWeight: 700,
       textDecoration: "none",
       color: "#fff",
-      fontSize: "18px",
+      fontSize: buttonFontSize,
       transition: "0.4s",
     },
   };
 
   return (
     <>
-      {/* Inline keyframes animation and media queries */}
       <style>
         {`
           @keyframes fadeIn {
             0% { opacity: 0; transform: translateY(20px); }
             100% { opacity: 1; transform: translateY(0); }
-          }
-
-          @media (max-width: 1024px) {
-            h1 {
-              font-size: 3rem !important;
-            }
-            p {
-              font-size: 1.3rem !important;
-            }
-            a {
-              padding: 14px 32px !important;
-              font-size: 16px !important;
-            }
-          }
-
-          @media (max-width: 768px) {
-            h1 {
-              font-size: 2.2rem !important;
-            }
-            p {
-              font-size: 1.1rem !important;
-            }
-            a {
-              padding: 12px 28px !important;
-              font-size: 15px !important;
-            }
-            section {
-              padding: 80px 16px !important;
-            }
-          }
-
-          @media (max-width: 480px) {
-            h1 {
-              font-size: 1.8rem !important;
-            }
-            p {
-              font-size: 1rem !important;
-            }
-            a {
-              padding: 10px 24px !important;
-              font-size: 14px !important;
-            }
           }
         `}
       </style>
