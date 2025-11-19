@@ -5,7 +5,11 @@ export default function Navbar() {
   const [shrink, setShrink] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => setShrink(window.scrollY > 50);
+    const handleScroll = () => {
+      if (window.scrollY > 50) setShrink(true);
+      else setShrink(false);
+    };
+
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -13,7 +17,7 @@ export default function Navbar() {
   const styles = {
     navbar: {
       width: "95%",
-      padding: shrink ? "10px 20px" : "20px 20px",
+      padding: shrink ? "10px 50px" : "20px 60px",
       position: "fixed",
       top: 0,
       left: 0,
@@ -25,25 +29,22 @@ export default function Navbar() {
       zIndex: 1000,
       borderBottom: "1px solid #e0dede",
       transition: "0.3s ease",
-      overflowX: "auto", // allows horizontal scroll if needed
     },
+
     logoImg: {
       width: shrink ? "90px" : "120px",
       height: shrink ? "45px" : "60px",
       borderRadius: "40px",
       objectFit: "cover",
       transition: "0.3s ease",
-      flexShrink: 0,
     },
+
     navLinks: {
       listStyle: "none",
       display: "flex",
-      gap: "20px",
-      flexWrap: "nowrap", // keep horizontal
-      justifyContent: "flex-end",
-      margin: 0,
-      padding: 0,
+      gap: "30px",
     },
+
     navLink: {
       fontWeight: 600,
       fontSize: "16px",
@@ -52,7 +53,6 @@ export default function Navbar() {
       textDecoration: "none",
       color: "#000",
       transition: "0.3s ease",
-      whiteSpace: "nowrap", // prevent wrapping
     },
   };
 
@@ -62,14 +62,6 @@ export default function Navbar() {
       color:#fff !important;
       transform:scale(1.05);
     }
-
-    /* MOBILE RESPONSIVE */
-    @media (max-width: 768px) {
-      ul.nav-links {
-        justify-content: flex-start;
-        gap: 15px;
-      }
-    }
   `;
 
   return (
@@ -77,17 +69,28 @@ export default function Navbar() {
       <style>{hoverStyle}</style>
 
       <nav style={styles.navbar}>
+        {/* LOGO */}
         <div>
           <img src="/Logoimage.jpeg" alt="Hall Logo" style={styles.logoImg} />
         </div>
 
-        <ul className="nav-links" style={styles.navLinks}>
-          <li className="nav-item"><Link to="/" style={styles.navLink}>Home</Link></li>
-          <li className="nav-item"><Link to="/about" style={styles.navLink}>About Us</Link></li>
-          <li className="nav-item"><Link to="/rooms" style={styles.navLink}>Rooms</Link></li>
-          <li className="nav-item"><Link to="/bookingpage" style={styles.navLink}>Bookings</Link></li>
-          <li className="nav-item"><Link to="/contact" style={styles.navLink}>Contact</Link></li>
-          <li className="nav-item"><Link to="/services" style={styles.navLink}>Services</Link></li>
+        {/* NAV LINKS (NORMAL — NO MAP) */}
+        <ul style={styles.navLinks}>
+                               <li><Link to="/" style={styles.navLink}>Home</Link></li>
+
+
+                     <li><Link to="/about" style={styles.navLink}>About Us</Link></li>
+
+                     <li><Link to="/rooms" style={styles.navLink}>Rooms</Link></li>
+
+
+                               <li><Link to="/bookingpage" style={styles.navLink}>Bookings</Link></li>
+
+                               <li><Link to="/contact" style={styles.navLink}>Contact</Link></li>
+
+
+                                        <li><Link to="/services" style={styles.navLink}>Services</Link></li>
+
         </ul>
       </nav>
     </>
