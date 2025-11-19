@@ -29,9 +29,9 @@ export default function Navbar() {
       position: "fixed",
       top: 0,
       left: 0,
-      background: "rgba(255,255,255,0.9)",
+      background: "white",
       backdropFilter: "blur(12px)",
-      zIndex: 1000,
+      zIndex: 9999,
       borderBottom: "1px solid #eaeaea",
       transition: "0.3s ease",
     },
@@ -51,29 +51,27 @@ export default function Navbar() {
       transition: "0.3s ease",
     },
 
-    menuIcon: {
-      fontSize: "28px",
-      cursor: "pointer",
-      display: isMobile ? "block" : "none",
-    },
-
     navLinks: {
       listStyle: "none",
-      display: isMobile ? (menuOpen ? "flex" : "none") : "flex",
+      display: isMobile ? "block" : "flex",
       flexDirection: isMobile ? "column" : "row",
-      width: isMobile ? "100%" : "auto",
+      width: "100%",
       padding: 0,
-      marginTop: isMobile ? "15px" : "0",
-      gap: isMobile ? "15px" : "30px",
+      marginTop: isMobile ? (menuOpen ? "15px" : "0") : 0,
+      maxHeight: isMobile ? (menuOpen ? "300px" : "0px") : "none",
+      overflow: "hidden",
+      transition: "0.3s ease",
+      background: isMobile ? "#fff" : "transparent",
+      borderTop: isMobile ? "1px solid #eaeaea" : "none",
     },
 
     navLink: {
+      padding: "12px 14px",
       textDecoration: "none",
       color: "#000",
       fontWeight: 600,
-      padding: "8px 14px",
+      display: "block",
       borderRadius: "8px",
-      transition: "0.3s ease",
     },
   };
 
@@ -89,12 +87,12 @@ export default function Navbar() {
       <style>{hoverStyle}</style>
 
       <nav style={styles.navbar}>
-
-        {/* Top Row */}
+        
+        {/* HEADER */}
         <div style={styles.topRow}>
           <img src="/Logoimage.jpeg" alt="Hall Logo" style={styles.logoImg} />
 
-          {/* Mobile Menu ICON */}
+          {/* MOBILE MENU ICON */}
           {isMobile && (
             <div onClick={() => setMenuOpen(!menuOpen)}>
               {menuOpen ? <X size={30} /> : <Menu size={30} />}
@@ -102,7 +100,7 @@ export default function Navbar() {
           )}
         </div>
 
-        {/* Nav Links */}
+        {/* DROPDOWN MENU */}
         <ul style={styles.navLinks}>
           <li><Link to="/" style={styles.navLink}>Home</Link></li>
           <li><Link to="/about" style={styles.navLink}>About Us</Link></li>
