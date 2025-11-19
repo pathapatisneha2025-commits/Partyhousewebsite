@@ -66,24 +66,16 @@ export default function Navbar() {
     },
   };
 
- const hoverStyle = `
-    /* REMOVE HOVER ON MOBILE */
-    @media (max-width: 767px) {
-      .nav-item:hover {
-        background: none !important;
-        color: #000 !important;
-        transform: none !important;
-      }
+const hoverStyle = `
+    /* NO HOVER ANYWHERE */
+    .nav-item:hover {
+      background: none !important;
+      color: inherit !important;
+      transform: none !important;
     }
 
-    /* APPLY HOVER ONLY ON DESKTOP */
+    /* DESKTOP LAYOUT ONLY — NO HOVER */
     @media (min-width: 768px) {
-      .nav-item:hover {
-        background:#000;
-        color:#fff !important;
-        transform:scale(1.05);
-      }
-
       .navbar {
         flex-direction: row !important;
         align-items: center !important;
@@ -99,6 +91,7 @@ export default function Navbar() {
       }
     }
 `;
+
 
 
   return (
