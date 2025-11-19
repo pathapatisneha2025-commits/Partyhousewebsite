@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { Menu, X } from "lucide-react";
 
 export default function Navbar() {
   const [shrink, setShrink] = useState(false);
   const [width, setWidth] = useState(window.innerWidth);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => setShrink(window.scrollY > 50);
@@ -18,7 +20,6 @@ export default function Navbar() {
     };
   }, []);
 
-  // MOBILE = column layout
   const isMobile = width <= 768;
 
   const styles = {
@@ -28,21 +29,18 @@ export default function Navbar() {
       position: "fixed",
       top: 0,
       left: 0,
-      display: "flex",
-      flexDirection: "column",
-      alignItems: isMobile ? "flex-start" : "center",
-      background: "rgba(255, 255, 255, 0.9)",
+      background: "rgba(255,255,255,0.9)",
       backdropFilter: "blur(12px)",
       zIndex: 1000,
-      borderBottom: "1px solid #e0dede",
+      borderBottom: "1px solid #eaeaea",
       transition: "0.3s ease",
     },
 
     topRow: {
-      width: "100%",
       display: "flex",
       justifyContent: "space-between",
       alignItems: "center",
+      width: "100%",
     },
 
     logoImg: {
@@ -53,32 +51,36 @@ export default function Navbar() {
       transition: "0.3s ease",
     },
 
+    menuIcon: {
+      fontSize: "28px",
+      cursor: "pointer",
+      display: isMobile ? "block" : "none",
+    },
+
     navLinks: {
       listStyle: "none",
-      display: "flex",
+      display: isMobile ? (menuOpen ? "flex" : "none") : "flex",
       flexDirection: isMobile ? "column" : "row",
       width: isMobile ? "100%" : "auto",
-      gap: isMobile ? "10px" : "30px",
-      marginTop: isMobile ? "15px" : "0",
       padding: 0,
+      marginTop: isMobile ? "15px" : "0",
+      gap: isMobile ? "15px" : "30px",
     },
 
     navLink: {
-      fontWeight: 600,
-      fontSize: "16px",
-      padding: "6px 14px",
-      borderRadius: "8px",
       textDecoration: "none",
       color: "#000",
+      fontWeight: 600,
+      padding: "8px 14px",
+      borderRadius: "8px",
       transition: "0.3s ease",
     },
   };
 
   const hoverStyle = `
     a:hover {
-      background:#000;
-      color:#fff !important;
-      transform:scale(1.05);
+      background: #000;
+      color: #fff !important;
     }
   `;
 
@@ -87,11 +89,20 @@ export default function Navbar() {
       <style>{hoverStyle}</style>
 
       <nav style={styles.navbar}>
-        
+
+        {/* Top Row */}
         <div style={styles.topRow}>
           <img src="/Logoimage.jpeg" alt="Hall Logo" style={styles.logoImg} />
+
+          {/* Mobile Menu ICON */}
+          {isMobile && (
+            <div onClick={() => setMenuOpen(!menuOpen)}>
+              {menuOpen ? <X size={30} /> : <Menu size={30} />}
+            </div>
+          )}
         </div>
 
+        {/* Nav Links */}
         <ul style={styles.navLinks}>
           <li><Link to="/" style={styles.navLink}>Home</Link></li>
           <li><Link to="/about" style={styles.navLink}>About Us</Link></li>
