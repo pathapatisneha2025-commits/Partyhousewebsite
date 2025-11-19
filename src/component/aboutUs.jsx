@@ -1,6 +1,5 @@
-import { motion } from "framer-motion";
+import { motion } from "framer-motion"; 
 import { Sparkles, Users, Award, Heart } from "lucide-react";
-import { useState, useEffect } from "react";
 
 export function AboutSection() {
   const stats = [
@@ -9,21 +8,6 @@ export function AboutSection() {
     { icon: Award, number: "15+", label: "Years Experience" },
     { icon: Heart, number: "100%", label: "Satisfaction Rate" },
   ];
-
-  const [columns, setColumns] = useState(2); // default 2 columns
-
-  useEffect(() => {
-    const updateColumns = () => {
-      const width = window.innerWidth;
-      if (width >= 1024) setColumns(4); // desktop
-      else if (width >= 640) setColumns(2); // tablet
-      else setColumns(1); // mobile
-    };
-
-    updateColumns();
-    window.addEventListener("resize", updateColumns);
-    return () => window.removeEventListener("resize", updateColumns);
-  }, []);
 
   const styles = {
     section: {
@@ -62,7 +46,7 @@ export function AboutSection() {
     },
     statsGrid: {
       display: "grid",
-      gridTemplateColumns: `repeat(${columns}, 1fr)`,
+      gridTemplateColumns: "repeat(2, 1fr)",
       gap: "24px",
       marginTop: "48px",
     },
@@ -96,6 +80,12 @@ export function AboutSection() {
       fontSize: "16px",
       color: "#666",
       fontWeight: 500,
+    },
+    // Responsive
+    responsiveLg: {
+      "@media(min-width: 1024px)": {
+        gridTemplateColumns: "repeat(4, 1fr)",
+      },
     },
   };
 
