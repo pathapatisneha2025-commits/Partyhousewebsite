@@ -8,7 +8,7 @@ export default function Hero() {
       alignItems: "center",
       justifyContent: "center",
       textAlign: "center",
-      paddingTop: "120px",
+      padding: "120px 20px", // added horizontal padding for mobile
       backgroundImage: "url('/heroimage.jpeg')",
       backgroundSize: "cover",
       backgroundPosition: "center",
@@ -31,6 +31,8 @@ export default function Hero() {
       zIndex: 2,
       color: "#fff",
       animation: "fadeIn 1.5s ease forwards",
+      maxWidth: "900px",
+      margin: "0 auto",
     },
 
     title: {
@@ -61,12 +63,54 @@ export default function Hero() {
 
   return (
     <>
-      {/* Inline keyframes animation */}
+      {/* Inline keyframes animation and media queries */}
       <style>
         {`
           @keyframes fadeIn {
             0% { opacity: 0; transform: translateY(20px); }
             100% { opacity: 1; transform: translateY(0); }
+          }
+
+          @media (max-width: 1024px) {
+            h1 {
+              font-size: 3rem !important;
+            }
+            p {
+              font-size: 1.3rem !important;
+            }
+            a {
+              padding: 14px 32px !important;
+              font-size: 16px !important;
+            }
+          }
+
+          @media (max-width: 768px) {
+            h1 {
+              font-size: 2.2rem !important;
+            }
+            p {
+              font-size: 1.1rem !important;
+            }
+            a {
+              padding: 12px 28px !important;
+              font-size: 15px !important;
+            }
+            section {
+              padding: 80px 16px !important;
+            }
+          }
+
+          @media (max-width: 480px) {
+            h1 {
+              font-size: 1.8rem !important;
+            }
+            p {
+              font-size: 1rem !important;
+            }
+            a {
+              padding: 10px 24px !important;
+              font-size: 14px !important;
+            }
           }
         `}
       </style>
