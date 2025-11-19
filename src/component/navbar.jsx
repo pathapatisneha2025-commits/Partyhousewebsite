@@ -13,7 +13,7 @@ export default function Navbar() {
   const styles = {
     navbar: {
       width: "95%",
-      padding: shrink ? "10px 50px" : "20px 60px",
+      padding: shrink ? "10px 20px" : "20px 20px",
       position: "fixed",
       top: 0,
       left: 0,
@@ -25,7 +25,7 @@ export default function Navbar() {
       zIndex: 1000,
       borderBottom: "1px solid #e0dede",
       transition: "0.3s ease",
-      flexWrap: "wrap", // allow wrapping on small screens
+      overflowX: "auto", // allows horizontal scroll if needed
     },
     logoImg: {
       width: shrink ? "90px" : "120px",
@@ -33,15 +33,16 @@ export default function Navbar() {
       borderRadius: "40px",
       objectFit: "cover",
       transition: "0.3s ease",
+      flexShrink: 0,
     },
     navLinks: {
       listStyle: "none",
       display: "flex",
-      gap: "30px",
-      flexWrap: "wrap", // allow wrapping
+      gap: "20px",
+      flexWrap: "nowrap", // keep horizontal
       justifyContent: "flex-end",
-      marginTop: "10px",
-      width: "100%",
+      margin: 0,
+      padding: 0,
     },
     navLink: {
       fontWeight: 600,
@@ -51,6 +52,7 @@ export default function Navbar() {
       textDecoration: "none",
       color: "#000",
       transition: "0.3s ease",
+      whiteSpace: "nowrap", // prevent wrapping
     },
   };
 
@@ -64,16 +66,8 @@ export default function Navbar() {
     /* MOBILE RESPONSIVE */
     @media (max-width: 768px) {
       ul.nav-links {
-        flex-direction: column;
-        gap: 10px;
-        width: 100%;
-      }
-      ul.nav-links li {
-        width: 100%;
-        text-align: center;
-      }
-      nav {
-        padding: ${shrink ? "10px 20px" : "20px 20px"};
+        justify-content: flex-start;
+        gap: 15px;
       }
     }
   `;
