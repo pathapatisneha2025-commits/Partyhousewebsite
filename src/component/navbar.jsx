@@ -1,46 +1,34 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Menu, X } from "lucide-react";
 
 export default function Navbar() {
   const [shrink, setShrink] = useState(false);
-  const [width, setWidth] = useState(window.innerWidth);
-  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => setShrink(window.scrollY > 50);
-    const handleResize = () => setWidth(window.innerWidth);
+    const handleScroll = () => {
+      if (window.scrollY > 50) setShrink(true);
+      else setShrink(false);
+    };
 
     window.addEventListener("scroll", handleScroll);
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-      window.removeEventListener("resize", handleResize);
-    };
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
-  const isMobile = width <= 768;
 
   const styles = {
     navbar: {
-      width: "100%",
-      padding: shrink ? "10px 20px" : "20px 30px",
+      width: "95%",
+      padding: shrink ? "10px 50px" : "20px 60px",
       position: "fixed",
       top: 0,
       left: 0,
-      background: "white",
-      backdropFilter: "blur(12px)",
-      zIndex: 9999,
-      borderBottom: "1px solid #eaeaea",
-      transition: "0.3s ease",
-    },
-
-    topRow: {
       display: "flex",
       justifyContent: "space-between",
       alignItems: "center",
-      width: "100%",
+      background: "rgba(255, 255, 255, 0.9)",
+      backdropFilter: "blur(12px)",
+      zIndex: 1000,
+      borderBottom: "1px solid #e0dede",
+      transition: "0.3s ease",
     },
 
     logoImg: {
@@ -53,32 +41,26 @@ export default function Navbar() {
 
     navLinks: {
       listStyle: "none",
-      display: isMobile ? "block" : "flex",
-      flexDirection: isMobile ? "column" : "row",
-      width: "100%",
-      padding: 0,
-      marginTop: isMobile ? (menuOpen ? "15px" : "0") : 0,
-      maxHeight: isMobile ? (menuOpen ? "300px" : "0px") : "none",
-      overflow: "hidden",
-      transition: "0.3s ease",
-      background: isMobile ? "#fff" : "transparent",
-      borderTop: isMobile ? "1px solid #eaeaea" : "none",
+      display: "flex",
+      gap: "30px",
     },
 
     navLink: {
-      padding: "12px 14px",
+      fontWeight: 600,
+      fontSize: "16px",
+      padding: "6px 14px",
+      borderRadius: "8px",
       textDecoration: "none",
       color: "#000",
-      fontWeight: 600,
-      display: "block",
-      borderRadius: "8px",
+      transition: "0.3s ease",
     },
   };
 
   const hoverStyle = `
-    a:hover {
-      background: #000;
-      color: #fff !important;
+    .nav-item:hover {
+      background:#000;
+      color:#fff !important;
+      transform:scale(1.05);
     }
   `;
 
@@ -87,29 +69,29 @@ export default function Navbar() {
       <style>{hoverStyle}</style>
 
       <nav style={styles.navbar}>
-        
-        {/* HEADER */}
-        <div style={styles.topRow}>
+        {/* LOGO */}
+        <div>
           <img src="/Logoimage.jpeg" alt="Hall Logo" style={styles.logoImg} />
-
-          {/* MOBILE MENU ICON */}
-          {isMobile && (
-            <div onClick={() => setMenuOpen(!menuOpen)}>
-              {menuOpen ? <X size={30} /> : <Menu size={30} />}
-            </div>
-          )}
         </div>
 
-        {/* DROPDOWN MENU */}
+        {/* NAV LINKS (NORMAL — NO MAP) */}
         <ul style={styles.navLinks}>
-          <li><Link to="/" style={styles.navLink}>Home</Link></li>
-          <li><Link to="/about" style={styles.navLink}>About Us</Link></li>
-          <li><Link to="/rooms" style={styles.navLink}>Rooms</Link></li>
-          <li><Link to="/bookingpage" style={styles.navLink}>Bookings</Link></li>
-          <li><Link to="/contact" style={styles.navLink}>Contact</Link></li>
-          <li><Link to="/services" style={styles.navLink}>Services</Link></li>
-        </ul>
+                               <li><Link to="/" style={styles.navLink}>Home</Link></li>
 
+
+                     <li><Link to="/about" style={styles.navLink}>About Us</Link></li>
+
+                     <li><Link to="/rooms" style={styles.navLink}>Rooms</Link></li>
+
+
+                               <li><Link to="/bookingpage" style={styles.navLink}>Bookings</Link></li>
+
+                               <li><Link to="/contact" style={styles.navLink}>Contact</Link></li>
+
+
+                                        <li><Link to="/services" style={styles.navLink}>Services</Link></li>
+
+        </ul>
       </nav>
     </>
   );
