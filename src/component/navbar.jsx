@@ -16,7 +16,8 @@ export default function Navbar() {
       padding: shrink ? "10px 20px" : "20px 20px",
       position: "fixed",
       top: 0,
-      left: 0,
+      left: "50%",
+      transform: "translateX(-50%)",
       display: "flex",
       justifyContent: "space-between",
       alignItems: "center",
@@ -25,7 +26,6 @@ export default function Navbar() {
       zIndex: 1000,
       borderBottom: "1px solid #e0dede",
       transition: "0.3s ease",
-      overflowX: "auto", // allows horizontal scroll if needed
     },
     logoImg: {
       width: shrink ? "90px" : "120px",
@@ -43,6 +43,7 @@ export default function Navbar() {
       justifyContent: "flex-end",
       margin: 0,
       padding: 0,
+      flexShrink: 1, // allow shrinking on mobile
     },
     navLink: {
       fontWeight: 600,
@@ -53,6 +54,7 @@ export default function Navbar() {
       color: "#000",
       transition: "0.3s ease",
       whiteSpace: "nowrap", // prevent wrapping
+      flexShrink: 1, // allow shrinking
     },
   };
 
@@ -65,9 +67,15 @@ export default function Navbar() {
 
     /* MOBILE RESPONSIVE */
     @media (max-width: 768px) {
+      nav {
+        padding: ${shrink ? "10px 10px" : "15px 10px"};
+      }
       ul.nav-links {
-        justify-content: flex-start;
-        gap: 15px;
+        gap: 10px; /* smaller gap on mobile */
+      }
+      ul.nav-links li a {
+        font-size: 14px; /* smaller font on mobile */
+        padding: 4px 8px;
       }
     }
   `;
@@ -77,17 +85,31 @@ export default function Navbar() {
       <style>{hoverStyle}</style>
 
       <nav style={styles.navbar}>
+        {/* Logo */}
         <div>
           <img src="/Logoimage.jpeg" alt="Hall Logo" style={styles.logoImg} />
         </div>
 
+        {/* Navigation Links */}
         <ul className="nav-links" style={styles.navLinks}>
-          <li className="nav-item"><Link to="/" style={styles.navLink}>Home</Link></li>
-          <li className="nav-item"><Link to="/about" style={styles.navLink}>About Us</Link></li>
-          <li className="nav-item"><Link to="/rooms" style={styles.navLink}>Rooms</Link></li>
-          <li className="nav-item"><Link to="/bookingpage" style={styles.navLink}>Bookings</Link></li>
-          <li className="nav-item"><Link to="/contact" style={styles.navLink}>Contact</Link></li>
-          <li className="nav-item"><Link to="/services" style={styles.navLink}>Services</Link></li>
+          <li className="nav-item">
+            <Link to="/" style={styles.navLink}>Home</Link>
+          </li>
+          <li className="nav-item">
+            <Link to="/about" style={styles.navLink}>About Us</Link>
+          </li>
+          <li className="nav-item">
+            <Link to="/rooms" style={styles.navLink}>Rooms</Link>
+          </li>
+          <li className="nav-item">
+            <Link to="/bookingpage" style={styles.navLink}>Bookings</Link>
+          </li>
+          <li className="nav-item">
+            <Link to="/contact" style={styles.navLink}>Contact</Link>
+          </li>
+          <li className="nav-item">
+            <Link to="/services" style={styles.navLink}>Services</Link>
+          </li>
         </ul>
       </nav>
     </>
