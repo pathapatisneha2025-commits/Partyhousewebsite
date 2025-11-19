@@ -1,4 +1,4 @@
-import { motion} from "framer-motion";
+import { motion } from "framer-motion";
 import { Facebook, Instagram, Twitter, Mail, Phone, MapPin, Link } from "lucide-react";
 
 export function Footer() {
@@ -29,7 +29,8 @@ export function Footer() {
         style={{
           maxWidth: "1200px",
           margin: "0 auto",
-          padding: "70px 24px",
+          padding: "60px 16px", // smaller padding for mobile
+          width: "100%",
         }}
       >
         {/* GRID */}
@@ -37,21 +38,21 @@ export function Footer() {
           style={{
             display: "grid",
             gridTemplateColumns: "1fr 1fr",
-            gap: "40px",
+            gap: "30px",
           }}
         >
-          {/* Left 2 Columns on Desktop */}
+          {/* LEFT SECTION */}
           <div style={{ gridColumn: "span 2" }}>
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              style={{ marginBottom: "24px" }}
+              style={{ marginBottom: "20px" }}
             >
               <h3
                 style={{
-                  fontSize: "24px",
-                  marginBottom: "12px",
+                  fontSize: "22px", // smaller for mobile
+                  marginBottom: "10px",
                   color: "#c59d5f",
                 }}
               >
@@ -60,9 +61,10 @@ export function Footer() {
 
               <p
                 style={{
-                  maxWidth: "450px",
+                  maxWidth: "100%",
                   color: "#bfbfbf",
                   lineHeight: "1.6",
+                  fontSize: "14px",
                 }}
               >
                 Creating unforgettable memories since 2010. Let us make your
@@ -71,7 +73,7 @@ export function Footer() {
             </motion.div>
 
             {/* SOCIAL ICONS */}
-            <div style={{ display: "flex", gap: "16px" }}>
+            <div style={{ display: "flex", gap: "12px", flexWrap: "wrap", marginBottom: "20px" }}>
               {socialLinks.map((s, i) => {
                 const Icon = s.icon;
                 return (
@@ -84,8 +86,8 @@ export function Footer() {
                     whileHover={{ scale: 1.1, y: -3 }}
                     aria-label={s.label}
                     style={{
-                      width: "42px",
-                      height: "42px",
+                      width: "38px",
+                      height: "38px",
                       borderRadius: "50%",
                       background: "rgba(255,255,255,0.12)",
                       display: "flex",
@@ -95,7 +97,7 @@ export function Footer() {
                       cursor: "pointer",
                     }}
                   >
-                    <Icon size={22} color="white" />
+                    <Icon size={20} color="white" />
                   </motion.a>
                 );
               })}
@@ -108,19 +110,18 @@ export function Footer() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <h4 style={{ fontSize: "18px", marginBottom: "20px" }}>
-              Quick Links
-            </h4>
+            <h4 style={{ fontSize: "16px", marginBottom: "16px" }}>Quick Links</h4>
 
             <ul style={{ listStyle: "none", padding: 0 }}>
               {quickLinks.map((l, i) => (
-                <li key={i} style={{ marginBottom: "12px" }}>
+                <li key={i} style={{ marginBottom: "10px" }}>
                   <a
                     href={l.href}
                     style={{
                       color: "#bfbfbf",
                       textDecoration: "none",
                       transition: "0.3s",
+                      fontSize: "14px",
                     }}
                     onMouseEnter={(e) => (e.target.style.color = "#c59d5f")}
                     onMouseLeave={(e) => (e.target.style.color = "#bfbfbf")}
@@ -138,31 +139,24 @@ export function Footer() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <h4 style={{ fontSize: "18px", marginBottom: "20px" }}>
-              Contact Info
-            </h4>
+            <h4 style={{ fontSize: "16px", marginBottom: "16px" }}>Contact Info</h4>
 
-            <ul style={{ listStyle: "none", padding: 0 }}>
-              {/* Phone */}
-              <li style={{ display: "flex", gap: "12px", marginBottom: "14px" }}>
-                <Phone size={20} color="#c59d5f" />
+            <ul style={{ listStyle: "none", padding: 0, fontSize: "14px" }}>
+              <li style={{ display: "flex", gap: "10px", marginBottom: "12px" }}>
+                <Phone size={18} color="#c59d5f" />
                 <div>
                   <p>+91 98765 43210</p>
-                  <p style={{ fontSize: "13px", color: "#bfbfbf" }}>
-                    9 AM – 9 PM
-                  </p>
+                  <p style={{ fontSize: "12px", color: "#bfbfbf" }}>9 AM – 9 PM</p>
                 </div>
               </li>
 
-              {/* Mail */}
-              <li style={{ display: "flex", gap: "12px", marginBottom: "14px" }}>
-                <Mail size={20} color="#c59d5f" />
+              <li style={{ display: "flex", gap: "10px", marginBottom: "12px" }}>
+                <Mail size={18} color="#c59d5f" />
                 <p>info@royalhall.com</p>
               </li>
 
-              {/* Address */}
-              <li style={{ display: "flex", gap: "12px" }}>
-                <MapPin size={20} color="#c59d5f" />
+              <li style={{ display: "flex", gap: "10px" }}>
+                <MapPin size={18} color="#c59d5f" />
                 <p>
                   123 Elegant Avenue,
                   <br />
@@ -179,8 +173,8 @@ export function Footer() {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           style={{
-            marginTop: "40px",
-            paddingTop: "24px",
+            marginTop: "30px",
+            paddingTop: "20px",
             borderTop: "1px solid rgba(255,255,255,0.15)",
           }}
         >
@@ -191,20 +185,16 @@ export function Footer() {
               justifyContent: "space-between",
               alignItems: "center",
               color: "#bfbfbf",
-              fontSize: "14px",
-              gap: "16px",
+              fontSize: "13px",
+              gap: "12px",
             }}
           >
             <p>© {currentYear} Royal Celebration Party Hall. All Rights Reserved.</p>
 
-            <div style={{ display: "flex", gap: "20px" }}>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: "16px" }}>
               <Link
                 href="#"
-                style={{
-                  color: "#bfbfbf",
-                  textDecoration: "none",
-                  transition: "0.3s",
-                }}
+                style={{ color: "#bfbfbf", textDecoration: "none", fontSize: "13px" }}
                 onMouseEnter={(e) => (e.target.style.color = "#c59d5f")}
                 onMouseLeave={(e) => (e.target.style.color = "#bfbfbf")}
               >
@@ -213,11 +203,7 @@ export function Footer() {
 
               <Link
                 href="#"
-                style={{
-                  color: "#bfbfbf",
-                  textDecoration: "none",
-                  transition: "0.3s",
-                }}
+                style={{ color: "#bfbfbf", textDecoration: "none", fontSize: "13px" }}
                 onMouseEnter={(e) => (e.target.style.color = "#c59d5f")}
                 onMouseLeave={(e) => (e.target.style.color = "#bfbfbf")}
               >
