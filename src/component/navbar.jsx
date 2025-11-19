@@ -6,8 +6,7 @@ export default function Navbar() {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 50) setShrink(true);
-      else setShrink(false);
+      setShrink(window.scrollY > 50);
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -16,19 +15,25 @@ export default function Navbar() {
 
   const styles = {
     navbar: {
-      width: "95%",
-      padding: shrink ? "10px 50px" : "20px 60px",
+      width: "100%",
+      padding: shrink ? "10px 20px" : "20px 25px",
       position: "fixed",
       top: 0,
       left: 0,
       display: "flex",
-      justifyContent: "space-between",
-      alignItems: "center",
-      background: "rgba(255, 255, 255, 0.9)",
+      flexDirection: "column", // mobile default
+      background: "rgba(255, 255, 255, 0.95)",
       backdropFilter: "blur(12px)",
       zIndex: 1000,
       borderBottom: "1px solid #e0dede",
       transition: "0.3s ease",
+    },
+
+    topRow: {
+      width: "100%",
+      display: "flex",
+      justifyContent: "space-between",
+      alignItems: "center",
     },
 
     logoImg: {
@@ -42,17 +47,22 @@ export default function Navbar() {
     navLinks: {
       listStyle: "none",
       display: "flex",
-      gap: "30px",
+      flexDirection: "column", // MOBILE BY DEFAULT
+      gap: "12px",
+      width: "100%",
+      padding: "15px 0",
+      marginTop: "8px",
     },
 
     navLink: {
       fontWeight: 600,
       fontSize: "16px",
-      padding: "6px 14px",
+      padding: "10px",
       borderRadius: "8px",
       textDecoration: "none",
       color: "#000",
       transition: "0.3s ease",
+      textAlign: "center",
     },
   };
 
@@ -62,35 +72,40 @@ export default function Navbar() {
       color:#fff !important;
       transform:scale(1.05);
     }
+
+    /* DESKTOP */
+    @media (min-width: 768px) {
+      .navbar {
+        flex-direction: row !important;
+        align-items: center !important;
+      }
+      .nav-links {
+        flex-direction: row !important;
+        justify-content: flex-end !important;
+        width: auto !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        gap: 30px !important;
+      }
+    }
   `;
 
   return (
     <>
       <style>{hoverStyle}</style>
 
-      <nav style={styles.navbar}>
-        {/* LOGO */}
-        <div>
-          <img src="/Logoimage.jpeg" alt="Hall Logo" style={styles.logoImg} />
+      <nav className="navbar" style={styles.navbar}>
+        <div style={styles.topRow}>
+          <img src="/Logoimage.jpeg" alt="Logo" style={styles.logoImg} />
         </div>
 
-        {/* NAV LINKS (NORMAL — NO MAP) */}
-        <ul style={styles.navLinks}>
-                               <li><Link to="/" style={styles.navLink}>Home</Link></li>
-
-
-                     <li><Link to="/about" style={styles.navLink}>About Us</Link></li>
-
-                     <li><Link to="/rooms" style={styles.navLink}>Rooms</Link></li>
-
-
-                               <li><Link to="/bookingpage" style={styles.navLink}>Bookings</Link></li>
-
-                               <li><Link to="/contact" style={styles.navLink}>Contact</Link></li>
-
-
-                                        <li><Link to="/services" style={styles.navLink}>Services</Link></li>
-
+        <ul className="nav-links" style={styles.navLinks}>
+          <li className="nav-item"><Link to="/" style={styles.navLink}>Home</Link></li>
+          <li className="nav-item"><Link to="/about" style={styles.navLink}>About Us</Link></li>
+          <li className="nav-item"><Link to="/rooms" style={styles.navLink}>Rooms</Link></li>
+          <li className="nav-item"><Link to="/bookingpage" style={styles.navLink}>Bookings</Link></li>
+          <li className="nav-item"><Link to="/contact" style={styles.navLink}>Contact</Link></li>
+          <li className="nav-item"><Link to="/services" style={styles.navLink}>Services</Link></li>
         </ul>
       </nav>
     </>
