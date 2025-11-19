@@ -41,12 +41,18 @@ export function ContactSection() {
     <section
       id="contact"
       style={{
-        padding: "100px 0",
+        padding: "80px 16px",
         background: "linear-gradient(to bottom, #ffffff, #fff5ec)",
       }}
     >
       <style>
         {`
+        .contact-grid {
+          display: flex;
+          flex-direction: column;
+          gap: 32px;
+        }
+
         @media (min-width: 1024px) {
           .contact-grid {
             display: grid;
@@ -54,37 +60,62 @@ export function ContactSection() {
             gap: 48px;
           }
         }
+
+        .form-grid {
+          display: grid;
+          grid-template-columns: 1fr;
+          gap: 20px;
+        }
+
+        @media (min-width: 640px) {
+          .form-grid.two-cols {
+            grid-template-columns: 1fr 1fr;
+          }
+        }
+
+        input, select, textarea {
+          width: 100%;
+          box-sizing: border-box;
+        }
+
+        button {
+          transition: 0.3s;
+        }
+
+        button:hover {
+          background: #b38b4c;
+        }
       `}
       </style>
 
-      <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 24px" }}>
+      <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 16px" }}>
         {/* Title */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          style={{ textAlign: "center", marginBottom: "64px" }}
+          style={{ textAlign: "center", marginBottom: "48px" }}
         >
           <span
             style={{
               display: "inline-block",
-              padding: "8px 22px",
+              padding: "6px 20px",
               background: "rgba(197,157,95,0.15)",
               color: "#c59d5f",
               borderRadius: "50px",
-              fontWeight: "600",
+              fontWeight: 600,
               marginBottom: "12px",
             }}
           >
             Contact Us
           </span>
 
-          <h2 style={{ fontSize: "40px", fontWeight: 700, marginBottom: "12px" }}>
+          <h2 style={{ fontSize: "32px", fontWeight: 700, marginBottom: "12px" }}>
             Book Your Event With Us
           </h2>
 
-          <p style={{ color: "#666", maxWidth: "650px", margin: "0 auto", fontSize: "18px" }}>
+          <p style={{ color: "#666", maxWidth: "600px", margin: "0 auto", fontSize: "16px" }}>
             Have questions or want to book your next event? Fill out the form — we’ll respond soon.
           </p>
         </motion.div>
@@ -101,51 +132,26 @@ export function ContactSection() {
             <div
               style={{
                 background: "white",
-                padding: "48px",
-                borderRadius: "24px",
-                boxShadow: "0 10px 30px rgba(0,0,0,0.12)",
+                padding: "32px",
+                borderRadius: "20px",
+                boxShadow: "0 8px 25px rgba(0,0,0,0.12)",
                 display: "flex",
                 flexDirection: "column",
-                justifyContent: "center",
               }}
             >
-              <form onSubmit={handleSubmit} style={{ display: "grid", gap: "24px" }}>
+              <form onSubmit={handleSubmit} className="form-grid" style={{ gap: "20px" }}>
                 {/* Name + Email */}
-                <div style={{ display: "grid", gap: "20px", gridTemplateColumns: "1fr 1fr" }}>
-                  <InputField
-                    label="Full Name *"
-                    value={formData.name}
-                    onChange={(e) => handleChange("name", e.target.value)}
-                    placeholder="John Doe"
-                  />
-
-                  <InputField
-                    label="Email *"
-                    type="email"
-                    value={formData.email}
-                    onChange={(e) => handleChange("email", e.target.value)}
-                    placeholder="john@example.com"
-                  />
+                <div className="form-grid two-cols">
+                  <InputField label="Full Name *" value={formData.name} onChange={(e) => handleChange("name", e.target.value)} placeholder="John Doe" />
+                  <InputField label="Email *" type="email" value={formData.email} onChange={(e) => handleChange("email", e.target.value)} placeholder="john@example.com" />
                 </div>
 
                 {/* Phone + Venue */}
-                <div style={{ display: "grid", gap: "20px", gridTemplateColumns: "1fr 1fr" }}>
-                  <InputField
-                    label="Phone Number *"
-                    type="tel"
-                    value={formData.phone}
-                    onChange={(e) => handleChange("phone", e.target.value)}
-                    placeholder="+91 98765 43210"
-                  />
-
-                  {/* Venue */}
+                <div className="form-grid two-cols">
+                  <InputField label="Phone Number *" type="tel" value={formData.phone} onChange={(e) => handleChange("phone", e.target.value)} placeholder="+91 98765 43210" />
                   <div>
                     <label style={labelStyle}>Preferred Venue *</label>
-                    <select
-                      value={formData.venue}
-                      onChange={(e) => handleChange("venue", e.target.value)}
-                      style={{ ...inputStyle, background: "white" }}
-                    >
+                    <select value={formData.venue} onChange={(e) => handleChange("venue", e.target.value)} style={{ ...inputStyle, background: "white" }}>
                       <option value="">Select Venue</option>
                       <option value="grand">Grand Celebration Hall</option>
                       <option value="mini">Mini Function Room</option>
@@ -154,61 +160,26 @@ export function ContactSection() {
                 </div>
 
                 {/* Date + Guests */}
-                <div style={{ display: "grid", gap: "20px", gridTemplateColumns: "1fr 1fr" }}>
-                  <InputField
-                    label="Event Date"
-                    type="date"
-                    value={formData.date}
-                    onChange={(e) => handleChange("date", e.target.value)}
-                  />
-
-                  <InputField
-                    label="Expected Guests"
-                    type="number"
-                    value={formData.guests}
-                    placeholder="50"
-                    onChange={(e) => handleChange("guests", e.target.value)}
-                  />
+                <div className="form-grid two-cols">
+                  <InputField label="Event Date" type="date" value={formData.date} onChange={(e) => handleChange("date", e.target.value)} />
+                  <InputField label="Expected Guests" type="number" value={formData.guests} placeholder="50" onChange={(e) => handleChange("guests", e.target.value)} />
                 </div>
 
                 {/* Message */}
                 <div>
                   <label style={labelStyle}>Additional Details</label>
-                  <textarea
-                    value={formData.message}
-                    onChange={(e) => handleChange("message", e.target.value)}
-                    placeholder="Tell us about your event…"
-                    rows={4}
-                    style={{ ...inputStyle, resize: "none" }}
-                  />
+                  <textarea value={formData.message} onChange={(e) => handleChange("message", e.target.value)} placeholder="Tell us about your event…" rows={4} style={{ ...inputStyle, resize: "none" }} />
                 </div>
 
                 {/* Submit */}
-                <button
-                  style={{
-                    width: "100%",
-                    padding: "16px",
-                    borderRadius: "50px",
-                    background: "#c59d5f",
-                    color: "white",
-                    fontSize: "17px",
-                    border: "none",
-                    cursor: "pointer",
-                    display: "flex",
-                    justifyContent: "center",
-                    gap: "10px",
-                    alignItems: "center",
-                    fontWeight: 600,
-                    transition: "0.3s",
-                  }}
-                >
+                <button style={submitButtonStyle}>
                   Submit Inquiry <Send size={20} />
                 </button>
               </form>
             </div>
           </motion.div>
 
-          {/* Contact Details Box */}
+          {/* Contact Info Box */}
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -216,23 +187,18 @@ export function ContactSection() {
             viewport={{ once: true }}
             style={{
               background: "#fff5ec",
-              padding: "40px 30px",
-              borderRadius: "22px",
-              boxShadow: "0 12px 35px rgba(0,0,0,0.08)",
+              padding: "32px",
+              borderRadius: "20px",
+              boxShadow: "0 10px 30px rgba(0,0,0,0.08)",
               display: "flex",
               flexDirection: "column",
-              gap: "28px",
+              gap: "24px",
               height: "fit-content",
             }}
           >
             <ContactInfo icon={<Phone />} title="Phone" info="+91 98765 43210" sub="9 AM – 9 PM" />
             <ContactInfo icon={<Mail />} title="Email" info="info@royalhall.com" sub="24-hour reply" />
-            <ContactInfo
-              icon={<MapPin />}
-              title="Location"
-              info="123 Elegant Avenue, Downtown City"
-              sub="India – 600001"
-            />
+            <ContactInfo icon={<MapPin />} title="Location" info="123 Elegant Avenue, Downtown City" sub="India – 600001" />
           </motion.div>
         </div>
       </div>
@@ -245,13 +211,7 @@ function InputField({ label, type = "text", value, onChange, placeholder }) {
   return (
     <div>
       <label style={labelStyle}>{label}</label>
-      <input
-        type={type}
-        value={value}
-        onChange={onChange}
-        placeholder={placeholder}
-        style={inputStyle}
-      />
+      <input type={type} value={value} onChange={onChange} placeholder={placeholder} style={inputStyle} />
     </div>
   );
 }
@@ -277,11 +237,27 @@ const labelStyle = {
 };
 
 const inputStyle = {
-  width: "90%",
+  width: "100%",
   padding: "12px 16px",
   borderRadius: "12px",
   border: "1px solid #ccc",
   outline: "none",
   fontSize: "15px",
   transition: "0.2s",
+};
+
+const submitButtonStyle = {
+  width: "100%",
+  padding: "16px",
+  borderRadius: "50px",
+  background: "#c59d5f",
+  color: "white",
+  fontSize: "17px",
+  border: "none",
+  cursor: "pointer",
+  display: "flex",
+  justifyContent: "center",
+  gap: "10px",
+  alignItems: "center",
+  fontWeight: 600,
 };
