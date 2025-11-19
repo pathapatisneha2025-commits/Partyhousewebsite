@@ -1,125 +1,95 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { FaBars, FaTimes } from "react-icons/fa"; // Icons for hamburger and close
+import { FaBars, FaTimes } from "react-icons/fa";
 
 export default function Navbar() {
   const [shrink, setShrink] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setShrink(window.scrollY > 50);
-    };
+    const handleScroll = () => setShrink(window.scrollY > 50);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const styles = {
-    navbar: {
-      width: "100%",
-      padding: shrink ? "10px 20px" : "20px 20px",
-      position: "fixed",
-      top: 0,
-      left: 0,
-      display: "flex",
-      justifyContent: "space-between",
-      alignItems: "center",
-      background: "rgba(255, 255, 255, 0.9)",
-      backdropFilter: "blur(12px)",
-      zIndex: 1000,
-      borderBottom: "1px solid #e0dede",
-      transition: "0.3s ease",
-    },
-    logoImg: {
-      width: shrink ? "90px" : "120px",
-      height: shrink ? "45px" : "60px",
-      borderRadius: "40px",
-      objectFit: "cover",
-      transition: "0.3s ease",
-    },
-    navLinks: {
-      listStyle: "none",
-      display: "flex",
-      gap: "30px",
-    },
-    navLink: {
-      fontWeight: 600,
-      fontSize: "16px",
-      padding: "6px 14px",
-      borderRadius: "8px",
-      textDecoration: "none",
-      color: "#000",
-      transition: "0.3s ease",
-    },
-    mobileMenu: {
-      display: menuOpen ? "flex" : "none",
-      position: "absolute",
-      top: "70px",
-      right: "20px",
-      flexDirection: "column",
-      gap: "15px",
-      background: "#fff",
-      padding: "15px",
-      borderRadius: "10px",
-      boxShadow: "0 4px 6px rgba(0,0,0,0.1)",
-    },
-    hamburger: {
-      display: "none",
-      fontSize: "24px",
-      cursor: "pointer",
-    },
-  };
-
-  const hoverStyle = `
-    .nav-item:hover {
-      background:#000;
-      color:#fff !important;
-      transform:scale(1.05);
-    }
-
-    @media (max-width: 768px) {
-      .nav-links {
-        display: none;
-      }
-      .hamburger {
-        display: block;
-      }
-    }
-  `;
-
   return (
-    <>
-      <style>{hoverStyle}</style>
-      <nav style={styles.navbar}>
-        <div>
-          <img src="/Logoimage.jpeg" alt="Hall Logo" style={styles.logoImg} />
-        </div>
+    <nav className={`navbar ${shrink ? "shrink" : ""}`}>
+      <div className="logo">
+        <img src="/Logoimage.jpeg" alt="Logo" />
+      </div>
 
-        {/* Desktop Links */}
-        <ul className="nav-links" style={styles.navLinks}>
-          <li className="nav-item"><Link to="/" style={styles.navLink}>Home</Link></li>
-          <li className="nav-item"><Link to="/about" style={styles.navLink}>About Us</Link></li>
-          <li className="nav-item"><Link to="/rooms" style={styles.navLink}>Rooms</Link></li>
-          <li className="nav-item"><Link to="/bookingpage" style={styles.navLink}>Bookings</Link></li>
-          <li className="nav-item"><Link to="/contact" style={styles.navLink}>Contact</Link></li>
-          <li className="nav-item"><Link to="/services" style={styles.navLink}>Services</Link></li>
-        </ul>
+      <div className={`nav-links ${menuOpen ? "active" : ""}`}>
+        <Link to="/" onClick={() => setMenuOpen(false)}>Home</Link>
+        <Link to="/about" onClick={() => setMenuOpen(false)}>About Us</Link>
+        <Link to="/rooms" onClick={() => setMenuOpen(false)}>Rooms</Link>
+        <Link to="/bookingpage" onClick={() => setMenuOpen(false)}>Bookings</Link>
+        <Link to="/contact" onClick={() => setMenuOpen(false)}>Contact</Link>
+        <Link to="/services" onClick={() => setMenuOpen(false)}>Services</Link>
+      </div>
 
-        {/* Hamburger */}
-        <div className="hamburger" style={styles.hamburger} onClick={() => setMenuOpen(!menuOpen)}>
-          {menuOpen ? <FaTimes /> : <FaBars />}
-        </div>
+      <div className="hamburger" onClick={() => setMenuOpen(!menuOpen)}>
+        {menuOpen ? <FaTimes /> : <FaBars />}
+      </div>
 
-        {/* Mobile Menu */}
-        <ul style={styles.mobileMenu}>
-          <li><Link to="/" style={styles.navLink} onClick={() => setMenuOpen(false)}>Home</Link></li>
-          <li><Link to="/about" style={styles.navLink} onClick={() => setMenuOpen(false)}>About Us</Link></li>
-          <li><Link to="/rooms" style={styles.navLink} onClick={() => setMenuOpen(false)}>Rooms</Link></li>
-          <li><Link to="/bookingpage" style={styles.navLink} onClick={() => setMenuOpen(false)}>Bookings</Link></li>
-          <li><Link to="/contact" style={styles.navLink} onClick={() => setMenuOpen(false)}>Contact</Link></li>
-          <li><Link to="/services" style={styles.navLink} onClick={() => setMenuOpen(false)}>Services</Link></li>
-        </ul>
-      </nav>
-    </>
+      <style>{`
+        .navbar {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 20px;
+          background: rgba(255,255,255,0.9);
+          backdrop-filter: blur(12px);
+          border-bottom: 1px solid #e0dede;
+          z-index: 1000;
+          transition: 0.3s ease;
+        }
+        .navbar.shrink { padding: 10px 20px; }
+        .logo img { width: 120px; height: 60px; border-radius: 40px; transition: 0.3s ease; }
+        .navbar.shrink .logo img { width: 90px; height: 45px; }
+
+        .nav-links {
+          display: flex;
+          gap: 30px;
+        }
+        .nav-links a {
+          text-decoration: none;
+          font-weight: 600;
+          color: #000;
+          padding: 6px 14px;
+          border-radius: 8px;
+          transition: 0.3s ease;
+        }
+        .nav-links a:hover {
+          background: #000;
+          color: #fff;
+          transform: scale(1.05);
+        }
+
+        .hamburger { display: none; font-size: 24px; cursor: pointer; }
+
+        /* MOBILE RESPONSIVE */
+        @media (max-width: 768px) {
+          .nav-links {
+            position: fixed;
+            top: 70px;
+            right: -100%;
+            background: #fff;
+            flex-direction: column;
+            gap: 15px;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: 0.3s ease;
+          }
+          .nav-links.active { right: 20px; }
+
+          .hamburger { display: block; }
+        }
+      `}</style>
+    </nav>
   );
 }
