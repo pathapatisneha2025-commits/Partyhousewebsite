@@ -60,8 +60,7 @@ export default function Navbar() {
       padding: "10px",
       borderRadius: "8px",
       textDecoration: "none",
-      color: "#000",
-      transition: "0.3s ease",
+       transition: "0.3s ease",
       textAlign: "center",
     },
   };
