@@ -41,7 +41,7 @@ export function ContactSection() {
     <section
       id="contact"
       style={{
-        padding: "80px 16px",
+        padding: "60px 16px",
         background: "linear-gradient(to bottom, #ffffff, #fff5ec)",
       }}
     >
@@ -53,23 +53,24 @@ export function ContactSection() {
           gap: 32px;
         }
 
-        @media (min-width: 1024px) {
+        @media (min-width: 768px) {
           .contact-grid {
             display: grid;
             grid-template-columns: 2fr 1fr;
-            gap: 48px;
+            gap: 32px;
           }
         }
 
         .form-grid {
           display: grid;
           grid-template-columns: 1fr;
-          gap: 20px;
+          gap: 16px;
         }
 
-        @media (min-width: 640px) {
+        @media (min-width: 480px) {
           .form-grid.two-cols {
             grid-template-columns: 1fr 1fr;
+            gap: 16px;
           }
         }
 
@@ -88,14 +89,14 @@ export function ContactSection() {
       `}
       </style>
 
-      <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 16px" }}>
+      <div style={{ maxWidth: "1000px", margin: "0 auto" }}>
         {/* Title */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          style={{ textAlign: "center", marginBottom: "48px" }}
+          style={{ textAlign: "center", marginBottom: "40px" }}
         >
           <span
             style={{
@@ -111,11 +112,11 @@ export function ContactSection() {
             Contact Us
           </span>
 
-          <h2 style={{ fontSize: "32px", fontWeight: 700, marginBottom: "12px" }}>
+          <h2 style={{ fontSize: "28px", fontWeight: 700, marginBottom: "12px" }}>
             Book Your Event With Us
           </h2>
 
-          <p style={{ color: "#666", maxWidth: "600px", margin: "0 auto", fontSize: "16px" }}>
+          <p style={{ color: "#666", maxWidth: "500px", margin: "0 auto", fontSize: "15px" }}>
             Have questions or want to book your next event? Fill out the form — we’ll respond soon.
           </p>
         </motion.div>
@@ -132,14 +133,12 @@ export function ContactSection() {
             <div
               style={{
                 background: "white",
-                padding: "32px",
-                borderRadius: "20px",
-                boxShadow: "0 8px 25px rgba(0,0,0,0.12)",
-                display: "flex",
-                flexDirection: "column",
+                padding: "24px",
+                borderRadius: "16px",
+                boxShadow: "0 6px 20px rgba(0,0,0,0.1)",
               }}
             >
-              <form onSubmit={handleSubmit} className="form-grid" style={{ gap: "20px" }}>
+              <form onSubmit={handleSubmit} className="form-grid" style={{ gap: "16px" }}>
                 {/* Name + Email */}
                 <div className="form-grid two-cols">
                   <InputField label="Full Name *" value={formData.name} onChange={(e) => handleChange("name", e.target.value)} placeholder="John Doe" />
@@ -187,12 +186,12 @@ export function ContactSection() {
             viewport={{ once: true }}
             style={{
               background: "#fff5ec",
-              padding: "32px",
-              borderRadius: "20px",
-              boxShadow: "0 10px 30px rgba(0,0,0,0.08)",
+              padding: "24px",
+              borderRadius: "16px",
+              boxShadow: "0 8px 25px rgba(0,0,0,0.08)",
               display: "flex",
               flexDirection: "column",
-              gap: "24px",
+              gap: "20px",
               height: "fit-content",
             }}
           >
@@ -220,44 +219,14 @@ function InputField({ label, type = "text", value, onChange, placeholder }) {
 function ContactInfo({ icon, title, info, sub }) {
   return (
     <div style={{ textAlign: "center" }}>
-      <div style={{ fontSize: "34px", color: "#c59d5f", marginBottom: "8px" }}>{icon}</div>
-      <h3 style={{ margin: "0 0 6px", fontSize: "20px" }}>{title}</h3>
+      <div style={{ fontSize: "28px", color: "#c59d5f", marginBottom: "6px" }}>{icon}</div>
+      <h3 style={{ margin: "0 0 4px", fontSize: "18px" }}>{title}</h3>
       <p style={{ margin: 0, fontWeight: 500 }}>{info}</p>
-      <p style={{ margin: 0, color: "#777" }}>{sub}</p>
+      <p style={{ margin: 0, color: "#777", fontSize: "14px" }}>{sub}</p>
     </div>
   );
 }
 
-/* Styles */
-const labelStyle = {
-  display: "block",
-  marginBottom: "6px",
-  color: "#444",
-  fontWeight: 500,
-};
-
-const inputStyle = {
-  width: "100%",
-  padding: "12px 16px",
-  borderRadius: "12px",
-  border: "1px solid #ccc",
-  outline: "none",
-  fontSize: "15px",
-  transition: "0.2s",
-};
-
-const submitButtonStyle = {
-  width: "100%",
-  padding: "16px",
-  borderRadius: "50px",
-  background: "#c59d5f",
-  color: "white",
-  fontSize: "17px",
-  border: "none",
-  cursor: "pointer",
-  display: "flex",
-  justifyContent: "center",
-  gap: "10px",
-  alignItems: "center",
-  fontWeight: 600,
-};
+const labelStyle = { display: "block", marginBottom: "4px", color: "#444", fontWeight: 500 };
+const inputStyle = { width: "100%", padding: "10px 14px", borderRadius: "10px", border: "1px solid #ccc", outline: "none", fontSize: "14px", transition: "0.2s" };
+const submitButtonStyle = { width: "100%", padding: "14px", borderRadius: "50px", background: "#c59d5f", color: "white", fontSize: "16px", border: "none", cursor: "pointer", display: "flex", justifyContent: "center", gap: "8px", alignItems: "center", fontWeight: 600 };
