@@ -17,7 +17,7 @@ export default function Navbar() {
     navbar: {
       width: "100%",
       padding: shrink ? "10px 20px" : "20px 25px",
-    
+      position: "flex",
       top: 0,
       left: 0,
       display: "flex",
