@@ -47,33 +47,48 @@ export default function Navbar() {
     navLinks: {
       listStyle: "none",
       display: "flex",
-      gap: "30px",
+      flexDirection: "column", // MOBILE BY DEFAULT
+      gap: "12px",
+      width: "100%",
+      padding: "15px 0",
+      marginTop: "8px",
     },
 
     navLink: {
       fontWeight: 600,
       fontSize: "16px",
-      padding: "6px 14px",
+      padding: "10px",
       borderRadius: "8px",
       textDecoration: "none",
       color: "#000",
       transition: "0.3s ease",
+      textAlign: "center",
     },
   };
 
-  const hoverStyle = `
-    .nav-item:hover {
-      background:#000;
-      color:#fff !important;
-      transform:scale(1.05);
+ const hoverStyle = `
+    /* REMOVE HOVER ON MOBILE */
+    @media (max-width: 767px) {
+      .nav-item:hover {
+        background: none !important;
+        color: #000 !important;
+        transform: none !important;
+      }
     }
 
-    /* DESKTOP */
+    /* APPLY HOVER ONLY ON DESKTOP */
     @media (min-width: 768px) {
+      .nav-item:hover {
+        background:#000;
+        color:#fff !important;
+        transform:scale(1.05);
+      }
+
       .navbar {
         flex-direction: row !important;
         align-items: center !important;
       }
+
       .nav-links {
         flex-direction: row !important;
         justify-content: flex-end !important;
@@ -83,7 +98,8 @@ export default function Navbar() {
         gap: 30px !important;
       }
     }
-  `;
+`;
+
 
   return (
     <>
