@@ -1,5 +1,4 @@
-import { motion,AnimatePresence } from "framer-motion";
-
+import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { Plus, Minus } from "lucide-react";
 
@@ -37,7 +36,7 @@ export function FAQSection() {
     <section
       id="faq"
       style={{
-        padding: "100px 0",
+        padding: "80px 16px", // reduced for mobile
         backgroundColor: "#ffffff",
       }}
     >
@@ -45,7 +44,7 @@ export function FAQSection() {
         style={{
           maxWidth: "950px",
           margin: "0 auto",
-          padding: "0 24px",
+          width: "100%",
         }}
       >
         {/* HEADER */}
@@ -54,17 +53,18 @@ export function FAQSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          style={{ textAlign: "center", marginBottom: "60px" }}
+          style={{ textAlign: "center", marginBottom: "40px" }}
         >
           <span
             style={{
               display: "inline-block",
-              padding: "10px 24px",
+              padding: "8px 20px",
               background: "rgba(197,157,95,0.1)",
               color: "#c59d5f",
               borderRadius: "50px",
-              marginBottom: "15px",
+              marginBottom: "12px",
               fontWeight: 500,
+              fontSize: "14px",
             }}
           >
             FAQ
@@ -72,22 +72,22 @@ export function FAQSection() {
 
           <h2
             style={{
-              fontSize: "40px",
+              fontSize: "32px", // smaller for mobile
               fontWeight: "700",
-              marginBottom: "14px",
+              marginBottom: "10px",
               color: "#222",
             }}
           >
             Frequently Asked Questions
           </h2>
 
-          <p style={{ color: "#666", fontSize: "18px" }}>
+          <p style={{ color: "#666", fontSize: "16px" }}>
             Got questions? We've got answers.
           </p>
         </motion.div>
 
         {/* FAQ LIST */}
-        <div style={{ display: "flex", flexDirection: "column", gap: "18px" }}>
+        <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
           {faqs.map((faq, index) => (
             <motion.div
               key={index}
@@ -99,8 +99,8 @@ export function FAQSection() {
               <div
                 style={{
                   background: "linear-gradient(to bottom right, #fff, #fff8f2)",
-                  borderRadius: "20px",
-                  boxShadow: "0 8px 20px rgba(0,0,0,0.1)",
+                  borderRadius: "16px", // slightly smaller corners
+                  boxShadow: "0 6px 15px rgba(0,0,0,0.08)",
                   overflow: "hidden",
                   border: "1px solid #eee",
                   transition: "0.3s",
@@ -111,7 +111,7 @@ export function FAQSection() {
                   onClick={() => toggleFAQ(index)}
                   style={{
                     width: "100%",
-                    padding: "24px",
+                    padding: "16px", // smaller padding
                     background: "transparent",
                     display: "flex",
                     justifyContent: "space-between",
@@ -123,10 +123,10 @@ export function FAQSection() {
                 >
                   <h3
                     style={{
-                      fontSize: "20px",
+                      fontSize: "18px", // smaller font
                       fontWeight: 600,
                       color: "#222",
-                      marginRight: "20px",
+                      marginRight: "16px",
                     }}
                   >
                     {faq.question}
@@ -134,8 +134,8 @@ export function FAQSection() {
 
                   <div
                     style={{
-                      width: "40px",
-                      height: "40px",
+                      width: "36px",
+                      height: "36px",
                       borderRadius: "50%",
                       backgroundColor: "rgba(197,157,95,0.15)",
                       display: "flex",
@@ -144,9 +144,9 @@ export function FAQSection() {
                     }}
                   >
                     {openIndex === index ? (
-                      <Minus size={22} color="#c59d5f" />
+                      <Minus size={20} color="#c59d5f" />
                     ) : (
-                      <Plus size={22} color="#c59d5f" />
+                      <Plus size={20} color="#c59d5f" />
                     )}
                   </div>
                 </button>
@@ -163,10 +163,10 @@ export function FAQSection() {
                     >
                       <div
                         style={{
-                          padding: "0 24px 24px 24px",
+                          padding: "0 16px 16px 16px",
                           color: "#555",
                           lineHeight: "1.6",
-                          fontSize: "16px",
+                          fontSize: "15px",
                         }}
                       >
                         {faq.answer}
