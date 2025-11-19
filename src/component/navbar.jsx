@@ -3,32 +3,46 @@ import { Link } from "react-router-dom";
 
 export default function Navbar() {
   const [shrink, setShrink] = useState(false);
+  const [width, setWidth] = useState(window.innerWidth);
 
   useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 50) setShrink(true);
-      else setShrink(false);
-    };
+    const handleScroll = () => setShrink(window.scrollY > 50);
+    const handleResize = () => setWidth(window.innerWidth);
 
     window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleResize);
+    };
   }, []);
+
+  // MOBILE = column layout
+  const isMobile = width <= 768;
 
   const styles = {
     navbar: {
-      width: "95%",
-      padding: shrink ? "10px 50px" : "20px 60px",
+      width: "100%",
+      padding: shrink ? "10px 20px" : "20px 30px",
       position: "fixed",
       top: 0,
       left: 0,
       display: "flex",
-      justifyContent: "space-between",
-      alignItems: "center",
+      flexDirection: "column",
+      alignItems: isMobile ? "flex-start" : "center",
       background: "rgba(255, 255, 255, 0.9)",
       backdropFilter: "blur(12px)",
       zIndex: 1000,
       borderBottom: "1px solid #e0dede",
       transition: "0.3s ease",
+    },
+
+    topRow: {
+      width: "100%",
+      display: "flex",
+      justifyContent: "space-between",
+      alignItems: "center",
     },
 
     logoImg: {
@@ -42,7 +56,11 @@ export default function Navbar() {
     navLinks: {
       listStyle: "none",
       display: "flex",
-      gap: "30px",
+      flexDirection: isMobile ? "column" : "row",
+      width: isMobile ? "100%" : "auto",
+      gap: isMobile ? "10px" : "30px",
+      marginTop: isMobile ? "15px" : "0",
+      padding: 0,
     },
 
     navLink: {
@@ -57,7 +75,7 @@ export default function Navbar() {
   };
 
   const hoverStyle = `
-    .nav-item:hover {
+    a:hover {
       background:#000;
       color:#fff !important;
       transform:scale(1.05);
@@ -69,29 +87,20 @@ export default function Navbar() {
       <style>{hoverStyle}</style>
 
       <nav style={styles.navbar}>
-        {/* LOGO */}
-        <div>
+        
+        <div style={styles.topRow}>
           <img src="/Logoimage.jpeg" alt="Hall Logo" style={styles.logoImg} />
         </div>
 
-        {/* NAV LINKS (NORMAL — NO MAP) */}
         <ul style={styles.navLinks}>
-                               <li><Link to="/" style={styles.navLink}>Home</Link></li>
-
-
-                     <li><Link to="/about" style={styles.navLink}>About Us</Link></li>
-
-                     <li><Link to="/rooms" style={styles.navLink}>Rooms</Link></li>
-
-
-                               <li><Link to="/bookingpage" style={styles.navLink}>Bookings</Link></li>
-
-                               <li><Link to="/contact" style={styles.navLink}>Contact</Link></li>
-
-
-                                        <li><Link to="/services" style={styles.navLink}>Services</Link></li>
-
+          <li><Link to="/" style={styles.navLink}>Home</Link></li>
+          <li><Link to="/about" style={styles.navLink}>About Us</Link></li>
+          <li><Link to="/rooms" style={styles.navLink}>Rooms</Link></li>
+          <li><Link to="/bookingpage" style={styles.navLink}>Bookings</Link></li>
+          <li><Link to="/contact" style={styles.navLink}>Contact</Link></li>
+          <li><Link to="/services" style={styles.navLink}>Services</Link></li>
         </ul>
+
       </nav>
     </>
   );
