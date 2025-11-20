@@ -46,8 +46,8 @@ export function AboutSection() {
     },
     statsGrid: {
       display: "grid",
-      gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
-      gap: "40px",
+      gridTemplateColumns: "repeat(2, 1fr)",
+      gap: "24px",
       marginTop: "48px",
     },
     statCard: {
