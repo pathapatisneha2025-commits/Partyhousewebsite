@@ -17,7 +17,7 @@ export default function RoomsSection() {
 
     container: {
       display: "grid",
-      gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
+  gridTemplateColumns: "repeat(2, 1fr)",
       gap: "40px",
     },
 
