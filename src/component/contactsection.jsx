@@ -47,13 +47,12 @@ export function ContactSection() {
     >
       <style>
         {`
-        @media (min-width: 1024px) {
-          .contact-grid {
-            display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 48px;
-          }
-        }
+        .contact-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 48px;
+}
+
       `}
       </style>
 
