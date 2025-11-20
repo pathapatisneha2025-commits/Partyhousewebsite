@@ -17,7 +17,7 @@ export default function RoomsSection() {
 
    container: {
   display: "grid",
-  gridTemplateColumns: "repeat(3, 1fr)", // desktop
+  gridTemplateColumns: "repeat(2, 1fr)", // desktop
 },
 "@media (max-width: 768px)": {
   container: {
