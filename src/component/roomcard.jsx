@@ -18,7 +18,7 @@ export default function RoomsSection() {
     container: {
       display: "grid",
       gridTemplateColumns: "repeat(2, 1fr)",
-      gap: "18px",
+      gap: "10px",
     },
 
     card: {

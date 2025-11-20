@@ -50,7 +50,7 @@ export function ContactSection() {
         .contact-grid {
   display: grid;
   grid-template-columns: 2fr 1fr;
-  gap: 20px;
+  gap: 10px;
 }
 
       `}
