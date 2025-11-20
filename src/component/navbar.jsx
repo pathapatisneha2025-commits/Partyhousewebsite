@@ -5,10 +5,7 @@ export default function Navbar() {
   const [shrink, setShrink] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setShrink(window.scrollY > 50);
-    };
-
+    const handleScroll = () => setShrink(window.scrollY > 50);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -17,23 +14,18 @@ export default function Navbar() {
     navbar: {
       width: "100%",
       padding: shrink ? "10px 20px" : "20px 25px",
-      position: "flex",
+      position: "fixed",
       top: 0,
       left: 0,
       display: "flex",
-      flexDirection: "column", // mobile default
+      justifyContent: "space-between",
+      alignItems: "center",
       background: "rgba(255, 255, 255, 0.95)",
       backdropFilter: "blur(12px)",
       zIndex: 1000,
       borderBottom: "1px solid #e0dede",
       transition: "0.3s ease",
-    },
-
-    topRow: {
-      width: "100%",
-      display: "flex",
-      justifyContent: "space-between",
-      alignItems: "center",
+      flexWrap: "wrap", // allows links to wrap on very small screens
     },
 
     logoImg: {
@@ -47,11 +39,11 @@ export default function Navbar() {
     navLinks: {
       listStyle: "none",
       display: "flex",
-      flexDirection: "column", // MOBILE BY DEFAULT
-      gap: "12px",
-      width: "100%",
-      padding: "15px 0",
-      marginTop: "8px",
+      flexDirection: "row",
+      gap: "20px",
+      padding: 0,
+      margin: 0,
+      flexWrap: "wrap", // ensures links don't overflow on tiny screens
     },
 
     navLink: {
@@ -63,47 +55,25 @@ export default function Navbar() {
       color: "#000",
       transition: "0.3s ease",
       textAlign: "center",
+      whiteSpace: "nowrap", // prevents wrapping of individual links
     },
   };
 
-const hoverStyle = `
-    /* NO HOVER ANYWHERE */
+  const hoverStyle = `
     .nav-item:hover {
       background: none !important;
       color: inherit !important;
       transform: none !important;
     }
-
-    /* DESKTOP LAYOUT ONLY — NO HOVER */
-    @media (min-width: 768px) {
-      .navbar {
-        flex-direction: row !important;
-        align-items: center !important;
-      }
-
-      .nav-links {
-        flex-direction: row !important;
-        justify-content: flex-end !important;
-        width: auto !important;
-        padding: 0 !important;
-        margin: 0 !important;
-        gap: 30px !important;
-      }
-    }
-`;
-
-
+  `;
 
   return (
     <>
       <style>{hoverStyle}</style>
+      <nav style={styles.navbar}>
+        <img src="/Logoimage.jpeg" alt="Logo" style={styles.logoImg} />
 
-      <nav className="navbar" style={styles.navbar}>
-        <div style={styles.topRow}>
-          <img src="/Logoimage.jpeg" alt="Logo" style={styles.logoImg} />
-        </div>
-
-        <ul className="nav-links" style={styles.navLinks}>
+        <ul style={styles.navLinks}>
           <li className="nav-item"><Link to="/" style={styles.navLink}>Home</Link></li>
           <li className="nav-item"><Link to="/about" style={styles.navLink}>About Us</Link></li>
           <li className="nav-item"><Link to="/rooms" style={styles.navLink}>Rooms</Link></li>
