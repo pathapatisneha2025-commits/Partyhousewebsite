@@ -11,52 +11,53 @@ export default function Navbar() {
   }, []);
 
   const styles = {
-    navbar: {
-      width: "100%",
-      padding: shrink ? "10px 15px" : "15px 20px",
-      position: "fixed",
-      top: 0,
-      left: 0,
-      display: "flex",
-      justifyContent: "space-between",
-      alignItems: "center",
-      background: "rgba(255, 255, 255, 0.95)",
-      backdropFilter: "blur(12px)",
-      zIndex: 1000,
-      borderBottom: "1px solid #e0dede",
-      transition: "0.3s ease",
-    },
+   navbar: {
+    width: "100%",
+    padding: shrink ? "10px 20px" : "20px 25px",
+    position: "fixed",
+    top: 0,
+    left: 0,
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    background: "rgba(255, 255, 255, 0.95)",
+    backdropFilter: "blur(12px)",
+    zIndex: 1000,
+    borderBottom: "1px solid #e0dede",
+    transition: "0.3s ease",
+    overflowX: "auto", // <-- allows horizontal scroll
+    whiteSpace: "nowrap", // prevents links from wrapping
+  },
 
+  navLinks: {
+    listStyle: "none",
+    display: "flex",
+    flexDirection: "row",
+    gap: "20px",
+    padding: 0,
+    margin: 0,
+    flexWrap: "nowrap", // <-- prevent wrapping
+  },
     logoImg: {
-      width: shrink ? "80px" : "100px",
-      height: shrink ? "40px" : "50px",
+      width: shrink ? "90px" : "120px",
+      height: shrink ? "45px" : "60px",
       borderRadius: "40px",
       objectFit: "cover",
       transition: "0.3s ease",
     },
 
-    navLinks: {
-      display: "flex",
-      flexDirection: "row",
-      gap: "10px",
-      listStyle: "none",
-      padding: 0,
-      margin: 0,
-      flexWrap: "nowrap",
-      flex: 1, // let links shrink to fit space
-      justifyContent: "flex-end",
-    },
+    
 
     navLink: {
       fontWeight: 600,
-      fontSize: "14px", // smaller font on mobile
-      padding: "8px 10px", // smaller padding
+      fontSize: "16px",
+      padding: "10px",
       borderRadius: "8px",
       textDecoration: "none",
       color: "#000",
       transition: "0.3s ease",
       textAlign: "center",
-      whiteSpace: "nowrap",
+      whiteSpace: "nowrap", // prevents wrapping of individual links
     },
   };
 
@@ -73,6 +74,7 @@ export default function Navbar() {
       <style>{hoverStyle}</style>
       <nav style={styles.navbar}>
         <img src="/Logoimage.jpeg" alt="Logo" style={styles.logoImg} />
+
         <ul style={styles.navLinks}>
           <li className="nav-item"><Link to="/" style={styles.navLink}>Home</Link></li>
           <li className="nav-item"><Link to="/about" style={styles.navLink}>About Us</Link></li>
