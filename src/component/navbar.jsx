@@ -11,23 +11,33 @@ export default function Navbar() {
   }, []);
 
   const styles = {
-    navbar: {
-      width: "100%",
-      padding: shrink ? "10px 20px" : "20px 25px",
-      position: "fixed",
-      top: 0,
-      left: 0,
-      display: "flex",
-      justifyContent: "space-between",
-      alignItems: "center",
-      background: "rgba(255, 255, 255, 0.95)",
-      backdropFilter: "blur(12px)",
-      zIndex: 1000,
-      borderBottom: "1px solid #e0dede",
-      transition: "0.3s ease",
-      flexWrap: "wrap", // allows links to wrap on very small screens
-    },
+   navbar: {
+    width: "100%",
+    padding: shrink ? "10px 20px" : "20px 25px",
+    position: "fixed",
+    top: 0,
+    left: 0,
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    background: "rgba(255, 255, 255, 0.95)",
+    backdropFilter: "blur(12px)",
+    zIndex: 1000,
+    borderBottom: "1px solid #e0dede",
+    transition: "0.3s ease",
+    overflowX: "auto", // <-- allows horizontal scroll
+    whiteSpace: "nowrap", // prevents links from wrapping
+  },
 
+  navLinks: {
+    listStyle: "none",
+    display: "flex",
+    flexDirection: "row",
+    gap: "20px",
+    padding: 0,
+    margin: 0,
+    flexWrap: "nowrap", // <-- prevent wrapping
+  },
     logoImg: {
       width: shrink ? "90px" : "120px",
       height: shrink ? "45px" : "60px",
@@ -36,15 +46,7 @@ export default function Navbar() {
       transition: "0.3s ease",
     },
 
-    navLinks: {
-      listStyle: "none",
-      display: "flex",
-      flexDirection: "row",
-      gap: "20px",
-      padding: 0,
-      margin: 0,
-      flexWrap: "wrap", // ensures links don't overflow on tiny screens
-    },
+    
 
     navLink: {
       fontWeight: 600,
