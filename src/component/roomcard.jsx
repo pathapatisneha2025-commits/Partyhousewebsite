@@ -18,10 +18,13 @@ export default function RoomsSection() {
    container: {
   display: "grid",
   gridTemplateColumns: "repeat(2, 1fr)", // desktop
+   gap: "40px"
 },
 "@media (max-width: 768px)": {
   container: {
     gridTemplateColumns: "repeat(2, 1fr)", // mobile
+       gap: "20px"
+
   }
 },
 
