@@ -15,19 +15,11 @@ export default function RoomsSection() {
       color: "#222",
     },
 
-   container: {
-  display: "grid",
-  gridTemplateColumns: "repeat(2, 1fr)", // desktop
-   gap: "40px"
-},
-"@media (max-width: 768px)": {
-  container: {
-    gridTemplateColumns: "repeat(2, 1fr)", // mobile
-       gap: "20px"
-
-  }
-},
-
+    container: {
+      display: "grid",
+      gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
+      gap: "40px",
+    },
 
     card: {
       background: "#fff",
