@@ -17,8 +17,8 @@ export default function RoomsSection() {
 
     container: {
       display: "grid",
-  gridTemplateColumns: "repeat(2, 1fr)",
-      gap: "40px",
+      gridTemplateColumns: "repeat(2, 1fr)",
+      gap: "24px",
     },
 
     card: {
@@ -51,25 +51,12 @@ export default function RoomsSection() {
       marginTop: "6px",
     },
   };
-<style>
-  {`
-    @media (max-width: 768px) {
-      #rooms {
-        padding: 60px 20px !important;
-      }
-
-      #rooms .rooms-grid {
-        grid-template-columns: 1fr !important;
-      }
-    }
-  `}
-</style>
 
   return (
     <section id="rooms" style={styles.section}>
       <h2 style={styles.title}>Our Premium Party Rooms</h2>
 
-<div className="rooms-grid" style={styles.container}>
+      <div style={styles.container}>
         {/* ROOM CARD 1 */}
         <div
           style={styles.card}
