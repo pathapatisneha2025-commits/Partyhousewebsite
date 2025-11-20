@@ -143,11 +143,12 @@ export default function RoomsPage() {
           }
         }
 
-        @media (max-width: 768px) {
-          .rooms-container {
-            grid-template-columns: 1fr;
-          }
-        }
+       @media (max-width: 768px) {
+  .rooms-container {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
       `}</style>
     </section>
   );
