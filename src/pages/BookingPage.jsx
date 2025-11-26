@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Footer } from "../component/footersection";
 import RoomsSection from "../component/roomcard";
 
-const BASE_URL = "https://partyhousedatabase.onrender.com/"; // 🔥 change to your server URL
+const BASE_URL = "https://partyhousedatabase.onrender.com"; //  change to your server URL
 
 export default function BookingPage() {
   const [formData, setFormData] = useState({
