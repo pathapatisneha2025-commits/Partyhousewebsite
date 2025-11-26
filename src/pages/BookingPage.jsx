@@ -2,6 +2,8 @@ import { useState } from "react";
 import { Footer } from "../component/footersection";
 import RoomsSection from "../component/roomcard";
 
+const BASE_URL = "http://localhost:5000"; // 🔥 change to your server URL
+
 export default function BookingPage() {
   const [formData, setFormData] = useState({
     name: "",
@@ -12,18 +14,52 @@ export default function BookingPage() {
     message: "",
   });
 
+  const [loading, setLoading] = useState(false);
+
   const handleChange = (field, value) => {
     setFormData(prev => ({ ...prev, [field]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
     if (!formData.name || !formData.email || !formData.phone || !formData.date) {
       alert("Please fill all required fields!");
       return;
     }
-    alert("Booking submitted successfully!");
-    setFormData({ name: "", email: "", phone: "", date: "", guests: "", message: "" });
+
+    setLoading(true);
+
+    try {
+      const response = await fetch(`${BASE_URL}/booking/create`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        alert("Booking submitted successfully!");
+        setFormData({
+          name: "",
+          email: "",
+          phone: "",
+          date: "",
+          guests: "",
+          message: "",
+        });
+      } else {
+        alert(result.error || "Failed to submit booking.");
+      }
+    } catch (error) {
+      alert("Server error. Please try again later.");
+      console.error("Booking Error:", error);
+    }
+
+    setLoading(false);
   };
 
   return (
@@ -34,7 +70,7 @@ export default function BookingPage() {
       background: "#fdf6f0",
       fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"
     }}>
-        <RoomsSection></RoomsSection>
+      <RoomsSection />
       <h1 style={{ textAlign: "center", marginBottom: "50px", fontSize: "2.8rem", color: "#333" }}>
         Event Booking
       </h1>
@@ -48,54 +84,29 @@ export default function BookingPage() {
         boxShadow: "0 10px 25px rgba(0,0,0,0.1)"
       }}>
         <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
-          <input
-            type="text"
-            placeholder="Full Name *"
-            value={formData.name}
-            onChange={e => handleChange("name", e.target.value)}
-            required
-            style={inputStyle}
-          />
-          <input
-            type="email"
-            placeholder="Email Address *"
-            value={formData.email}
-            onChange={e => handleChange("email", e.target.value)}
-            required
-            style={inputStyle}
-          />
-          <input
-            type="tel"
-            placeholder="Phone Number *"
-            value={formData.phone}
-            onChange={e => handleChange("phone", e.target.value)}
-            required
-            style={inputStyle}
-          />
-          <input
-            type="date"
-            value={formData.date}
-            onChange={e => handleChange("date", e.target.value)}
-            required
-            min={new Date().toISOString().split("T")[0]}
-            style={inputStyle}
-          />
-          <input
-            type="number"
-            placeholder="Number of Guests"
-            value={formData.guests}
-            onChange={e => handleChange("guests", e.target.value)}
-            min="1"
-            style={inputStyle}
-          />
-          <textarea
-            placeholder="Additional Details"
-            value={formData.message}
-            onChange={e => handleChange("message", e.target.value)}
-            rows="5"
-            style={{ ...inputStyle, resize: "vertical" }}
-          />
-          <button type="submit" style={buttonStyle}>Submit Booking</button>
+
+          <input type="text" placeholder="Full Name *" value={formData.name}
+            onChange={e => handleChange("name", e.target.value)} required style={inputStyle} />
+
+          <input type="email" placeholder="Email Address *" value={formData.email}
+            onChange={e => handleChange("email", e.target.value)} required style={inputStyle} />
+
+          <input type="tel" placeholder="Phone Number *" value={formData.phone}
+            onChange={e => handleChange("phone", e.target.value)} required style={inputStyle} />
+
+          <input type="date" value={formData.date} onChange={e => handleChange("date", e.target.value)}
+            required min={new Date().toISOString().split("T")[0]} style={inputStyle} />
+
+          <input type="number" placeholder="Number of Guests" value={formData.guests}
+            onChange={e => handleChange("guests", e.target.value)} min="1" style={inputStyle} />
+
+          <textarea placeholder="Additional Details" value={formData.message}
+            onChange={e => handleChange("message", e.target.value)} rows="5"
+            style={{ ...inputStyle, resize: "vertical" }} />
+
+          <button type="submit" style={buttonStyle} disabled={loading}>
+            {loading ? "Submitting..." : "Submit Booking"}
+          </button>
         </form>
       </div>
 
