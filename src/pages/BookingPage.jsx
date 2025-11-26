@@ -31,7 +31,7 @@ export default function BookingPage() {
     setLoading(true);
 
     try {
-      const response = await fetch(`${BASE_URL}/booking/create`, {
+      const response = await fetch(`${BASE_URL}/bookings/add`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
