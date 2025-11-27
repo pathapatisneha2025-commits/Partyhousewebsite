@@ -1,17 +1,31 @@
-import { useState } from "react"; 
+import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Footer } from "../component/footersection";
 
-const roomsData = [
-  { id: 1, name: "Grand Celebration Hall", img: "/image2.jpeg", capacity: "150 Guests", features: "Stage • AC • Sound • Elegant Lighting" },
-  { id: 2, name: "Mini Function Room", img: "/minifunction.jpeg", capacity: "60 Guests", features: "Birthdays • Baby Showers • Family Events" },
-  { id: 3, name: "Rooftop Lounge", img: "/image4.jpeg", capacity: "80 Guests", features: "Open Air • Sunset View • Music & Lights" },
-  { id: 4, name: "Banquet Hall", img: "/image3.jpeg", capacity: "120 Guests", features: "Buffet Setup • Stage • AC • Elegant Décor" },
-];
+const BASE_URL = "https://partyhousedatabase.onrender.com";
 
 export function BookingHall() {
   const { id } = useParams();
-  const room = roomsData.find(r => r.id === Number(id));
+
+  const [room, setRoom] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  // Fetch room by ID
+  useEffect(() => {
+    const fetchRoom = async () => {
+      try {
+        const response = await fetch(`${BASE_URL}/rooms/${id}`);
+        const data = await response.json();
+        setRoom(data);
+      } catch (err) {
+        console.error("Error fetching room:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchRoom();
+  }, [id]);
 
   const [formData, setFormData] = useState({
     name: "",
@@ -23,18 +37,27 @@ export function BookingHall() {
   });
 
   const handleChange = (field, value) => {
-    setFormData(prev => ({ ...prev, [field]: value }));
+    setFormData((prev) => ({ ...prev, [field]: value }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     if (!formData.name || !formData.email || !formData.phone || !formData.date) {
-      alert("Please fill in all required fields");
+      alert("Please fill all required fields");
       return;
     }
-    alert(`Booking inquiry submitted for ${room.name}! We'll contact you soon.`);
-    setFormData({ name: "", email: "", phone: "", date: "", guests: "", message: "" });
+
+    alert(`Booking inquiry submitted for ${room.name}!`);
   };
+
+  if (loading) {
+    return <h2 style={{ padding: 50, textAlign: "center" }}>Loading Room...</h2>;
+  }
+
+  if (!room) {
+    return <h2 style={{ padding: 50, textAlign: "center", color: "red" }}>Room not found</h2>;
+  }
 
   return (
     <div style={pageStyle}>
@@ -43,22 +66,78 @@ export function BookingHall() {
       <div style={contentWrapperStyle}>
         {/* Left: Room Details */}
         <div style={roomDetailsStyle}>
-          <img src={room.img} alt={room.name} style={imageStyle} />
+          <img src={room.image_url} alt={room.name} style={imageStyle} />
+
           <div style={roomInfoStyle}>
-            <p><strong>Capacity:</strong> {room.capacity}</p>
-            <p><strong>Features:</strong> {room.features}</p>
+            <p><strong>Capacity:</strong> {room.capacity} Guests</p>
+
+            <p>
+              <strong>Features:</strong>{" "}
+              {room.description?.replace(/"/g, "")}
+            </p>
+
+            <p>
+              <strong>Price:</strong> ₹{room.price}
+            </p>
           </div>
         </div>
 
-        {/* Right: Booking Form */}
+        {/* Right: Form */}
         <div style={formWrapperStyle}>
           <form onSubmit={handleSubmit} style={formStyle}>
-            <input type="text" placeholder="Full Name *" value={formData.name} onChange={e => handleChange("name", e.target.value)} required style={inputStyle} />
-            <input type="email" placeholder="Email Address *" value={formData.email} onChange={e => handleChange("email", e.target.value)} required style={inputStyle} />
-            <input type="tel" placeholder="Phone Number *" value={formData.phone} onChange={e => handleChange("phone", e.target.value)} required style={inputStyle} />
-            <input type="date" value={formData.date} onChange={e => handleChange("date", e.target.value)} min={new Date().toISOString().split("T")[0]} required style={inputStyle} />
-            <input type="number" placeholder="Number of Guests" value={formData.guests} onChange={e => handleChange("guests", e.target.value)} min="1" style={inputStyle} />
-            <textarea placeholder="Additional Details" value={formData.message} onChange={e => handleChange("message", e.target.value)} rows="5" style={{ ...inputStyle, resize: "vertical" }} />
+            <input
+              type="text"
+              placeholder="Full Name *"
+              value={formData.name}
+              onChange={(e) => handleChange("name", e.target.value)}
+              required
+              style={inputStyle}
+            />
+
+            <input
+              type="email"
+              placeholder="Email Address *"
+              value={formData.email}
+              onChange={(e) => handleChange("email", e.target.value)}
+              required
+              style={inputStyle}
+            />
+
+            <input
+              type="tel"
+              placeholder="Phone Number *"
+              value={formData.phone}
+              onChange={(e) => handleChange("phone", e.target.value)}
+              required
+              style={inputStyle}
+            />
+
+            <input
+              type="date"
+              value={formData.date}
+              onChange={(e) => handleChange("date", e.target.value)}
+              min={new Date().toISOString().split("T")[0]}
+              required
+              style={inputStyle}
+            />
+
+            <input
+              type="number"
+              placeholder="Number of Guests"
+              value={formData.guests}
+              onChange={(e) => handleChange("guests", e.target.value)}
+              min="1"
+              style={inputStyle}
+            />
+
+            <textarea
+              placeholder="Additional Details"
+              value={formData.message}
+              onChange={(e) => handleChange("message", e.target.value)}
+              rows="5"
+              style={{ ...inputStyle, resize: "vertical" }}
+            />
+
             <button type="submit" style={buttonStyle}>Submit Booking Inquiry</button>
           </form>
         </div>
@@ -69,7 +148,7 @@ export function BookingHall() {
   );
 }
 
-// --- Styles ---
+// --- Styles (same as before) ---
 const pageStyle = {
   width: "100%",
   minHeight: "100vh",
@@ -88,7 +167,7 @@ const headingStyle = {
 const contentWrapperStyle = {
   display: "flex",
   gap: "40px",
-  flexWrap: "wrap", // responsive: stack on small screens
+  flexWrap: "wrap",
   justifyContent: "center",
 };
 
@@ -132,7 +211,6 @@ const inputStyle = {
   border: "1px solid #ddd",
   fontSize: "16px",
   outline: "none",
-  boxSizing: "border-box",
   transition: "0.3s",
 };
 
@@ -140,12 +218,10 @@ const buttonStyle = {
   width: "100%",
   padding: "15px",
   borderRadius: "50px",
-  border: "none",
   background: "#c59d5f",
   color: "#fff",
   fontSize: "18px",
   fontWeight: "bold",
   cursor: "pointer",
-  transition: "0.3s",
 };
 
