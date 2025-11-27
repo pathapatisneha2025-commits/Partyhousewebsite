@@ -1,40 +1,35 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Footer } from "../component/footersection";
 import { useNavigate } from "react-router-dom";
+
+const BASE_URL = "https://partyhousedatabase.onrender.com";
 
 export default function RoomsPage() {
   const navigate = useNavigate();
 
-  const rooms = [
-    {
-      id: 1,
-      name: "Grand Celebration Hall",
-      img: "/image2.jpeg",
-      capacity: "150 Guests",
-      features: "Stage • AC • Sound • Elegant Lighting",
-    },
-    {
-      id: 2,
-      name: "Mini Function Room",
-      img: "/minifunction.jpeg",
-      capacity: "60 Guests",
-      features: "Birthdays • Baby Showers • Family Events",
-    },
-    {
-      id: 3,
-      name: "Rooftop Lounge",
-      img: "/image4.jpeg",
-      capacity: "80 Guests",
-      features: "Open Air • Sunset View • Music & Lights",
-    },
-    {
-      id: 4,
-      name: "Banquet Hall",
-      img: "/image3.jpeg",
-      capacity: "120 Guests",
-      features: "Buffet Setup • Stage • AC • Elegant Décor",
-    },
-  ];
+  const [rooms, setRooms] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  // Fetch rooms dynamically
+  useEffect(() => {
+    const fetchRooms = async () => {
+      try {
+        const res = await fetch(`${BASE_URL}/rooms/all`);
+        const data = await res.json();
+        setRooms(data);
+      } catch (err) {
+        console.log("Error fetching rooms:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchRooms();
+  }, []);
+
+  if (loading) {
+    return <h2 style={{ padding: 100, textAlign: "center" }}>Loading rooms...</h2>;
+  }
 
   return (
     <section id="rooms" className="rooms-section">
@@ -43,11 +38,14 @@ export default function RoomsPage() {
       <div className="rooms-container">
         {rooms.map((room) => (
           <div key={room.id} className="room-card">
-            <img src={room.img} alt={room.name} />
+            <img src={room.image_url} alt={room.name} />
             <h3>{room.name}</h3>
-            <p>Capacity: {room.capacity}</p>
-            <p>{room.features}</p>
-            <button onClick={() => navigate(`/bookinghall/${room.id}`)}>Book Now</button>
+            <p>Capacity: {room.capacity} Guests</p>
+            <p>{room.description.replace(/"/g, "")}</p>
+
+            <button onClick={() => navigate(`/bookinghall/${room.id}`)}>
+              Book Now
+            </button>
           </div>
         ))}
       </div>
@@ -86,8 +84,6 @@ export default function RoomsPage() {
           flex-direction: column;
           align-items: center;
           gap: 15px;
-          width: 100%;
-          box-sizing: border-box;
         }
 
         .room-card:hover {
@@ -100,7 +96,7 @@ export default function RoomsPage() {
           height: 280px;
           object-fit: cover;
           border-radius: 20px;
-          transition: transform 0.4s;
+          transition: 0.4s;
         }
 
         .room-card img:hover {
@@ -110,13 +106,11 @@ export default function RoomsPage() {
         .room-card h3 {
           font-size: 1.75rem;
           color: #222;
-          margin: 10px 0 5px 0;
         }
 
         .room-card p {
           color: #555;
           font-size: 16px;
-          margin: 2px 0;
         }
 
         .room-card button {
@@ -143,12 +137,11 @@ export default function RoomsPage() {
           }
         }
 
-       @media (max-width: 768px) {
-  .rooms-container {
-    grid-template-columns: 1fr 1fr;
-  }
-}
-
+        @media (max-width: 768px) {
+          .rooms-container {
+            grid-template-columns: 1fr;
+          }
+        }
       `}</style>
     </section>
   );
