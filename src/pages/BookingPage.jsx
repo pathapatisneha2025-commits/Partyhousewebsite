@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Footer } from "../component/footersection";
 import RoomsSection from "../component/roomcard";
 
-const BASE_URL = "https://partyhousedatabase.onrender.com"; // change to your server URL
+const BASE_URL = "https://partyhousedatabase.onrender.com";
 
 export default function BookingPage() {
   const [formData, setFormData] = useState({
@@ -12,10 +12,13 @@ export default function BookingPage() {
     date: "",
     guests: "",
     message: "",
-    service: "", // added service field
+    service: "",
+    room: "",
   });
 
   const [loading, setLoading] = useState(false);
+  const [rooms, setRooms] = useState([]);
+  const [bookings, setBookings] = useState([]);
 
   const services = [
     "Photography",
@@ -26,14 +29,45 @@ export default function BookingPage() {
     "Custom Package",
   ];
 
+  // Fetch rooms and bookings
+  useEffect(() => {
+    const fetchRooms = async () => {
+      try {
+        const roomsRes = await fetch(`${BASE_URL}/rooms/all`);
+        const roomsData = await roomsRes.json();
+        setRooms(roomsData);
+      } catch (err) {
+        console.error("Failed to fetch rooms:", err);
+      }
+    };
+
+    const fetchBookings = async () => {
+      try {
+        const bookingsRes = await fetch(`${BASE_URL}/bookings`);
+        const bookingsData = await bookingsRes.json();
+        setBookings(bookingsData);
+      } catch (err) {
+        console.error("Failed to fetch bookings:", err);
+      }
+    };
+
+    fetchRooms();
+    fetchBookings();
+  }, []);
+
   const handleChange = (field, value) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
+  };
+
+  const handleDateChange = (value) => {
+    // Reset room when date changes
+    setFormData((prev) => ({ ...prev, date: value, room: "" }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!formData.name || !formData.email || !formData.phone || !formData.date) {
+    if (!formData.name || !formData.email || !formData.phone || !formData.date || !formData.room) {
       alert("Please fill all required fields!");
       return;
     }
@@ -59,7 +93,13 @@ export default function BookingPage() {
           guests: "",
           message: "",
           service: "",
+          room: "",
         });
+
+        // Refresh bookings to update the dropdown
+        const bookingsRes = await fetch(`${BASE_URL}/bookings`);
+        const bookingsData = await bookingsRes.json();
+        setBookings(bookingsData);
       } else {
         alert(result.error || "Failed to submit booking.");
       }
@@ -137,7 +177,7 @@ export default function BookingPage() {
           <input
             type="date"
             value={formData.date}
-            onChange={(e) => handleChange("date", e.target.value)}
+            onChange={(e) => handleDateChange(e.target.value)}
             required
             min={new Date().toISOString().split("T")[0]}
             style={inputStyle}
@@ -151,6 +191,26 @@ export default function BookingPage() {
             min="1"
             style={inputStyle}
           />
+
+          {/* Room dropdown with "already booked" check */}
+          <select
+            value={formData.room}
+            onChange={(e) => handleChange("room", e.target.value)}
+            style={inputStyle}
+            required
+          >
+            <option value="">Select a Room *</option>
+            {rooms.map((room) => {
+              const isBooked = bookings.some(
+                (b) => b.roomId === room.id && b.date === formData.date
+              );
+              return (
+                <option key={room.id} value={room.id} disabled={isBooked}>
+                  {room.name} - Capacity: {room.capacity}, Price: ₹{room.price} {isBooked ? "(Already booked)" : ""}
+                </option>
+              );
+            })}
+          </select>
 
           {/* Dropdown for Services */}
           <select
