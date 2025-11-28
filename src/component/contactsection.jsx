@@ -45,15 +45,16 @@ export function ContactSection() {
         background: "linear-gradient(to bottom, #ffffff, #fff5ec)",
       }}
     >
-      {/* FIXED contact-grid CSS (always 2 columns) */}
       <style>
         {`
-            .contact-grid {
-              display: grid;
-              grid-template-columns: 2fr 1fr;
-              gap: 48px;
-            }
-        `}
+        @media (min-width: 1024px) {
+          .contact-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 48px;
+          }
+        }
+      `}
       </style>
 
       <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 24px" }}>
@@ -103,6 +104,9 @@ export function ContactSection() {
                 padding: "48px",
                 borderRadius: "24px",
                 boxShadow: "0 10px 30px rgba(0,0,0,0.12)",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
               }}
             >
               <form onSubmit={handleSubmit} style={{ display: "grid", gap: "24px" }}>
@@ -134,6 +138,7 @@ export function ContactSection() {
                     placeholder="+91 98765 43210"
                   />
 
+                  {/* Venue */}
                   <div>
                     <label style={labelStyle}>Preferred Venue *</label>
                     <select
@@ -194,6 +199,7 @@ export function ContactSection() {
                     gap: "10px",
                     alignItems: "center",
                     fontWeight: 600,
+                    transition: "0.3s",
                   }}
                 >
                   Submit Inquiry <Send size={20} />
@@ -202,7 +208,7 @@ export function ContactSection() {
             </div>
           </motion.div>
 
-          {/* Contact Info */}
+          {/* Contact Details Box */}
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -239,7 +245,13 @@ function InputField({ label, type = "text", value, onChange, placeholder }) {
   return (
     <div>
       <label style={labelStyle}>{label}</label>
-      <input type={type} value={value} onChange={onChange} placeholder={placeholder} style={inputStyle} />
+      <input
+        type={type}
+        value={value}
+        onChange={onChange}
+        placeholder={placeholder}
+        style={inputStyle}
+      />
     </div>
   );
 }
@@ -265,7 +277,7 @@ const labelStyle = {
 };
 
 const inputStyle = {
-  width: "100%", // FIXED
+  width: "90%",
   padding: "12px 16px",
   borderRadius: "12px",
   border: "1px solid #ccc",
