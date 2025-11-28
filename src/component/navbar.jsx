@@ -1,117 +1,120 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { FiMenu, FiX } from "react-icons/fi";
 
 export default function Navbar() {
   const [shrink, setShrink] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
       setShrink(window.scrollY > 50);
     };
-
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const styles = {
-    navbar: {
-      width: "100%",
-      padding: shrink ? "10px 20px" : "20px 25px",
-      position: "flex",
-      top: 0,
-      left: 0,
-      display: "flex",
-      flexDirection: "column", // mobile default
-      background: "rgba(255, 255, 255, 0.95)",
-      backdropFilter: "blur(12px)",
-      zIndex: 1000,
-      borderBottom: "1px solid #e0dede",
-      transition: "0.3s ease",
-    },
-
-    topRow: {
-      width: "100%",
-      display: "flex",
-      justifyContent: "space-between",
-      alignItems: "center",
-    },
-
-    logoImg: {
-      width: shrink ? "90px" : "120px",
-      height: shrink ? "45px" : "60px",
-      borderRadius: "40px",
-      objectFit: "cover",
-      transition: "0.3s ease",
-    },
-
-    navLinks: {
-      listStyle: "none",
-      display: "flex",
-      flexDirection: "column", // MOBILE BY DEFAULT
-      gap: "12px",
-      width: "100%",
-      padding: "15px 0",
-      marginTop: "8px",
-    },
-
-    navLink: {
-      fontWeight: 600,
-      fontSize: "16px",
-      padding: "10px",
-      borderRadius: "8px",
-      textDecoration: "none",
-      color: "#000",
-      transition: "0.3s ease",
-      textAlign: "center",
-    },
-  };
-
-const hoverStyle = `
-    /* NO HOVER ANYWHERE */
-    .nav-item:hover {
-      background: none !important;
-      color: inherit !important;
-      transform: none !important;
-    }
-
-    /* DESKTOP LAYOUT ONLY — NO HOVER */
-    @media (min-width: 768px) {
-      .navbar {
-        flex-direction: row !important;
-        align-items: center !important;
-      }
-
-      .nav-links {
-        flex-direction: row !important;
-        justify-content: flex-end !important;
-        width: auto !important;
-        padding: 0 !important;
-        margin: 0 !important;
-        gap: 30px !important;
-      }
-    }
-`;
-
-
-
   return (
-    <>
-      <style>{hoverStyle}</style>
+    <nav className={`navbar ${shrink ? "shrink" : ""}`}>
+      <div className="nav-container">
+        <Link to="/" className="logo">
+          <img src="/Logoimage.jpeg" alt="Logo" />
+        </Link>
 
-      <nav className="navbar" style={styles.navbar}>
-        <div style={styles.topRow}>
-          <img src="/Logoimage.jpeg" alt="Logo" style={styles.logoImg} />
+        {/* Hamburger icon for mobile */}
+        <div className="mobile-menu-icon" onClick={() => setMobileOpen(!mobileOpen)}>
+          {mobileOpen ? <FiX size={28} /> : <FiMenu size={28} />}
         </div>
 
-        <ul className="nav-links" style={styles.navLinks}>
-          <li className="nav-item"><Link to="/" style={styles.navLink}>Home</Link></li>
-          <li className="nav-item"><Link to="/about" style={styles.navLink}>AboutUs</Link></li>
-          <li className="nav-item"><Link to="/rooms" style={styles.navLink}>Rooms</Link></li>
-          <li className="nav-item"><Link to="/bookingpage" style={styles.navLink}>Bookings</Link></li>
-          <li className="nav-item"><Link to="/contact" style={styles.navLink}>Contact</Link></li>
-          <li className="nav-item"><Link to="/services" style={styles.navLink}>Services</Link></li>
+        <ul className={`nav-links ${mobileOpen ? "open" : ""}`}>
+          <li><Link to="/">Home</Link></li>
+          <li><Link to="/about">About Us</Link></li>
+          <li><Link to="/rooms">Rooms</Link></li>
+          <li><Link to="/bookingpage">Bookings</Link></li>
+          <li><Link to="/contact">Contact</Link></li>
+          <li><Link to="/services">Services</Link></li>
         </ul>
-      </nav>
-    </>
+      </div>
+
+      <style jsx="true">{`
+        .navbar {
+          position: sticky;
+          top: 0;
+          width: 100%;
+          background: rgba(255, 255, 255, 0.95);
+          backdrop-filter: blur(12px);
+          border-bottom: 1px solid #e0dede;
+          transition: 0.3s ease;
+          z-index: 1000;
+        }
+
+        .navbar.shrink .logo img {
+          width: 90px;
+          height: 45px;
+        }
+
+        .nav-container {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 20px 25px;
+        }
+
+        .logo img {
+          width: 120px;
+          height: 60px;
+          border-radius: 40px;
+          transition: 0.3s ease;
+        }
+
+        .nav-links {
+          display: flex;
+          gap: 30px;
+        }
+
+        .nav-links li a {
+          text-decoration: none;
+          color: #000;
+          font-weight: 600;
+          padding: 10px;
+          border-radius: 8px;
+          transition: 0.3s ease;
+        }
+
+        /* Mobile styles */
+        .mobile-menu-icon {
+          display: none;
+          cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+          .mobile-menu-icon {
+            display: block;
+          }
+
+          .nav-links {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(12px);
+            flex-direction: column;
+            padding: 15px 0;
+            margin: 0;
+            gap: 12px;
+            display: none;
+          }
+
+          .nav-links.open {
+            display: flex;
+          }
+
+          .nav-links li a {
+            text-align: center;
+          }
+        }
+      `}</style>
+    </nav>
   );
 }
