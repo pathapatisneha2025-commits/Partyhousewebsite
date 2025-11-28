@@ -17,11 +17,11 @@ export function ContactSection() {
     e.preventDefault();
 
     if (!formData.name || !formData.email || !formData.phone || !formData.venue) {
-      alert("Please fill in all required fields");
+      alert.error("Please fill in all required fields");
       return;
     }
 
-    alert("Booking inquiry submitted successfully!");
+    alert.success("Booking inquiry submitted successfully!");
     setFormData({
       name: "",
       email: "",
@@ -45,35 +45,33 @@ export function ContactSection() {
         background: "linear-gradient(to bottom, #ffffff, #fff5ec)",
       }}
     >
-      {/* 2-COLUMN GRID FIX */}
       <style>
-  {`
-    /* ALWAYS 2 columns */
-    .two-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 16px;
-      width: 100%;
-    }
+        {`
+        @media (min-width: 1024px) {
+          .contact-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 48px;
+          }
+        }
 
-    /* Contact form + info layout on desktop */
-    @media (min-width: 1024px) {
-      .contact-grid {
-        display: grid;
-        grid-template-columns: 2fr 1fr;
-        gap: 48px;
-      }
-    }
+        .form-row {
+          display: grid;
+          gap: 20px;
+          grid-template-columns: 1fr 1fr;
+        }
 
-    /* FIX mobile shrinking/overlap */
-    @media (max-width: 480px) {
-      .form-box {
-        padding: 24px !important;
-      }
-    }
-  `}
-</style>
+        @media (max-width: 768px) {
+          .form-row {
+            grid-template-columns: 1fr;
+          }
 
+          input, select, textarea {
+            width: 100% !important;
+          }
+        }
+      `}
+      </style>
 
       <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 24px" }}>
         {/* Title */}
@@ -107,37 +105,35 @@ export function ContactSection() {
           </p>
         </motion.div>
 
-        {/* Form + Sidebar */}
+        {/* Form + Info Box */}
         <div className="contact-grid">
-          {/* FORM */}
+          {/* Form */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-          <div
-  className="form-box"
-  style={{
-    background: "white",
-    padding: "40px",
-    borderRadius: "24px",
-    boxShadow: "0 10px 30px rgba(0,0,0,0.12)",
-    boxSizing: "border-box",
-  }}
->
-
+            <div
+              style={{
+                background: "white",
+                padding: "48px",
+                borderRadius: "24px",
+                boxShadow: "0 10px 30px rgba(0,0,0,0.12)",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+              }}
+            >
               <form onSubmit={handleSubmit} style={{ display: "grid", gap: "24px" }}>
-                
                 {/* Name + Email */}
-                <div className="two-grid">
+                <div className="form-row">
                   <InputField
                     label="Full Name *"
                     value={formData.name}
                     onChange={(e) => handleChange("name", e.target.value)}
                     placeholder="John Doe"
                   />
-
                   <InputField
                     label="Email *"
                     type="email"
@@ -148,7 +144,7 @@ export function ContactSection() {
                 </div>
 
                 {/* Phone + Venue */}
-                <div className="two-grid">
+                <div className="form-row">
                   <InputField
                     label="Phone Number *"
                     type="tel"
@@ -156,7 +152,6 @@ export function ContactSection() {
                     onChange={(e) => handleChange("phone", e.target.value)}
                     placeholder="+91 98765 43210"
                   />
-
                   <div>
                     <label style={labelStyle}>Preferred Venue *</label>
                     <select
@@ -172,14 +167,13 @@ export function ContactSection() {
                 </div>
 
                 {/* Date + Guests */}
-                <div className="two-grid">
+                <div className="form-row">
                   <InputField
                     label="Event Date"
                     type="date"
                     value={formData.date}
                     onChange={(e) => handleChange("date", e.target.value)}
                   />
-
                   <InputField
                     label="Expected Guests"
                     type="number"
@@ -217,6 +211,7 @@ export function ContactSection() {
                     gap: "10px",
                     alignItems: "center",
                     fontWeight: 600,
+                    transition: "0.3s",
                   }}
                 >
                   Submit Inquiry <Send size={20} />
@@ -225,7 +220,7 @@ export function ContactSection() {
             </div>
           </motion.div>
 
-          {/* CONTACT INFORMATION BOX */}
+          {/* Contact Details Box */}
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -273,7 +268,7 @@ function InputField({ label, type = "text", value, onChange, placeholder }) {
   );
 }
 
-/* Contact Info */
+/* Contact Info Box */
 function ContactInfo({ icon, title, info, sub }) {
   return (
     <div style={{ textAlign: "center" }}>
@@ -294,11 +289,12 @@ const labelStyle = {
 };
 
 const inputStyle = {
-  width: "100%",        // FIXED to prevent overlapping
+  width: "100%",
   padding: "12px 16px",
   borderRadius: "12px",
   border: "1px solid #ccc",
   outline: "none",
   fontSize: "15px",
   transition: "0.2s",
+  boxSizing: "border-box",
 };
