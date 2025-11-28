@@ -61,8 +61,14 @@ export function ContactSection() {
           grid-template-columns: 1fr 1fr;
         }
 
+        /* Rows that stay side by side on all screen sizes */
+        .form-row.row-double {
+          grid-template-columns: 1fr 1fr;
+        }
+
         @media (max-width: 768px) {
-          .form-row {
+          /* Other rows stack vertically */
+          .form-row:not(.row-double) {
             grid-template-columns: 1fr;
           }
 
@@ -127,7 +133,7 @@ export function ContactSection() {
             >
               <form onSubmit={handleSubmit} style={{ display: "grid", gap: "24px" }}>
                 {/* Name + Email */}
-                <div className="form-row">
+                <div className="form-row row-double">
                   <InputField
                     label="Full Name *"
                     value={formData.name}
@@ -144,7 +150,7 @@ export function ContactSection() {
                 </div>
 
                 {/* Phone + Venue */}
-                <div className="form-row">
+                <div className="form-row row-double">
                   <InputField
                     label="Phone Number *"
                     type="tel"
