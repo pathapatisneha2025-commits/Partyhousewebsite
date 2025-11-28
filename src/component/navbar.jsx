@@ -105,7 +105,7 @@ const hoverStyle = `
 
         <ul className="nav-links" style={styles.navLinks}>
           <li className="nav-item"><Link to="/" style={styles.navLink}>Home</Link></li>
-          <li className="nav-item"><Link to="/about" style={styles.navLink}>About Us</Link></li>
+          <li className="nav-item"><Link to="/about" style={styles.navLink}>AboutUs</Link></li>
           <li className="nav-item"><Link to="/rooms" style={styles.navLink}>Rooms</Link></li>
           <li className="nav-item"><Link to="/bookingpage" style={styles.navLink}>Bookings</Link></li>
           <li className="nav-item"><Link to="/contact" style={styles.navLink}>Contact</Link></li>
