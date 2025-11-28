@@ -13,7 +13,7 @@ export default function BookingPage() {
     guests: "",
     message: "",
     service: "",
-    roomId: "", // renamed to match backend
+    room: "",
   });
 
   const [loading, setLoading] = useState(false);
@@ -33,9 +33,9 @@ export default function BookingPage() {
   useEffect(() => {
     const fetchRooms = async () => {
       try {
-        const res = await fetch(`${BASE_URL}/rooms/all`);
-        const data = await res.json();
-        setRooms(data);
+        const roomsRes = await fetch(`${BASE_URL}/rooms/all`);
+        const roomsData = await roomsRes.json();
+        setRooms(roomsData);
       } catch (err) {
         console.error("Failed to fetch rooms:", err);
       }
@@ -43,9 +43,9 @@ export default function BookingPage() {
 
     const fetchBookings = async () => {
       try {
-        const res = await fetch(`${BASE_URL}/bookings/all`);
-        const data = await res.json();
-        setBookings(data);
+        const bookingsRes = await fetch(`${BASE_URL}/bookings`);
+        const bookingsData = await bookingsRes.json();
+        setBookings(bookingsData);
       } catch (err) {
         console.error("Failed to fetch bookings:", err);
       }
@@ -60,14 +60,14 @@ export default function BookingPage() {
   };
 
   const handleDateChange = (value) => {
-    // Reset room selection when date changes
-    setFormData((prev) => ({ ...prev, date: value, roomId: "" }));
+    // Reset room when date changes
+    setFormData((prev) => ({ ...prev, date: value, room: "" }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!formData.name || !formData.email || !formData.phone || !formData.date || !formData.roomId) {
+    if (!formData.name || !formData.email || !formData.phone || !formData.date || !formData.room) {
       alert("Please fill all required fields!");
       return;
     }
@@ -81,12 +81,7 @@ export default function BookingPage() {
         body: JSON.stringify(formData),
       });
 
-      let result = {};
-      try {
-        result = await response.json();
-      } catch {
-        // JSON parse error
-      }
+      const result = await response.json();
 
       if (response.ok) {
         alert("Booking submitted successfully!");
@@ -98,11 +93,11 @@ export default function BookingPage() {
           guests: "",
           message: "",
           service: "",
-          roomId: "",
+          room: "",
         });
 
-        // Refresh bookings to update dropdown
-        const bookingsRes = await fetch(`${BASE_URL}/bookings/all`);
+        // Refresh bookings to update the dropdown
+        const bookingsRes = await fetch(`${BASE_URL}/bookings`);
         const bookingsData = await bookingsRes.json();
         setBookings(bookingsData);
       } else {
@@ -157,6 +152,7 @@ export default function BookingPage() {
             placeholder="Full Name *"
             value={formData.name}
             onChange={(e) => handleChange("name", e.target.value)}
+            required
             style={inputStyle}
           />
 
@@ -165,6 +161,7 @@ export default function BookingPage() {
             placeholder="Email Address *"
             value={formData.email}
             onChange={(e) => handleChange("email", e.target.value)}
+            required
             style={inputStyle}
           />
 
@@ -173,6 +170,7 @@ export default function BookingPage() {
             placeholder="Phone Number *"
             value={formData.phone}
             onChange={(e) => handleChange("phone", e.target.value)}
+            required
             style={inputStyle}
           />
 
@@ -196,15 +194,15 @@ export default function BookingPage() {
 
           {/* Room dropdown with "already booked" check */}
           <select
-            value={formData.roomId}
-            onChange={(e) => handleChange("roomId", e.target.value)}
+            value={formData.room}
+            onChange={(e) => handleChange("room", e.target.value)}
             style={inputStyle}
             required
           >
             <option value="">Select a Room *</option>
             {rooms.map((room) => {
               const isBooked = bookings.some(
-                (b) => b.roomId === room.id && b.event_date === formData.date
+                (b) => b.roomId === room.id && b.date === formData.date
               );
               return (
                 <option key={room.id} value={room.id} disabled={isBooked}>
@@ -214,7 +212,7 @@ export default function BookingPage() {
             })}
           </select>
 
-          {/* Services dropdown */}
+          {/* Dropdown for Services */}
           <select
             value={formData.service}
             onChange={(e) => handleChange("service", e.target.value)}
