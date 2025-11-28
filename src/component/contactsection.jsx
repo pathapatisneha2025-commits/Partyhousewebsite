@@ -152,14 +152,14 @@ export function ContactSection() {
                 {/* Phone + Venue */}
                 <div className="form-row row-double">
                   <InputField
-                    label="Phone Number *"
+                    label="PhoneNumber *"
                     type="tel"
                     value={formData.phone}
                     onChange={(e) => handleChange("phone", e.target.value)}
                     placeholder="+91 98765 43210"
                   />
                   <div>
-                    <label style={labelStyle}>Preferred Venue *</label>
+                    <label style={labelStyle}>PreferredVenue*</label>
                     <select
                       value={formData.venue}
                       onChange={(e) => handleChange("venue", e.target.value)}
@@ -173,7 +173,7 @@ export function ContactSection() {
                 </div>
 
                 {/* Date + Guests */}
-                <div className="form-row">
+<div className="form-row row-double">
                   <InputField
                     label="Event Date"
                     type="date"
