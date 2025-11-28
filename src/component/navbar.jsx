@@ -21,8 +21,11 @@ export default function Navbar() {
           <img src="/Logoimage.jpeg" alt="Logo" />
         </Link>
 
-        {/* Hamburger icon for mobile */}
-        <div className="mobile-menu-icon" onClick={() => setMobileOpen(!mobileOpen)}>
+        {/* Hamburger icon fixed */}
+        <div
+          className="mobile-menu-icon"
+          onClick={() => setMobileOpen(!mobileOpen)}
+        >
           {mobileOpen ? <FiX size={28} /> : <FiMenu size={28} />}
         </div>
 
@@ -58,6 +61,7 @@ export default function Navbar() {
           justify-content: space-between;
           align-items: center;
           padding: 20px 25px;
+          position: relative; /* allow absolute children */
         }
 
         .logo img {
@@ -93,25 +97,40 @@ export default function Navbar() {
         @media (max-width: 768px) {
           .mobile-menu-icon {
             display: block;
+            position: fixed;      /* fix position on screen */
+            top: 20px;
+            right: 20px;
+            z-index: 1100;        /* above navbar */
+            background: white;
+            border-radius: 8px;
+            padding: 4px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.15);
           }
 
           .nav-links {
             flex-direction: column;
             overflow: hidden;
-            max-height: 0;             /* hidden by default */
+            max-height: 0;             
             transition: max-height 0.4s ease;
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(12px);
             gap: 12px;
             list-style: none;
+            width: 100%;
+            position: absolute;
+            top: 70px;              /* slide below navbar */
+            left: 0;
+            padding: 0;
           }
 
           .nav-links.open {
-            max-height: 500px;         /* enough to show all items */
+            max-height: 500px;     
           }
 
           .nav-links li a {
             text-align: center;
+            display: block;
+            padding: 15px 0;
           }
         }
       `}</style>
