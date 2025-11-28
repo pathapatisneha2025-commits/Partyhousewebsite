@@ -70,6 +70,9 @@ export default function Navbar() {
         .nav-links {
           display: flex;
           gap: 30px;
+          list-style: none;
+          margin: 0;
+          padding: 0;
         }
 
         .nav-links li a {
@@ -93,21 +96,18 @@ export default function Navbar() {
           }
 
           .nav-links {
-            position: absolute;
-            top: 100%;
-            left: 0;
-            right: 0;
+            flex-direction: column;
+            overflow: hidden;
+            max-height: 0;             /* hidden by default */
+            transition: max-height 0.4s ease;
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(12px);
-            flex-direction: column;
-            padding: 15px 0;
-            margin: 0;
             gap: 12px;
-            display: none;
+            list-style: none;
           }
 
           .nav-links.open {
-            display: flex;
+            max-height: 500px;         /* enough to show all items */
           }
 
           .nav-links li a {
