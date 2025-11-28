@@ -17,11 +17,11 @@ export function ContactSection() {
     e.preventDefault();
 
     if (!formData.name || !formData.email || !formData.phone || !formData.venue) {
-      alert.error("Please fill in all required fields");
+      alert("Please fill required fields");
       return;
     }
 
-    alert.success("Booking inquiry submitted successfully!");
+    alert("Booking inquiry submitted!");
     setFormData({
       name: "",
       email: "",
@@ -45,16 +45,37 @@ export function ContactSection() {
         background: "linear-gradient(to bottom, #ffffff, #fff5ec)",
       }}
     >
+      {/* CSS FIXES */}
       <style>
         {`
-        @media (min-width: 1024px) {
-          .contact-grid {
-            display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 48px;
+          /* Desktop — 2 columns layout */
+          @media (min-width: 1024px) {
+            .contact-grid {
+              display: grid;
+              grid-template-columns: 2fr 1fr;
+              gap: 48px;
+            }
           }
-        }
-      `}
+
+          /* Mobile — stack everything */
+          @media (max-width: 768px) {
+            .form-2col {
+              grid-template-columns: 1fr !important;
+            }
+
+            .contact-grid {
+              grid-template-columns: 1fr !important;
+            }
+
+            .input-full {
+              width: 100% !important;
+            }
+
+            .contact-form-wrapper {
+              padding: 24px !important;
+            }
+          }
+        `}
       </style>
 
       <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 24px" }}>
@@ -89,7 +110,7 @@ export function ContactSection() {
           </p>
         </motion.div>
 
-        {/* Form + Info Box */}
+        {/* Form + Sidebox */}
         <div className="contact-grid">
           {/* Form */}
           <motion.div
@@ -99,19 +120,20 @@ export function ContactSection() {
             viewport={{ once: true }}
           >
             <div
+              className="contact-form-wrapper"
               style={{
                 background: "white",
                 padding: "48px",
                 borderRadius: "24px",
                 boxShadow: "0 10px 30px rgba(0,0,0,0.12)",
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "center",
               }}
             >
               <form onSubmit={handleSubmit} style={{ display: "grid", gap: "24px" }}>
                 {/* Name + Email */}
-                <div style={{ display: "grid", gap: "20px", gridTemplateColumns: "1fr 1fr" }}>
+                <div
+                  className="form-2col"
+                  style={{ display: "grid", gap: "20px", gridTemplateColumns: "1fr 1fr" }}
+                >
                   <InputField
                     label="Full Name *"
                     value={formData.name}
@@ -129,7 +151,10 @@ export function ContactSection() {
                 </div>
 
                 {/* Phone + Venue */}
-                <div style={{ display: "grid", gap: "20px", gridTemplateColumns: "1fr 1fr" }}>
+                <div
+                  className="form-2col"
+                  style={{ display: "grid", gap: "20px", gridTemplateColumns: "1fr 1fr" }}
+                >
                   <InputField
                     label="Phone Number *"
                     type="tel"
@@ -138,10 +163,10 @@ export function ContactSection() {
                     placeholder="+91 98765 43210"
                   />
 
-                  {/* Venue */}
                   <div>
                     <label style={labelStyle}>Preferred Venue *</label>
                     <select
+                      className="input-full"
                       value={formData.venue}
                       onChange={(e) => handleChange("venue", e.target.value)}
                       style={{ ...inputStyle, background: "white" }}
@@ -154,7 +179,10 @@ export function ContactSection() {
                 </div>
 
                 {/* Date + Guests */}
-                <div style={{ display: "grid", gap: "20px", gridTemplateColumns: "1fr 1fr" }}>
+                <div
+                  className="form-2col"
+                  style={{ display: "grid", gap: "20px", gridTemplateColumns: "1fr 1fr" }}
+                >
                   <InputField
                     label="Event Date"
                     type="date"
@@ -175,6 +203,7 @@ export function ContactSection() {
                 <div>
                   <label style={labelStyle}>Additional Details</label>
                   <textarea
+                    className="input-full"
                     value={formData.message}
                     onChange={(e) => handleChange("message", e.target.value)}
                     placeholder="Tell us about your event…"
@@ -208,7 +237,7 @@ export function ContactSection() {
             </div>
           </motion.div>
 
-          {/* Contact Details Box */}
+          {/* Contact Info */}
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -246,6 +275,7 @@ function InputField({ label, type = "text", value, onChange, placeholder }) {
     <div>
       <label style={labelStyle}>{label}</label>
       <input
+        className="input-full"
         type={type}
         value={value}
         onChange={onChange}
@@ -277,7 +307,7 @@ const labelStyle = {
 };
 
 const inputStyle = {
-  width: "90%",
+  width: "100%",
   padding: "12px 16px",
   borderRadius: "12px",
   border: "1px solid #ccc",
