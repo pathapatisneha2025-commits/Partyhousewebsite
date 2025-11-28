@@ -1,258 +1,135 @@
-import { useState } from "react";
-import { Phone, Mail, MapPin } from "lucide-react";
-export function ContactSection() {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    venue: "",
-    date: "",
-    guests: "",
-    message: "",
-  });
+import React from "react";
+import contactBg from "../assets/ContactBg.jpg";
+import contactroom from "../assets/contactroom.png";
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (!formData.name || !formData.email || !formData.phone || !formData.venue) {
-      alert.error("Please fill in all required fields");
-      return;
-    }
-    alert.success("Booking inquiry submitted successfully!");
-    setFormData({
-      name: "",
-      email: "",
-      phone: "",
-      venue: "",
-      date: "",
-      guests: "",
-      message: "",
-    });
-  };
-
-  const handleChange = (field, value) => {
-    setFormData((prev) => ({ ...prev, [field]: value }));
+export const ContactSection = () => {
+  const inputStyle = {
+    width: "100%",
+    padding: "12px",
+    border: "1px solid #ccc",
+    borderRadius: "8px",
+    fontSize: "16px",
   };
 
   return (
     <section
-      id="contact"
-      style={{
-        padding: "80px 24px",
-        background: "linear-gradient(to bottom, #ffffff, #fff5ec)",
-      }}
+      id="contact-section"
+      className="relative bg-cover bg-center center-div"
+      style={{ backgroundImage: `url(${contactBg})`, padding: "50px 0" }}
     >
-      <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
-        {/* Title */}
-        <div style={{ textAlign: "center", marginBottom: "64px" }}>
-          <span
-            style={{
-              display: "inline-block",
-              padding: "8px 22px",
-              background: "rgba(197,157,95,0.15)",
-              color: "#c59d5f",
-              borderRadius: "50px",
-              fontWeight: "600",
-              marginBottom: "12px",
-            }}
-          >
-            Contact Us
-          </span>
-          <h2 style={{ fontSize: "36px", fontWeight: 700, marginBottom: "12px" }}>
-            Book Your Event With Us
-          </h2>
-          <p style={{ color: "#666", maxWidth: "650px", margin: "0 auto", fontSize: "16px" }}>
-            Have questions or want to book your next event? Fill out the form — we’ll respond soon.
-          </p>
+      {/* Background overlay */}
+      <div className="absolute bg-green opacity-30"></div>
+      <div className="container mx-auto px-6 py-16 relative z-10">
+        <div className="center-div">
+          <h2 className="hed fslargest color-gray text-center">CONTACT US</h2>
         </div>
 
-        {/* Form + Info Grid */}
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
-            gap: "40px",
-          }}
-        >
-          {/* Form */}
-          <div
-            style={{
-              background: "white",
-              padding: "32px",
-              borderRadius: "24px",
-              boxShadow: "0 10px 30px rgba(0,0,0,0.12)",
-            }}
-          >
-            <form style={{ display: "grid", gap: "20px" }} onSubmit={handleSubmit}>
+        {/* MAIN GRID – Always 2 Columns */}
+        <div className="contact-grid mt-10">
+          {/* LEFT: FORM */}
+          <div className="bg-white p-8 shadow-xl rounded-xl">
+            <h3 className="hed fslarge mb-2 text-center">Get In Touch</h3>
+
+            <form className="grid gap-6 mt-6">
+              
+              {/* Name + Email */}
               <div
                 style={{
                   display: "grid",
-                  gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
                   gap: "20px",
-                }}
-              >
-                <InputField
-                  label="Full Name *"
-                  value={formData.name}
-                  onChange={(e) => handleChange("name", e.target.value)}
-                  placeholder="John Doe"
-                />
-                <InputField
-                  label="Email *"
-                  type="email"
-                  value={formData.email}
-                  onChange={(e) => handleChange("email", e.target.value)}
-                  placeholder="john@example.com"
-                />
-              </div>
-
-              <div
-                style={{
-                  display: "grid",
-                  gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
-                  gap: "20px",
-                }}
-              >
-                <InputField
-                  label="Phone Number *"
-                  type="tel"
-                  value={formData.phone}
-                  onChange={(e) => handleChange("phone", e.target.value)}
-                  placeholder="+91 98765 43210"
-                />
-                <div>
-                  <label style={labelStyle}>Preferred Venue *</label>
-                  <select
-                    value={formData.venue}
-                    onChange={(e) => handleChange("venue", e.target.value)}
-                    style={{ ...inputStyle, width: "100%" }}
-                  >
-                    <option value="">Select Venue</option>
-                    <option value="grand">Grand Celebration Hall</option>
-                    <option value="mini">Mini Function Room</option>
-                  </select>
-                </div>
-              </div>
-
-              <div
-                style={{
-                  display: "grid",
-                  gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
-                  gap: "20px",
-                }}
-              >
-                <InputField
-                  label="Event Date"
-                  type="date"
-                  value={formData.date}
-                  onChange={(e) => handleChange("date", e.target.value)}
-                />
-                <InputField
-                  label="Expected Guests"
-                  type="number"
-                  value={formData.guests}
-                  placeholder="50"
-                  onChange={(e) => handleChange("guests", e.target.value)}
-                />
-              </div>
-
-              <div>
-                <label style={labelStyle}>Additional Details</label>
-                <textarea
-                  value={formData.message}
-                  onChange={(e) => handleChange("message", e.target.value)}
-                  placeholder="Tell us about your event…"
-                  rows={4}
-                  style={{ ...inputStyle, width: "100%", resize: "none" }}
-                />
-              </div>
-
-              <button
-                type="submit"
-                style={{
+                  gridTemplateColumns: "1fr 1fr",
                   width: "100%",
-                  padding: "16px",
-                  borderRadius: "50px",
-                  background: "#c59d5f",
-                  color: "white",
-                  fontSize: "17px",
-                  border: "none",
-                  cursor: "pointer",
-                  fontWeight: 600,
+                  maxWidth: "100%",
                 }}
               >
-                Submit Inquiry
+                <input type="text" placeholder="Name" style={inputStyle} />
+                <input type="email" placeholder="Email" style={inputStyle} />
+              </div>
+
+              {/* Phone + Event Date */}
+              <div
+                style={{
+                  display: "grid",
+                  gap: "20px",
+                  gridTemplateColumns: "1fr 1fr",
+                  width: "100%",
+                  maxWidth: "100%",
+                }}
+              >
+                <input type="text" placeholder="Phone" style={inputStyle} />
+
+                <input
+                  type="date"
+                  placeholder="Event Date"
+                  style={{
+                    ...inputStyle,
+                    color: "#888",
+                  }}
+                />
+              </div>
+
+              {/* Event Type + Guests */}
+              <div
+                style={{
+                  display: "grid",
+                  gap: "20px",
+                  gridTemplateColumns: "1fr 1fr",
+                  width: "100%",
+                  maxWidth: "100%",
+                }}
+              >
+                <select style={inputStyle}>
+                  <option>Select Type</option>
+                  <option>Birthday</option>
+                  <option>Corporate Event</option>
+                  <option>Engagement</option>
+                </select>
+
+                <input type="number" placeholder="No. of Guests" style={inputStyle} />
+              </div>
+
+              {/* Message */}
+              <textarea
+                placeholder="Message"
+                rows="4"
+                style={{ ...inputStyle, resize: "none" }}
+              ></textarea>
+
+              {/* Submit */}
+              <button
+                className="bg-black text-white px-6 py-3 rounded-xl"
+                style={{ marginTop: "10px" }}
+              >
+                Submit
               </button>
             </form>
           </div>
 
-          {/* Contact Info */}
-          <div
-            style={{
-              background: "#fff5ec",
-              padding: "32px",
-              borderRadius: "22px",
-              boxShadow: "0 12px 35px rgba(0,0,0,0.08)",
-              display: "flex",
-              flexDirection: "column",
-              gap: "28px",
-              textAlign: "center",
-            }}
-          >
-            <ContactInfo icon={<Phone />} title="Phone" info="+91 98765 43210" sub="9 AM – 9 PM" />
-            <ContactInfo icon={<Mail />} title="Email" info="info@royalhall.com" sub="24-hour reply" />
-            <ContactInfo
-              icon={<MapPin />}
-              title="Location"
-              info="123 Elegant Avenue, Downtown City"
-              sub="India – 600001"
-            />
+          {/* RIGHT: IMAGE + INFO */}
+          <div className="bg-white shadow-xl rounded-xl p-6 flex flex-col items-center justify-center">
+            <img src={contactroom} alt="Room" className="w-full rounded-lg mb-4" />
+            <p className="text-lg font-semibold mb-2 text-center">Party House</p>
+            <p className="text-center">
+              Book your perfect event space! <br />
+              Reach out to us anytime.
+            </p>
           </div>
         </div>
       </div>
+
+      {/* CSS For fixed layout */}
+      <style>
+        {`
+            .contact-grid {
+              display: grid;
+              grid-template-columns: 2fr 1fr;
+              gap: 48px;
+              width: 100%;
+            }
+        `}
+      </style>
     </section>
   );
-}
-
-// Input Field Component
-function InputField({ label, type = "text", value, onChange, placeholder }) {
-  return (
-    <div>
-      <label style={labelStyle}>{label}</label>
-      <input
-        type={type}
-        value={value}
-        onChange={onChange}
-        placeholder={placeholder}
-        style={{ ...inputStyle, width: "100%" }}
-      />
-    </div>
-  );
-}
-
-// Contact Info Component
-function ContactInfo({ icon, title, info, sub }) {
-  return (
-    <div>
-      <div style={{ fontSize: "34px", color: "#c59d5f", marginBottom: "8px" }}>{icon}</div>
-      <h3 style={{ margin: "0 0 6px", fontSize: "20px" }}>{title}</h3>
-      <p style={{ margin: 0, fontWeight: 500 }}>{info}</p>
-      <p style={{ margin: 0, color: "#777" }}>{sub}</p>
-    </div>
-  );
-}
-
-// Styles
-const labelStyle = {
-  display: "block",
-  marginBottom: "6px",
-  color: "#444",
-  fontWeight: 500,
 };
 
-const inputStyle = {
-  padding: "12px 16px",
-  borderRadius: "12px",
-  border: "1px solid #ccc",
-  outline: "none",
-  fontSize: "15px",
-};
+export default ContactSection;
