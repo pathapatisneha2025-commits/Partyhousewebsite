@@ -47,31 +47,33 @@ export function ContactSection() {
     >
       {/* 2-COLUMN GRID FIX */}
       <style>
-        {`
-          .two-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-            width: 100%;
-          }
+  {`
+    /* ALWAYS 2 columns */
+    .two-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+      width: 100%;
+    }
 
-          /* Always 2 columns even on small screens */
-          @media (max-width: 480px) {
-            .two-grid {
-              grid-template-columns: 1fr 1fr;
-            }
-          }
+    /* Contact form + info layout on desktop */
+    @media (min-width: 1024px) {
+      .contact-grid {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        gap: 48px;
+      }
+    }
 
-          /* Desktop layout for form + info block */
-          @media (min-width: 1024px) {
-            .contact-grid {
-              display: grid;
-              grid-template-columns: 2fr 1fr;
-              gap: 48px;
-            }
-          }
-        `}
-      </style>
+    /* FIX mobile shrinking/overlap */
+    @media (max-width: 480px) {
+      .form-box {
+        padding: 24px !important;
+      }
+    }
+  `}
+</style>
+
 
       <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 24px" }}>
         {/* Title */}
@@ -114,14 +116,18 @@ export function ContactSection() {
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            <div
-              style={{
-                background: "white",
-                padding: "48px",
-                borderRadius: "24px",
-                boxShadow: "0 10px 30px rgba(0,0,0,0.12)",
-              }}
-            >
+          <div
+  className="form-box"
+  style={{
+    background: "white",
+    padding: "40px",
+    borderRadius: "24px",
+    boxShadow: "0 10px 30px rgba(0,0,0,0.12)",
+    boxSizing: "border-box",
+    width: "100%",
+  }}
+>
+
               <form onSubmit={handleSubmit} style={{ display: "grid", gap: "24px" }}>
                 
                 {/* Name + Email */}
