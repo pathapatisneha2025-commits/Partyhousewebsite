@@ -124,7 +124,6 @@ export function ContactSection() {
     borderRadius: "24px",
     boxShadow: "0 10px 30px rgba(0,0,0,0.12)",
     boxSizing: "border-box",
-    width: "100%",
   }}
 >
 
