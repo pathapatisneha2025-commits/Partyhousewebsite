@@ -1,10 +1,31 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect } from "react"; 
 import { Footer } from "../component/footersection";
 import RoomsSection from "../component/roomcard";
 
 const BASE_URL = "https://partyhousedatabase.onrender.com";
 
 export default function BookingPage() {
+
+  return (
+    <>
+      {/* GLOBAL FIX FOR SIDE SCROLL */}
+      <style>{`
+        html, body {
+          overflow-x: hidden !important;
+          width: 100%;
+        }
+
+        * {
+          box-sizing: border-box;
+        }
+      `}</style>
+
+      <MainBookingPage />
+    </>
+  );
+}
+
+function MainBookingPage() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -146,7 +167,9 @@ export default function BookingPage() {
           boxShadow: "0 10px 25px rgba(0,0,0,0.1)",
         }}
       >
-        <form onSubmit={handleSubmit} className="form">
+        {/* FORM */}
+        <form onSubmit={handleSubmit} className="form" style={{ display: "flex", flexDirection: "column", gap: "18px" }}>
+          
           <input type="text" placeholder="Full Name *"
             value={formData.name} onChange={(e) => handleChange("name", e.target.value)}
             style={inputStyle}
@@ -216,7 +239,7 @@ export default function BookingPage() {
         </form>
       </div>
 
-      {/* Mobile Responsive CSS */}
+      {/* Responsive CSS */}
       <style>{`
         @media (max-width: 768px) {
           .booking-container {
@@ -226,6 +249,10 @@ export default function BookingPage() {
 
           h1 {
             font-size: 2rem !important;
+          }
+
+          .form {
+            gap: 15px;
           }
 
           .form input,
@@ -248,6 +275,10 @@ export default function BookingPage() {
 
           h1 {
             font-size: 1.7rem !important;
+          }
+
+          .form {
+            gap: 12px;
           }
 
           .form input,
