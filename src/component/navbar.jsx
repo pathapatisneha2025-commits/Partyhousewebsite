@@ -46,8 +46,9 @@ export default function Navbar() {
           <li><Link to="/about" onClick={() => setMobileOpen(false)}>About Us</Link></li>
           <li><Link to="/rooms" onClick={() => setMobileOpen(false)}>Rooms</Link></li>
           <li><Link to="/bookingpage" onClick={() => setMobileOpen(false)}>Bookings</Link></li>
-          <li><Link to="/contact" onClick={() => setMobileOpen(false)}>Contact</Link></li>
           <li><Link to="/services" onClick={() => setMobileOpen(false)}>Services</Link></li>
+          <li><Link to="/contact" onClick={() => setMobileOpen(false)}>Contact</Link></li>
+
         </ul>
 
       </div>

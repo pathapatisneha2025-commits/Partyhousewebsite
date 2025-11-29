@@ -187,7 +187,6 @@ export function Footer() {
       <MapPin size={22} color="#c59d5f" />
       <p style={{ margin: 0, lineHeight: "1.5" }}>
         New City Colony, Opp. HP Petrol Bunk, Shadnagar
-        <br />
         India
       </p>
     </li>
