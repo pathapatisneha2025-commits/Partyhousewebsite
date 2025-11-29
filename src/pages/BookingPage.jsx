@@ -20,14 +20,20 @@ export default function BookingPage() {
   const [rooms, setRooms] = useState([]);
   const [bookings, setBookings] = useState([]);
 
-  const services = [
-    "Photography",
-    "Catering",
-    "DJ / Music",
-    "Decoration",
-    "Lighting",
-    "Custom Package",
-  ];
+const services = [
+ // Add-ons from image
+  "Cold Fire 2 - 499/-",
+  "Cold Fire 4 - 799/-",
+  "Balloons - 499/-",
+  "Candle Entry - 499/-",
+  "Name Board - 99/-",
+  "Age Board - 99/-",
+  "Light Effect - 499/-",
+  "Fire Gun - 499/-",
+  "Fog Entry - 499/-",
+  "Photography Add-on - 3000/-"
+];
+
 
   // Fetch rooms and bookings
   useEffect(() => {

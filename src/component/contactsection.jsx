@@ -243,12 +243,12 @@ export function ContactSection() {
               height: "fit-content",
             }}
           >
-            <ContactInfo icon={<Phone />} title="Phone" info="+91 98765 43210" sub="9 AM – 9 PM" />
-            <ContactInfo icon={<Mail />} title="Email" info="info@royalhall.com" sub="24-hour reply" />
+            <ContactInfo icon={<Phone />} title="Phone" info="+91  7893420321" sub="9 AM – 9 PM" />
+            <ContactInfo icon={<Mail />} title="Email" info="Ajpartyhouse0205@gmail.com" sub="24-hour reply" />
             <ContactInfo
               icon={<MapPin />}
               title="Location"
-              info="123 Elegant Avenue, Downtown City"
+              info="new city colony, opp to hp petrol bunk, Shadnagar"
               sub="India – 600001"
             />
           </motion.div>

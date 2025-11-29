@@ -133,44 +133,68 @@ export function Footer() {
           </motion.div>
 
           {/* CONTACT INFO */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
-            <h4 style={{ fontSize: "18px", marginBottom: "20px" }}>
-              Contact Info
-            </h4>
+         {/* CONTACT INFO */}
+<motion.div
+  initial={{ opacity: 0, y: 20 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  viewport={{ once: true }}
+>
+  <h4 style={{ fontSize: "18px", marginBottom: "20px" }}>
+    Contact Info
+  </h4>
 
-            <ul style={{ listStyle: "none", padding: 0 }}>
-              {/* Phone */}
-              <li style={{ display: "flex", gap: "12px", marginBottom: "14px" }}>
-                <Phone size={20} color="#c59d5f" />
-                <div>
-                  <p>+91 98765 43210</p>
-                  <p style={{ fontSize: "13px", color: "#bfbfbf" }}>
-                    9 AM – 9 PM
-                  </p>
-                </div>
-              </li>
+  <ul style={{ listStyle: "none", padding: 0 }}>
 
-              {/* Mail */}
-              <li style={{ display: "flex", gap: "12px", marginBottom: "14px" }}>
-                <Mail size={20} color="#c59d5f" />
-                <p>info@royalhall.com</p>
-              </li>
+    {/* Phone */}
+    <li
+      style={{
+        display: "flex",
+        alignItems: "center",
+        gap: "12px",
+        marginBottom: "16px"
+      }}
+    >
+      <Phone size={22} color="#c59d5f" />
+      <div style={{ lineHeight: "1.4" }}>
+        <p style={{ margin: 0 }}>+91 7893420321</p>
+        <p style={{ fontSize: "13px", color: "#bfbfbf", margin: 0 }}>
+          9 AM – 9 PM
+        </p>
+      </div>
+    </li>
 
-              {/* Address */}
-              <li style={{ display: "flex", gap: "12px" }}>
-                <MapPin size={20} color="#c59d5f" />
-                <p>
-                  123 Elegant Avenue,
-                  <br />
-                  Downtown City, India
-                </p>
-              </li>
-            </ul>
-          </motion.div>
+    {/* Email */}
+    <li
+      style={{
+        display: "flex",
+        alignItems: "center",
+        gap: "12px",
+        marginBottom: "16px"
+      }}
+    >
+      <Mail size={22} color="#c59d5f" />
+      <p style={{ margin: 0 }}>Ajpartyhouse0205@gmail.com</p>
+    </li>
+
+    {/* Address */}
+    <li
+      style={{
+        display: "flex",
+        alignItems: "flex-start",
+        gap: "12px"
+      }}
+    >
+      <MapPin size={22} color="#c59d5f" />
+      <p style={{ margin: 0, lineHeight: "1.5" }}>
+        New City Colony, Opp. HP Petrol Bunk, Shadnagar
+        <br />
+        India
+      </p>
+    </li>
+
+  </ul>
+</motion.div>
+
         </div>
 
         {/* BOTTOM BAR */}

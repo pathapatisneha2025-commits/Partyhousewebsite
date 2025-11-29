@@ -1,15 +1,24 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { FiMenu, FiX } from "react-icons/fi";
 
 export default function Navbar() {
   const [shrink, setShrink] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
+  const location = useLocation();
+
+  // Auto close mobile menu when route changes
+  useEffect(() => {
+    setMobileOpen(false);
+  }, [location.pathname]);
+
+  // Shrink navbar on scroll
   useEffect(() => {
     const handleScroll = () => {
       setShrink(window.scrollY > 50);
     };
+
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -17,11 +26,13 @@ export default function Navbar() {
   return (
     <nav className={`navbar ${shrink ? "shrink" : ""}`}>
       <div className="nav-container">
-        <Link to="/" className="logo">
+
+        {/* Logo */}
+        <Link to="/" className="logo" onClick={() => setMobileOpen(false)}>
           <img src="/Logoimage.jpeg" alt="Logo" />
         </Link>
 
-        {/* Hamburger icon fixed */}
+        {/* Hamburger Icon */}
         <div
           className="mobile-menu-icon"
           onClick={() => setMobileOpen(!mobileOpen)}
@@ -29,16 +40,19 @@ export default function Navbar() {
           {mobileOpen ? <FiX size={28} /> : <FiMenu size={28} />}
         </div>
 
+        {/* Navigation Links */}
         <ul className={`nav-links ${mobileOpen ? "open" : ""}`}>
-          <li><Link to="/">Home</Link></li>
-          <li><Link to="/about">About Us</Link></li>
-          <li><Link to="/rooms">Rooms</Link></li>
-          <li><Link to="/bookingpage">Bookings</Link></li>
-          <li><Link to="/contact">Contact</Link></li>
-          <li><Link to="/services">Services</Link></li>
+          <li><Link to="/" onClick={() => setMobileOpen(false)}>Home</Link></li>
+          <li><Link to="/about" onClick={() => setMobileOpen(false)}>About Us</Link></li>
+          <li><Link to="/rooms" onClick={() => setMobileOpen(false)}>Rooms</Link></li>
+          <li><Link to="/bookingpage" onClick={() => setMobileOpen(false)}>Bookings</Link></li>
+          <li><Link to="/contact" onClick={() => setMobileOpen(false)}>Contact</Link></li>
+          <li><Link to="/services" onClick={() => setMobileOpen(false)}>Services</Link></li>
         </ul>
+
       </div>
 
+      {/* Styles */}
       <style jsx="true">{`
         .navbar {
           position: sticky;
@@ -61,7 +75,7 @@ export default function Navbar() {
           justify-content: space-between;
           align-items: center;
           padding: 20px 25px;
-          position: relative; /* allow absolute children */
+          position: relative;
         }
 
         .logo img {
@@ -75,8 +89,8 @@ export default function Navbar() {
           display: flex;
           gap: 30px;
           list-style: none;
-          margin: 0;
           padding: 0;
+          margin: 0;
         }
 
         .nav-links li a {
@@ -88,7 +102,7 @@ export default function Navbar() {
           transition: 0.3s ease;
         }
 
-        /* Mobile styles */
+        /* Mobile View */
         .mobile-menu-icon {
           display: none;
           cursor: pointer;
@@ -97,10 +111,10 @@ export default function Navbar() {
         @media (max-width: 768px) {
           .mobile-menu-icon {
             display: block;
-            position: fixed;      /* fix position on screen */
+            position: fixed;
             top: 20px;
             right: 20px;
-            z-index: 1100;        /* above navbar */
+            z-index: 1100;
             background: white;
             border-radius: 8px;
             padding: 4px;
@@ -110,27 +124,25 @@ export default function Navbar() {
           .nav-links {
             flex-direction: column;
             overflow: hidden;
-            max-height: 0;             
+            max-height: 0;
             transition: max-height 0.4s ease;
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(12px);
-            gap: 12px;
-            list-style: none;
             width: 100%;
             position: absolute;
-            top: 70px;              /* slide below navbar */
+            top: 70px;
             left: 0;
-            padding: 0;
+            gap: 12px;
           }
 
           .nav-links.open {
-            max-height: 500px;     
+            max-height: 500px;
           }
 
           .nav-links li a {
             text-align: center;
-            display: block;
             padding: 15px 0;
+            display: block;
           }
         }
       `}</style>
