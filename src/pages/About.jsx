@@ -1,13 +1,22 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Footer } from "../component/footersection";
 import { AboutSection } from "../component/aboutUs";
 
 export default function About() {
+  useEffect(() => {
+    // Prevent horizontal scrolling
+    document.body.style.overflowX = "hidden";
+    return () => {
+      document.body.style.overflowX = "auto"; // reset on unmount
+    };
+  }, []);
+
   const sectionStyle = {
     width: "100%",
-    padding: "80px 60px",
+    padding: "80px 20px",
     background: "#f9f9f9",
     marginTop: "80px",
+    boxSizing: "border-box",
   };
 
   const container = {
@@ -21,18 +30,18 @@ export default function About() {
 
   const textBox = {
     flex: 1,
-    minWidth: "300px",
+    minWidth: "280px",
   };
 
   const title = {
-    fontSize: "40px",
+    fontSize: "36px",
     fontWeight: "700",
     marginBottom: "20px",
     color: "#222",
   };
 
   const subtitle = {
-    fontSize: "18px",
+    fontSize: "16px",
     lineHeight: "1.6",
     color: "#444",
     marginBottom: "15px",
@@ -40,10 +49,11 @@ export default function About() {
 
   const imageStyle = {
     flex: 1,
-    minWidth: "300px",
+    minWidth: "280px",
     width: "100%",
     borderRadius: "20px",
     objectFit: "cover",
+    display: "block", // prevents inline spacing issues
   };
 
   return (
@@ -74,13 +84,19 @@ export default function About() {
 
         {/* RIGHT IMAGE */}
         <img
-          src="/image3.jpeg" // replace with your actual image path
+          src="/image3.jpeg"
           alt="Party Hall"
           style={imageStyle}
         />
       </div>
-      <AboutSection></AboutSection>
-      <Footer></Footer>
+
+      {/* About Section */}
+      <AboutSection />
+
+      {/* Footer */}
+      <div style={{ width: "100%", marginTop: "40px" }}>
+        <Footer />
+      </div>
     </section>
   );
 }
