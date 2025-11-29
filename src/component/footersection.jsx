@@ -1,4 +1,4 @@
-import { motion} from "framer-motion";
+import { motion } from "framer-motion";
 import { Facebook, Instagram, Twitter, Mail, Phone, MapPin, Link } from "lucide-react";
 
 export function Footer() {
@@ -23,6 +23,7 @@ export function Footer() {
       style={{
         background: "linear-gradient(to bottom right, #1f1f1f, #2a2a2a, #1f1f1f)",
         color: "white",
+        width: "100%",
       }}
     >
       <div
@@ -36,42 +37,27 @@ export function Footer() {
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "1fr 1fr",
+            gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
             gap: "40px",
           }}
         >
-          {/* Left 2 Columns on Desktop */}
-          <div style={{ gridColumn: "span 2" }}>
+          {/* About Section */}
+          <div style={{ gridColumn: "span 1" }}>
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               style={{ marginBottom: "24px" }}
             >
-              <h3
-                style={{
-                  fontSize: "24px",
-                  marginBottom: "12px",
-                  color: "#c59d5f",
-                }}
-              >
+              <h3 style={{ fontSize: "24px", marginBottom: "12px", color: "#c59d5f" }}>
                 Royal Celebration Party Hall
               </h3>
-
-              <p
-                style={{
-                  maxWidth: "450px",
-                  color: "#bfbfbf",
-                  lineHeight: "1.6",
-                }}
-              >
-                Creating unforgettable memories since 2010. Let us make your
-                special day truly extraordinary.
+              <p style={{ maxWidth: "450px", color: "#bfbfbf", lineHeight: "1.6", wordBreak: "break-word" }}>
+                Creating unforgettable memories since 2010. Let us make your special day truly extraordinary.
               </p>
             </motion.div>
 
-            {/* SOCIAL ICONS */}
-            <div style={{ display: "flex", gap: "16px" }}>
+            <div style={{ display: "flex", gap: "16px", flexWrap: "wrap" }}>
               {socialLinks.map((s, i) => {
                 const Icon = s.icon;
                 return (
@@ -102,26 +88,19 @@ export function Footer() {
             </div>
           </div>
 
-          {/* QUICK LINKS */}
+          {/* Quick Links */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <h4 style={{ fontSize: "18px", marginBottom: "20px" }}>
-              Quick Links
-            </h4>
-
+            <h4 style={{ fontSize: "18px", marginBottom: "20px" }}>Quick Links</h4>
             <ul style={{ listStyle: "none", padding: 0 }}>
               {quickLinks.map((l, i) => (
                 <li key={i} style={{ marginBottom: "12px" }}>
                   <a
                     href={l.href}
-                    style={{
-                      color: "#bfbfbf",
-                      textDecoration: "none",
-                      transition: "0.3s",
-                    }}
+                    style={{ color: "#bfbfbf", textDecoration: "none", transition: "0.3s" }}
                     onMouseEnter={(e) => (e.target.style.color = "#c59d5f")}
                     onMouseLeave={(e) => (e.target.style.color = "#bfbfbf")}
                   >
@@ -132,69 +111,40 @@ export function Footer() {
             </ul>
           </motion.div>
 
-          {/* CONTACT INFO */}
-         {/* CONTACT INFO */}
-<motion.div
-  initial={{ opacity: 0, y: 20 }}
-  whileInView={{ opacity: 1, y: 0 }}
-  viewport={{ once: true }}
->
-  <h4 style={{ fontSize: "18px", marginBottom: "20px" }}>
-    Contact Info
-  </h4>
+          {/* Contact Info */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <h4 style={{ fontSize: "18px", marginBottom: "20px" }}>Contact Info</h4>
+            <ul style={{ listStyle: "none", padding: 0 }}>
+              {/* Phone */}
+              <li style={{ display: "flex", alignItems: "flex-start", gap: "12px", marginBottom: "16px", flexWrap: "wrap" }}>
+                <Phone size={22} color="#c59d5f" />
+                <div style={{ lineHeight: "1.4" }}>
+                  <p style={{ margin: 0 }}>+91 7893420321</p>
+                  <p style={{ fontSize: "13px", color: "#bfbfbf", margin: 0 }}>9 AM – 9 PM</p>
+                </div>
+              </li>
 
-  <ul style={{ listStyle: "none", padding: 0 }}>
+              {/* Email */}
+              <li style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "16px", flexWrap: "wrap" }}>
+                <Mail size={22} color="#c59d5f" />
+                <p style={{ margin: 0, wordBreak: "break-word" }}>Ajpartyhouse0205@gmail.com</p>
+              </li>
 
-    {/* Phone */}
-    <li
-      style={{
-        display: "flex",
-        alignItems: "center",
-        gap: "12px",
-        marginBottom: "16px"
-      }}
-    >
-      <Phone size={22} color="#c59d5f" />
-      <div style={{ lineHeight: "1.4" }}>
-        <p style={{ margin: 0 }}>+91 7893420321</p>
-        <p style={{ fontSize: "13px", color: "#bfbfbf", margin: 0 }}>
-          9 AM – 9 PM
-        </p>
-      </div>
-    </li>
-
-    {/* Email */}
-    <li
-      style={{
-        display: "flex",
-        alignItems: "center",
-        gap: "12px",
-        marginBottom: "16px"
-      }}
-    >
-      <Mail size={22} color="#c59d5f" />
-      <p style={{ margin: 0 }}>Ajpartyhouse0205@gmail.com</p>
-    </li>
-
-    {/* Address */}
-    <li
-      style={{
-        display: "flex",
-        alignItems: "flex-start",
-        gap: "12px"
-      }}
-    >
-      <MapPin size={22} color="#c59d5f" />
-      <p style={{ margin: 0, lineHeight: "1.5" }}>
-        New City Colony, Opp. HP Petrol Bunk, Shadnagar
-        <br />
-        India
-      </p>
-    </li>
-
-  </ul>
-</motion.div>
-
+              {/* Address */}
+              <li style={{ display: "flex", alignItems: "flex-start", gap: "12px", flexWrap: "wrap" }}>
+                <MapPin size={22} color="#c59d5f" />
+                <p style={{ margin: 0, lineHeight: "1.5", wordBreak: "break-word" }}>
+                  New City Colony, Opp. HP Petrol Bunk, Shadnagar
+                  <br />
+                  India
+                </p>
+              </li>
+            </ul>
+          </motion.div>
         </div>
 
         {/* BOTTOM BAR */}
@@ -219,29 +169,18 @@ export function Footer() {
               gap: "16px",
             }}
           >
-            <p>© {currentYear} Royal Celebration Party Hall. All Rights Reserved.</p>
+            <p style={{ flex: "1 1 100%", textAlign: "center", marginBottom: "10px" }}>
+              © {currentYear} Royal Celebration Party Hall. All Rights Reserved.
+            </p>
 
-            <div style={{ display: "flex", gap: "20px" }}>
-              <Link
-                href="#"
-                style={{
-                  color: "#bfbfbf",
-                  textDecoration: "none",
-                  transition: "0.3s",
-                }}
+            <div style={{ display: "flex", gap: "20px", flexWrap: "wrap", justifyContent: "center", width: "100%" }}>
+              <Link href="#" style={{ color: "#bfbfbf", textDecoration: "none" }}
                 onMouseEnter={(e) => (e.target.style.color = "#c59d5f")}
                 onMouseLeave={(e) => (e.target.style.color = "#bfbfbf")}
               >
                 Privacy Policy
               </Link>
-
-              <Link
-                href="#"
-                style={{
-                  color: "#bfbfbf",
-                  textDecoration: "none",
-                  transition: "0.3s",
-                }}
+              <Link href="#" style={{ color: "#bfbfbf", textDecoration: "none" }}
                 onMouseEnter={(e) => (e.target.style.color = "#c59d5f")}
                 onMouseLeave={(e) => (e.target.style.color = "#bfbfbf")}
               >
