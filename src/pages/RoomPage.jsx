@@ -6,11 +6,9 @@ const BASE_URL = "https://partyhousedatabase.onrender.com";
 
 export default function RoomsPage() {
   const navigate = useNavigate();
-
   const [rooms, setRooms] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // Fetch rooms dynamically
   useEffect(() => {
     const fetchRooms = async () => {
       try {
@@ -131,15 +129,91 @@ export default function RoomsPage() {
           transform: scale(1.05);
         }
 
+        /* ⬇ Responsive: Tablets */
         @media (max-width: 1024px) {
+          .rooms-section {
+            padding: 100px 40px;
+          }
+
           .rooms-container {
             grid-template-columns: 1fr 1fr;
+            gap: 30px;
+          }
+
+          .rooms-section h2 {
+            font-size: 2.5rem;
           }
         }
 
+        /* ⬇ Responsive: Mobile (768px) */
         @media (max-width: 768px) {
+          .rooms-section {
+            padding: 80px 20px;
+          }
+
+          .rooms-section h2 {
+            font-size: 2rem;
+            margin-bottom: 40px;
+          }
+
           .rooms-container {
             grid-template-columns: 1fr;
+            gap: 25px;
+          }
+
+          .room-card {
+            padding: 22px;
+            border-radius: 18px;
+          }
+
+          .room-card img {
+            height: 220px;
+            border-radius: 15px;
+          }
+
+          .room-card h3 {
+            font-size: 1.4rem;
+          }
+
+          .room-card p {
+            font-size: 14px;
+          }
+
+          .room-card button {
+            font-size: 14px;
+            padding: 10px 22px;
+          }
+        }
+
+        /* ⬇ Extra Small Mobile (under 480px) */
+        @media (max-width: 480px) {
+          .rooms-section {
+            padding: 70px 15px;
+          }
+
+          .rooms-section h2 {
+            font-size: 1.8rem;
+          }
+
+          .room-card {
+            padding: 18px;
+          }
+
+          .room-card img {
+            height: 180px;
+          }
+
+          .room-card h3 {
+            font-size: 1.2rem;
+          }
+
+          .room-card p {
+            font-size: 13px;
+          }
+
+          .room-card button {
+            font-size: 13px;
+            padding: 8px 20px;
           }
         }
       `}</style>
