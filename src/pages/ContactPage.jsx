@@ -52,9 +52,9 @@ export default function ContactPage() {
           boxShadow: "0 10px 25px rgba(0,0,0,0.1)"
         }}>
           <h2 style={{ marginBottom: "20px", color: "#c59d5f" }}>Get in Touch</h2>
-          <p><strong>Phone:</strong> +91 1234567890</p>
-          <p><strong>Email:</strong> info@example.com</p>
-          <p><strong>Address:</strong> 123 Main Street, City, Country</p>
+          <p><strong>Phone:</strong> +91 7893420321</p>
+          <p><strong>Email:</strong> Ajpartyhouse0205@gmail.com</p>
+          <p><strong>Address:</strong> new city colony, opp to hp petrol bunk, Shadnagar,India</p>
         </div>
 
         {/* Contact Form */}
