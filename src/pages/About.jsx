@@ -57,6 +57,7 @@ export default function About() {
   };
 
   return (
+    <>
     <section id="aboutus" style={sectionStyle}>
       <div style={container}>
         {/* LEFT TEXT SECTION */}
@@ -93,10 +94,10 @@ export default function About() {
       {/* About Section */}
       <AboutSection />
 
-      {/* Footer */}
-      <div style={{ width: "100%", marginTop: "40px" }}>
-        <Footer />
-      </div>
+     
     </section>
+
+    <Footer></Footer>
+    </>
   );
 }
