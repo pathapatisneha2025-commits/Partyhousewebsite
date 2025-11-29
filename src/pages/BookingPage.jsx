@@ -134,6 +134,7 @@ function MainBookingPage() {
   };
 
   return (
+    <>
     <div
       style={{
         width: "100%",
@@ -297,8 +298,10 @@ function MainBookingPage() {
         }
       `}</style>
 
-      <Footer />
+     
     </div>
+     <Footer />
+    </>
   );
 }
 

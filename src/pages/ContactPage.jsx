@@ -24,6 +24,7 @@ export default function ContactPage() {
   };
 
   return (
+    <>
     <div style={{
       width: "100%",
       minHeight: "100vh",
@@ -102,8 +103,10 @@ export default function ContactPage() {
           </form>
         </div>
       </div>
-      <Footer></Footer>
+      
     </div>
+    <Footer></Footer>
+    </>
   );
 }
 

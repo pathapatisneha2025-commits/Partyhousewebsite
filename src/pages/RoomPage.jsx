@@ -30,6 +30,7 @@ export default function RoomsPage() {
   }
 
   return (
+    <>
     <section id="rooms" className="rooms-section">
       <h2>Our Premium Party Rooms</h2>
 
@@ -48,7 +49,7 @@ export default function RoomsPage() {
         ))}
       </div>
 
-      <Footer />
+     
 
       <style>{`
         .rooms-section {
@@ -218,5 +219,7 @@ export default function RoomsPage() {
         }
       `}</style>
     </section>
+     <Footer />
+    </>
   );
 }

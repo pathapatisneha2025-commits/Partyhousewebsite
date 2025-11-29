@@ -60,6 +60,7 @@ export function BookingHall() {
   }
 
   return (
+    <>
     <div style={pageStyle}>
       <h2 style={headingStyle}>{room.name}</h2>
 
@@ -143,8 +144,10 @@ export function BookingHall() {
         </div>
       </div>
 
-      <Footer />
+      
     </div>
+    <Footer />
+    </>
   );
 }
 

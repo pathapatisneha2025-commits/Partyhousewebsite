@@ -46,6 +46,7 @@ const servicesData = [
 
 export default function ServicesPage() {
   return (
+    <>
     <div style={{
       width: "100%",
       minHeight: "100vh",
@@ -90,7 +91,9 @@ export default function ServicesPage() {
           </div>
         </div>
       ))}
-      <Footer></Footer>
+     
     </div>
+     <Footer></Footer>
+    </>
   );
 }
