@@ -77,7 +77,7 @@ export default function Hero() {
 
         {/* Content */}
         <div style={styles.heroContent}>
-          <h1 style={styles.title}>Royal Celebration Party Hall</h1>
+          <h1 style={styles.title}>AJ Party House</h1>
           <p style={styles.subtitle}>Where celebrations become magical memories</p>
 
           <a
