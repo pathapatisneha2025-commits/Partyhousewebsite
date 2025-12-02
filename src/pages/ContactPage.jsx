@@ -25,87 +25,92 @@ export default function ContactPage() {
 
   return (
     <>
-    <div style={{
-      width: "100%",
-      minHeight: "100vh",
-      padding: "50px 5%",
-      background: "#f9f9f9",
-      fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"
-    }}>
-      <h1 style={{ textAlign: "center", marginBottom: "50px", color: "#333", fontSize: "2.8rem" }}>
-        Contact Us
-      </h1>
-
       <div style={{
-        display: "flex",
-        flexWrap: "wrap",
-        gap: "40px",
-        justifyContent: "center",
+        width: "100%",
+        minHeight: "100vh",
+        padding: "50px 5%",
+        background: "#f9f9f9",
+        fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"
       }}>
-        {/* Contact Info */}
+        <h1 style={{ textAlign: "center", marginBottom: "50px", color: "#333", fontSize: "2.8rem" }}>
+          Contact Us
+        </h1>
+
         <div style={{
-          flex: "1 1 300px",
-          maxWidth: "400px",
-          background: "#fff",
-          padding: "30px",
-          borderRadius: "20px",
-          boxShadow: "0 10px 25px rgba(0,0,0,0.1)"
+          display: "flex",
+          flexWrap: "wrap",
+          gap: "40px",
+          justifyContent: "center",
         }}>
-          <h2 style={{ marginBottom: "20px", color: "#c59d5f" }}>Get in Touch</h2>
-          <p><strong>Phone:</strong> +91 7893420321</p>
-          <p><strong>Email:</strong> Ajpartyhouse0205@gmail.com</p>
-          <p><strong>Address:</strong> new city colony, opp to hp petrol bunk, Shadnagar,India</p>
+
+          {/* Contact Info */}
+          <div
+            className="contact-info"
+            style={{
+              flex: "1 1 300px",
+              maxWidth: "400px",
+              background: "#fff",
+              padding: "30px",
+              borderRadius: "20px",
+              boxShadow: "0 10px 25px rgba(0,0,0,0.1)"
+            }}>
+            <h2 style={{ marginBottom: "20px", color: "#c59d5f" }}>Get in Touch</h2>
+            <p><strong>Phone:</strong> +91 7893420321</p>
+            <p><strong>Email:</strong> Ajpartyhouse0205@gmail.com</p>
+            <p><strong>Address:</strong> new city colony, opp to hp petrol bunk, Shadnagar,India</p>
+          </div>
+
+          {/* Contact Form */}
+          <div
+            className="contact-form"
+            style={{
+              flex: "1 1 400px",
+              maxWidth: "500px",
+              background: "#fff",
+              padding: "30px",
+              borderRadius: "20px",
+              boxShadow: "0 10px 25px rgba(0,0,0,0.1)"
+            }}>
+            <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "15px" }}>
+              <input
+                type="text"
+                placeholder="Your Name *"
+                value={formData.name}
+                onChange={e => handleChange("name", e.target.value)}
+                required
+                style={inputStyle}
+              />
+              <input
+                type="email"
+                placeholder="Your Email *"
+                value={formData.email}
+                onChange={e => handleChange("email", e.target.value)}
+                required
+                style={inputStyle}
+              />
+              <input
+                type="text"
+                placeholder="Subject *"
+                value={formData.subject}
+                onChange={e => handleChange("subject", e.target.value)}
+                required
+                style={inputStyle}
+              />
+              <textarea
+                placeholder="Your Message *"
+                value={formData.message}
+                onChange={e => handleChange("message", e.target.value)}
+                rows="5"
+                required
+                style={{ ...inputStyle, resize: "vertical" }}
+              />
+              <button type="submit" style={buttonStyle}>Send Message</button>
+            </form>
+          </div>
         </div>
 
-        {/* Contact Form */}
-        <div style={{
-          flex: "1 1 400px",
-          maxWidth: "500px",
-          background: "#fff",
-          padding: "30px",
-          borderRadius: "20px",
-          boxShadow: "0 10px 25px rgba(0,0,0,0.1)"
-        }}>
-          <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "15px" }}>
-            <input
-              type="text"
-              placeholder="Your Name *"
-              value={formData.name}
-              onChange={e => handleChange("name", e.target.value)}
-              required
-              style={inputStyle}
-            />
-            <input
-              type="email"
-              placeholder="Your Email *"
-              value={formData.email}
-              onChange={e => handleChange("email", e.target.value)}
-              required
-              style={inputStyle}
-            />
-            <input
-              type="text"
-              placeholder="Subject *"
-              value={formData.subject}
-              onChange={e => handleChange("subject", e.target.value)}
-              required
-              style={inputStyle}
-            />
-            <textarea
-              placeholder="Your Message *"
-              value={formData.message}
-              onChange={e => handleChange("message", e.target.value)}
-              rows="5"
-              required
-              style={{ ...inputStyle, resize: "vertical" }}
-            />
-            <button type="submit" style={buttonStyle}>Send Message</button>
-          </form>
-        </div>
       </div>
-      
-    </div>
-    <Footer></Footer>
+      <Footer></Footer>
     </>
   );
 }
