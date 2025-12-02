@@ -55,7 +55,7 @@ export function Footer() {
                   color: "#c59d5f",
                 }}
               >
-                Royal Celebration Party Hall
+                AJ PARTY HOUSE
               </h3>
 
               <p
