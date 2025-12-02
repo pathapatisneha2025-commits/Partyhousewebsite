@@ -218,7 +218,7 @@ export function Footer() {
               gap: "16px",
             }}
           >
-            <p>© {currentYear} Royal Celebration Party Hall. All Rights Reserved.</p>
+            <p>© {currentYear} AJ PARTY HOUSE. All Rights Reserved.</p>
 
             <div style={{ display: "flex", gap: "20px" }}>
               <Link
