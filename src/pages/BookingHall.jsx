@@ -40,16 +40,57 @@ export function BookingHall() {
     setFormData((prev) => ({ ...prev, [field]: value }));
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+const handleSubmit = async (e) => {
+  e.preventDefault();
 
-    if (!formData.name || !formData.email || !formData.phone || !formData.date) {
-      alert("Please fill all required fields");
-      return;
+  if (!formData.name || !formData.email || !formData.phone || !formData.date) {
+    alert("Please fill all required fields");
+    return;
+  }
+
+  try {
+    const payload = {
+      name: formData.name,
+      email: formData.email,
+      phone: formData.phone,
+      date: formData.date,
+      guests: formData.guests,
+      message: formData.message,
+
+      // IMPORTANT: match backend fields
+      room: id, // from useParams()
+      service: room?.name || "Hall Booking",
+    };
+
+    const response = await fetch(`${BASE_URL}/bookings/add`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    });
+
+    const data = await response.json();
+
+    if (response.ok) {
+      alert("Booking created successfully!");
+
+      setFormData({
+        name: "",
+        email: "",
+        phone: "",
+        date: "",
+        guests: "",
+        message: "",
+      });
+    } else {
+      alert(data?.error || "Booking failed");
     }
-
-    alert(`Booking inquiry submitted for ${room.name}!`);
-  };
+  } catch (err) {
+    console.error("Booking error:", err);
+    alert("Server error");
+  }
+};
 
   if (loading) {
     return <h2 style={{ padding: 50, textAlign: "center" }}>Loading Room...</h2>;
