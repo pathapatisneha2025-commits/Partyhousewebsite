@@ -13,16 +13,44 @@ export default function ContactPage() {
     setFormData(prev => ({ ...prev, [field]: value }));
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (!formData.name || !formData.email || !formData.subject || !formData.message) {
-      alert("Please fill all required fields!");
-      return;
-    }
-    alert("Message sent successfully!");
-    setFormData({ name: "", email: "", subject: "", message: "" });
-  };
+ const handleSubmit = async (e) => {
+  e.preventDefault();
 
+  if (!formData.name || !formData.email || !formData.subject || !formData.message) {
+    alert("Please fill all required fields!");
+    return;
+  }
+
+  try {
+    const response = await fetch("https://partyhousedatabase-rpft.onrender.com/contact/send", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    });
+
+    const data = await response.json();
+
+    if (response.ok) {
+      alert(data.message || "Message sent successfully!");
+      
+      // reset form after success
+      setFormData({
+        name: "",
+        email: "",
+        subject: "",
+        message: "",
+      });
+    } else {
+      alert(data.error || "Failed to send message");
+    }
+
+  } catch (error) {
+    console.error(error);
+    alert("Server not reachable");
+  }
+};
   return (
     <>
       <div style={{

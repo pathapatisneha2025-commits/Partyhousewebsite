@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Footer } from "../component/footersection";
 import RoomsSection from "../component/roomcard";
 
-const BASE_URL = "https://partyhousedatabase.onrender.com";
+const BASE_URL = "https://partyhousedatabase-rpft.onrender.com";
 
 export default function BookingPage() {
 
