@@ -18,11 +18,14 @@ import { BookingHall } from "./pages/BookingHall";
 import BookingPage from "./pages/BookingPage";
 import ContactPage from "./pages/ContactPage";
 import ServicesPage from "./pages/ServicePage";
+import ScrollToTop from "./component/ScrollToTop";
 
 export default function App() {
   return (
     <Router>
+      
       <>
+      <ScrollToTop/>
         <Navbar />
 
         <Routes>

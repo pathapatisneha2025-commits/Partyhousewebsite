@@ -9,160 +9,193 @@ export default function ContactPage() {
     message: "",
   });
 
+  const isMobile = window.innerWidth < 768;
+
   const handleChange = (field, value) => {
-    setFormData(prev => ({ ...prev, [field]: value }));
+    setFormData((prev) => ({ ...prev, [field]: value }));
   };
 
- const handleSubmit = async (e) => {
-  e.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-  if (!formData.name || !formData.email || !formData.subject || !formData.message) {
-    alert("Please fill all required fields!");
-    return;
-  }
-
-  try {
-    const response = await fetch("https://partyhousedatabase-rpft.onrender.com/contact/send", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(formData),
-    });
-
-    const data = await response.json();
-
-    if (response.ok) {
-      alert(data.message || "Message sent successfully!");
-      
-      // reset form after success
-      setFormData({
-        name: "",
-        email: "",
-        subject: "",
-        message: "",
-      });
-    } else {
-      alert(data.error || "Failed to send message");
+    if (
+      !formData.name ||
+      !formData.email ||
+      !formData.subject ||
+      !formData.message
+    ) {
+      alert("Please fill all required fields!");
+      return;
     }
 
-  } catch (error) {
-    console.error(error);
-    alert("Server not reachable");
-  }
-};
+    try {
+      const response = await fetch(
+        "https://partyhousedatabase-rpft.onrender.com/contact/send",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        }
+      );
+
+      const data = await response.json();
+
+      if (response.ok) {
+        alert(data.message || "Message sent successfully!");
+        setFormData({
+          name: "",
+          email: "",
+          subject: "",
+          message: "",
+        });
+      } else {
+        alert(data.error || "Failed to send message");
+      }
+    } catch (error) {
+      console.error(error);
+      alert("Server not reachable");
+    }
+  };
+
   return (
-    <>
-      <div style={{
-        width: "100%",
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
         minHeight: "100vh",
-        padding: "50px 5%",
         background: "#f9f9f9",
-        fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"
-      }}>
-        <h1 style={{ textAlign: "center", marginBottom: "50px", color: "#333", fontSize: "2.8rem" }}>
+        fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
+      }}
+    >
+      {/* MAIN CONTENT */}
+      <div
+        style={{
+          flex: 1,
+          padding: isMobile ? "30px 15px" : "50px 5%",
+        }}
+      >
+        <h1
+          style={{
+            textAlign: "center",
+            marginBottom: "40px",
+            color: "#333",
+            fontSize: isMobile ? "1.8rem" : "2.5rem",
+          }}
+        >
           Contact Us
         </h1>
 
-        <div style={{
-          display: "flex",
-          flexWrap: "wrap",
-          gap: "40px",
-          justifyContent: "center",
-        }}>
-
-          {/* Contact Info */}
+        <div
+          style={{
+            display: "flex",
+            flexDirection: isMobile ? "column" : "row",
+            gap: "30px",
+            justifyContent: "center",
+            alignItems: isMobile ? "center" : "flex-start",
+          }}
+        >
+          {/* CONTACT INFO */}
           <div
-            className="contact-info"
             style={{
-              flex: "1 1 300px",
-              maxWidth: "400px",
+              width: isMobile ? "100%" : "400px",
               background: "#fff",
-              padding: "30px",
-              borderRadius: "20px",
-              boxShadow: "0 10px 25px rgba(0,0,0,0.1)"
-            }}>
-            <h2 style={{ marginBottom: "20px", color: "#c59d5f" }}>Get in Touch</h2>
+              padding: "25px",
+              borderRadius: "16px",
+              boxShadow: "0 8px 20px rgba(0,0,0,0.08)",
+            }}
+          >
+            <h2 style={{ marginBottom: "20px", color: "#c59d5f" }}>
+              Get in Touch
+            </h2>
+
             <p><strong>Phone:</strong> +91 7893420321</p>
             <p><strong>Email:</strong> Ajpartyhouse0205@gmail.com</p>
-            <p><strong>Address:</strong> new city colony, opp to hp petrol bunk, Shadnagar,India</p>
+            <p>
+              <strong>Address:</strong> New City Colony, Shadnagar
+            </p>
           </div>
 
-          {/* Contact Form */}
+          {/* FORM */}
           <div
-            className="contact-form"
             style={{
-              flex: "1 1 400px",
-              maxWidth: "500px",
+              width: isMobile ? "100%" : "500px",
               background: "#fff",
-              padding: "30px",
-              borderRadius: "20px",
-              boxShadow: "0 10px 25px rgba(0,0,0,0.1)"
-            }}>
-            <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "15px" }}>
+              padding: "25px",
+              borderRadius: "16px",
+              boxShadow: "0 8px 20px rgba(0,0,0,0.08)",
+            }}
+          >
+            <form
+              onSubmit={handleSubmit}
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                gap: "12px",
+              }}
+            >
               <input
-                type="text"
                 placeholder="Your Name *"
                 value={formData.name}
-                onChange={e => handleChange("name", e.target.value)}
-                required
+                onChange={(e) => handleChange("name", e.target.value)}
                 style={inputStyle}
               />
+
               <input
-                type="email"
                 placeholder="Your Email *"
                 value={formData.email}
-                onChange={e => handleChange("email", e.target.value)}
-                required
+                onChange={(e) => handleChange("email", e.target.value)}
                 style={inputStyle}
               />
+
               <input
-                type="text"
                 placeholder="Subject *"
                 value={formData.subject}
-                onChange={e => handleChange("subject", e.target.value)}
-                required
+                onChange={(e) => handleChange("subject", e.target.value)}
                 style={inputStyle}
               />
+
               <textarea
                 placeholder="Your Message *"
                 value={formData.message}
-                onChange={e => handleChange("message", e.target.value)}
+                onChange={(e) => handleChange("message", e.target.value)}
                 rows="5"
-                required
                 style={{ ...inputStyle, resize: "vertical" }}
               />
-              <button type="submit" style={buttonStyle}>Send Message</button>
+
+              <button type="submit" style={buttonStyle}>
+                Send Message
+              </button>
             </form>
           </div>
         </div>
-
       </div>
-      <Footer></Footer>
-    </>
+
+      <Footer />
+    </div>
   );
 }
 
-// --- Inline Styles ---
+// STYLES
 const inputStyle = {
   width: "100%",
-  padding: "14px 16px",
-  borderRadius: "12px",
+  padding: "14px",
+  borderRadius: "10px",
   border: "1px solid #ddd",
-  fontSize: "16px",
+  fontSize: "15px",
   outline: "none",
   boxSizing: "border-box",
 };
 
 const buttonStyle = {
   width: "100%",
-  padding: "15px",
+  padding: "14px",
   borderRadius: "50px",
   border: "none",
   background: "#c59d5f",
   color: "#fff",
-  fontSize: "18px",
+  fontSize: "16px",
   fontWeight: "bold",
   cursor: "pointer",
-  transition: "0.3s",
 };
