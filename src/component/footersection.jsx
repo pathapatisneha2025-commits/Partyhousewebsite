@@ -1,5 +1,13 @@
-import { motion} from "framer-motion";
-import { Facebook, Instagram, Twitter, Mail, Phone, MapPin, Link } from "lucide-react";
+import { motion } from "framer-motion";
+import {
+  Facebook,
+  Instagram,
+  Twitter,
+  Mail,
+  Phone,
+  MapPin,
+} from "lucide-react";
+import { NavLink } from "react-router-dom";
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
@@ -10,12 +18,13 @@ export function Footer() {
     { icon: Twitter, href: "#", label: "Twitter" },
   ];
 
+  // ✅ Updated for React Router navigation
   const quickLinks = [
-    { name: "Home", href: "#home" },
-    { name: "About Us", href: "#about" },
-    { name: "Rooms", href: "#rooms" },
-    { name: "Services", href: "#services" },
-    { name: "Contact", href: "#contact" },
+    { name: "Home", href: "/" },
+    { name: "About Us", href: "/about" },
+    { name: "Rooms", href: "/rooms" },
+    { name: "Services", href: "/services" },
+    { name: "Contact", href: "/contact" },
   ];
 
   return (
@@ -40,7 +49,7 @@ export function Footer() {
             gap: "40px",
           }}
         >
-          {/* Left 2 Columns on Desktop */}
+          {/* LEFT SECTION */}
           <div style={{ gridColumn: "span 2" }}>
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -91,7 +100,6 @@ export function Footer() {
                       display: "flex",
                       justifyContent: "center",
                       alignItems: "center",
-                      transition: "0.3s",
                       cursor: "pointer",
                     }}
                   >
@@ -115,85 +123,81 @@ export function Footer() {
             <ul style={{ listStyle: "none", padding: 0 }}>
               {quickLinks.map((l, i) => (
                 <li key={i} style={{ marginBottom: "12px" }}>
-                  <a
-                    href={l.href}
-                    style={{
-                      color: "#bfbfbf",
+                  <NavLink
+                    to={l.href}
+                    style={({ isActive }) => ({
+                      color: isActive ? "#c59d5f" : "#bfbfbf",
                       textDecoration: "none",
                       transition: "0.3s",
-                    }}
-                    onMouseEnter={(e) => (e.target.style.color = "#c59d5f")}
-                    onMouseLeave={(e) => (e.target.style.color = "#bfbfbf")}
+                    })}
+                    onMouseEnter={(e) =>
+                      (e.target.style.color = "#c59d5f")
+                    }
+                    onMouseLeave={(e) =>
+                      (e.target.style.color = "#bfbfbf")
+                    }
                   >
                     {l.name}
-                  </a>
+                  </NavLink>
                 </li>
               ))}
             </ul>
           </motion.div>
 
           {/* CONTACT INFO */}
-         {/* CONTACT INFO */}
-<motion.div
-  initial={{ opacity: 0, y: 20 }}
-  whileInView={{ opacity: 1, y: 0 }}
-  viewport={{ once: true }}
->
-  <h4 style={{ fontSize: "18px", marginBottom: "20px" }}>
-    Contact Info
-  </h4>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <h4 style={{ fontSize: "18px", marginBottom: "20px" }}>
+              Contact Info
+            </h4>
 
-  <ul style={{ listStyle: "none", padding: 0 }}>
+            <ul style={{ listStyle: "none", padding: 0 }}>
+              <li
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "12px",
+                  marginBottom: "16px",
+                }}
+              >
+                <Phone size={22} color="#c59d5f" />
+                <div>
+                  <p style={{ margin: 0 }}>+91 7893420321</p>
+                  <p style={{ fontSize: "13px", color: "#bfbfbf", margin: 0 }}>
+                    9 AM – 9 PM
+                  </p>
+                </div>
+              </li>
 
-    {/* Phone */}
-    <li
-      style={{
-        display: "flex",
-        alignItems: "center",
-        gap: "12px",
-        marginBottom: "16px"
-      }}
-    >
-      <Phone size={22} color="#c59d5f" />
-      <div style={{ lineHeight: "1.4" }}>
-        <p style={{ margin: 0 }}>+91 7893420321</p>
-        <p style={{ fontSize: "13px", color: "#bfbfbf", margin: 0 }}>
-          9 AM – 9 PM
-        </p>
-      </div>
-    </li>
+              <li
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "12px",
+                  marginBottom: "16px",
+                }}
+              >
+                <Mail size={22} color="#c59d5f" />
+                <p style={{ margin: 0 }}>Ajpartyhouse0205@gmail.com</p>
+              </li>
 
-    {/* Email */}
-    <li
-      style={{
-        display: "flex",
-        alignItems: "center",
-        gap: "12px",
-        marginBottom: "16px"
-      }}
-    >
-      <Mail size={22} color="#c59d5f" />
-      <p style={{ margin: 0 }}>Ajpartyhouse0205@gmail.com</p>
-    </li>
-
-    {/* Address */}
-    <li
-      style={{
-        display: "flex",
-        alignItems: "flex-start",
-        gap: "12px"
-      }}
-    >
-      <MapPin size={22} color="#c59d5f" />
-      <p style={{ margin: 0, lineHeight: "1.5" }}>
-        New City Colony, Opp. HP Petrol Bunk, Shadnagar
-        India
-      </p>
-    </li>
-
-  </ul>
-</motion.div>
-
+              <li
+                style={{
+                  display: "flex",
+                  alignItems: "flex-start",
+                  gap: "12px",
+                }}
+              >
+                <MapPin size={22} color="#c59d5f" />
+                <p style={{ margin: 0, lineHeight: "1.5" }}>
+                  New City Colony, Opp. HP Petrol Bunk, Shadnagar, India
+                </p>
+              </li>
+            </ul>
+          </motion.div>
         </div>
 
         {/* BOTTOM BAR */}
@@ -221,31 +225,25 @@ export function Footer() {
             <p>© {currentYear} AJ PARTY HOUSE. All Rights Reserved.</p>
 
             <div style={{ display: "flex", gap: "20px" }}>
-              <Link
+              <a
                 href="#"
                 style={{
                   color: "#bfbfbf",
                   textDecoration: "none",
-                  transition: "0.3s",
                 }}
-                onMouseEnter={(e) => (e.target.style.color = "#c59d5f")}
-                onMouseLeave={(e) => (e.target.style.color = "#bfbfbf")}
               >
                 Privacy Policy
-              </Link>
+              </a>
 
-              <Link
+              <a
                 href="#"
                 style={{
                   color: "#bfbfbf",
                   textDecoration: "none",
-                  transition: "0.3s",
                 }}
-                onMouseEnter={(e) => (e.target.style.color = "#c59d5f")}
-                onMouseLeave={(e) => (e.target.style.color = "#bfbfbf")}
               >
                 Terms of Service
-              </Link>
+              </a>
             </div>
           </div>
         </motion.div>
