@@ -10,7 +10,6 @@ export function BookingHall() {
   const [room, setRoom] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // Fetch room by ID
   useEffect(() => {
     const fetchRoom = async () => {
       try {
@@ -40,57 +39,53 @@ export function BookingHall() {
     setFormData((prev) => ({ ...prev, [field]: value }));
   };
 
-const handleSubmit = async (e) => {
-  e.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-  if (!formData.name || !formData.email || !formData.phone || !formData.date) {
-    alert("Please fill all required fields");
-    return;
-  }
-
-  try {
-    const payload = {
-      name: formData.name,
-      email: formData.email,
-      phone: formData.phone,
-      date: formData.date,
-      guests: formData.guests,
-      message: formData.message,
-
-      // IMPORTANT: match backend fields
-      room: id, // from useParams()
-      service: room?.name || "Hall Booking",
-    };
-
-    const response = await fetch(`${BASE_URL}/bookings/add`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(payload),
-    });
-
-    const data = await response.json();
-
-    if (response.ok) {
-      alert("Booking created successfully!");
-
-      setFormData({
-        name: "",
-        email: "",
-        phone: "",
-        date: "",
-        guests: "",
-        message: "",
-      });
-    } else {
-      alert(data?.error || "Booking failed");
+    if (!formData.name || !formData.email || !formData.phone || !formData.date) {
+      alert("Please fill all required fields");
+      return;
     }
-  } catch (err) {
-    console.error("Booking error:", err);
-    alert("Server error");
-  }
-};
+
+    try {
+      const payload = {
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone,
+        date: formData.date,
+        guests: formData.guests,
+        message: formData.message,
+        room: id,
+        service: room?.name || "Hall Booking",
+      };
+
+      const response = await fetch(`${BASE_URL}/bookings/add`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        alert("Booking created successfully!");
+
+        setFormData({
+          name: "",
+          email: "",
+          phone: "",
+          date: "",
+          guests: "",
+          message: "",
+        });
+      } else {
+        alert(data?.error || "Booking failed");
+      }
+    } catch (err) {
+      console.error(err);
+      alert("Server error");
+    }
+  };
 
   if (loading) {
     return <h2 style={{ padding: 50, textAlign: "center" }}>Loading Room...</h2>;
@@ -101,171 +96,171 @@ const handleSubmit = async (e) => {
   }
 
   return (
-    <>
-    <div style={pageStyle}>
-      <h2 style={headingStyle}>{room.name}</h2>
+    <div style={wrapperStyle}>
+      <div style={pageStyle}>
+        <h2 style={headingStyle}>{room.name}</h2>
 
-      <div style={contentWrapperStyle}>
-        {/* Left: Room Details */}
-        <div style={roomDetailsStyle}>
-          <img src={room.image_url} alt={room.name} style={imageStyle} />
+        <div style={contentWrapperStyle}>
+          {/* LEFT SIDE */}
+          <div style={roomDetailsStyle}>
+            <img src={room.image_url} alt={room.name} style={imageStyle} />
 
-          <div style={roomInfoStyle}>
-            <p><strong>Capacity:</strong> {room.capacity} Guests</p>
-
-            <p>
-              <strong>Features:</strong>{" "}
-              {room.description?.replace(/"/g, "")}
-            </p>
-
-            <p>
-              <strong>Price:</strong> ₹{room.price}
-            </p>
+            <div style={roomInfoStyle}>
+              <p><strong>Capacity:</strong> {room.capacity} Guests</p>
+              <p><strong>Features:</strong> {room.description?.replace(/"/g, "")}</p>
+              <p><strong>Price:</strong> ₹{room.price}</p>
+            </div>
           </div>
-        </div>
 
-        {/* Right: Form */}
-        <div style={formWrapperStyle}>
-          <form onSubmit={handleSubmit} style={formStyle}>
-            <input
-              type="text"
-              placeholder="Full Name *"
-              value={formData.name}
-              onChange={(e) => handleChange("name", e.target.value)}
-              required
-              style={inputStyle}
-            />
+          {/* RIGHT FORM */}
+          <div style={formWrapperStyle}>
+            <form onSubmit={handleSubmit} style={formStyle}>
+              <input
+                placeholder="Full Name *"
+                value={formData.name}
+                onChange={(e) => handleChange("name", e.target.value)}
+                style={inputStyle}
+              />
 
-            <input
-              type="email"
-              placeholder="Email Address *"
-              value={formData.email}
-              onChange={(e) => handleChange("email", e.target.value)}
-              required
-              style={inputStyle}
-            />
+              <input
+                placeholder="Email *"
+                value={formData.email}
+                onChange={(e) => handleChange("email", e.target.value)}
+                style={inputStyle}
+              />
 
-            <input
-              type="tel"
-              placeholder="Phone Number *"
-              value={formData.phone}
-              onChange={(e) => handleChange("phone", e.target.value)}
-              required
-              style={inputStyle}
-            />
+              <input
+                placeholder="Phone *"
+                value={formData.phone}
+                onChange={(e) => handleChange("phone", e.target.value)}
+                style={inputStyle}
+              />
 
-            <input
-              type="date"
-              value={formData.date}
-              onChange={(e) => handleChange("date", e.target.value)}
-              min={new Date().toISOString().split("T")[0]}
-              required
-              style={inputStyle}
-            />
+              <input
+                type="date"
+                value={formData.date}
+                onChange={(e) => handleChange("date", e.target.value)}
+                style={inputStyle}
+              />
 
-            <input
-              type="number"
-              placeholder="Number of Guests"
-              value={formData.guests}
-              onChange={(e) => handleChange("guests", e.target.value)}
-              min="1"
-              style={inputStyle}
-            />
+              <input
+                type="number"
+                placeholder="Guests"
+                value={formData.guests}
+                onChange={(e) => handleChange("guests", e.target.value)}
+                style={inputStyle}
+              />
 
-            <textarea
-              placeholder="Additional Details"
-              value={formData.message}
-              onChange={(e) => handleChange("message", e.target.value)}
-              rows="5"
-              style={{ ...inputStyle, resize: "vertical" }}
-            />
+              <textarea
+                placeholder="Message"
+                value={formData.message}
+                onChange={(e) => handleChange("message", e.target.value)}
+                rows="5"
+                style={{ ...inputStyle, resize: "vertical" }}
+              />
 
-            <button type="submit" style={buttonStyle}>Submit Booking Inquiry</button>
-          </form>
+              <button type="submit" style={buttonStyle}>
+                Submit Booking Inquiry
+              </button>
+            </form>
+          </div>
         </div>
       </div>
 
-      
+      <Footer />
     </div>
-    <Footer />
-    </>
   );
 }
 
-// --- Styles (same as before) ---
-const pageStyle = {
-  width: "100%",
+/* ================= WRAPPER ================= */
+const wrapperStyle = {
+  display: "flex",
+  flexDirection: "column",
   minHeight: "100vh",
-  padding: "50px 5%",
-  background: "#fff8f2",
-  fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
 };
 
+/* ================= PAGE ================= */
+const pageStyle = {
+  flex: 1,
+  width: "100%",
+  padding: "50px 5%",
+  background: "#fff8f2",
+  boxSizing: "border-box",
+};
+
+/* ================= TITLE ================= */
 const headingStyle = {
   textAlign: "center",
   marginBottom: "40px",
-  fontSize: "2.8rem",
+  fontSize: "2.5rem",
   color: "#333",
 };
 
+/* ================= FIXED LAYOUT (IMPORTANT) ================= */
 const contentWrapperStyle = {
   display: "flex",
   gap: "40px",
   flexWrap: "wrap",
-  justifyContent: "center",
+  justifyContent: "space-between",   // FIX
+  alignItems: "flex-start",          // FIX
 };
 
+/* LEFT */
 const roomDetailsStyle = {
-  flex: "1 1 400px",
-  maxWidth: "600px",
+  flex: "1 1 55%",
+  minWidth: "280px",
+  maxWidth: "650px",
 };
 
+/* IMAGE */
 const imageStyle = {
   width: "100%",
   borderRadius: "20px",
-  objectFit: "cover",
-  marginBottom: "20px",
+  display: "block",
 };
 
+/* TEXT */
 const roomInfoStyle = {
   fontSize: "1.1rem",
-  lineHeight: "1.6",
   color: "#555",
+  marginTop: "10px",
 };
 
+/* RIGHT FORM */
 const formWrapperStyle = {
-  flex: "1 1 350px",
-  maxWidth: "500px",
+  flex: "1 1 40%",
+  minWidth: "280px",
+  maxWidth: "520px",
   background: "#fff",
   padding: "30px",
   borderRadius: "20px",
   boxShadow: "0 10px 25px rgba(0,0,0,0.1)",
+  boxSizing: "border-box",
 };
 
+/* FORM */
 const formStyle = {
   display: "flex",
   flexDirection: "column",
   gap: "15px",
+  width: "100%",
 };
 
+/* INPUT FIX */
 const inputStyle = {
   width: "100%",
-  padding: "14px 16px",
+  padding: "14px",
   borderRadius: "12px",
   border: "1px solid #ddd",
-  fontSize: "16px",
-  outline: "none",
-  transition: "0.3s",
+  boxSizing: "border-box",
 };
 
+/* BUTTON */
 const buttonStyle = {
-  width: "100%",
   padding: "15px",
   borderRadius: "50px",
   background: "#c59d5f",
   color: "#fff",
-  fontSize: "18px",
   fontWeight: "bold",
   cursor: "pointer",
 };
-
