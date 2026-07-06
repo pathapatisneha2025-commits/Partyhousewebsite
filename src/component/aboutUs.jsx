@@ -1,4 +1,4 @@
-import { motion } from "framer-motion"; 
+import { motion } from "framer-motion";
 import { Sparkles, Users, Award, Heart } from "lucide-react";
 
 export function AboutSection() {
@@ -9,90 +9,154 @@ export function AboutSection() {
     { icon: Heart, number: "100%", label: "Satisfaction Rate" },
   ];
 
-  const styles = {
-    section: {
-      padding: "96px 0",
-      background: "linear-gradient(to bottom, white, #fff8f2)",
-    },
-    container: {
-      maxWidth: "1280px",
-      margin: "0 auto",
-      padding: "0 24px",
-    },
-    badge: {
-      display: "inline-block",
-      padding: "8px 24px",
-      background: "rgba(197, 157, 95, 0.1)",
-      color: "#c59d5f",
-      borderRadius: "999px",
-      marginBottom: "16px",
-      fontWeight: 600,
-    },
-    heading: {
-      fontSize: "40px",
-      fontWeight: 700,
-      marginBottom: "24px",
-      lineHeight: 1.2,
-    },
-    headingHighlight: {
-      color: "#c59d5f",
-    },
-    paragraph: {
-      color: "#555",
-      fontSize: "18px",
-      maxWidth: "700px",
-      margin: "0 auto",
-      lineHeight: 1.7,
-    },
-    statsGrid: {
-      display: "grid",
-      gridTemplateColumns: "repeat(2, 1fr)",
-      gap: "24px",
-      marginTop: "48px",
-    },
-    statCard: {
-      background: "white",
-      padding: "32px",
-      borderRadius: "20px",
-      boxShadow: "0px 4px 20px rgba(0,0,0,0.1)",
-      textAlign: "center",
-      transition: "all 0.3s ease",
-      cursor: "pointer",
-    },
-    iconWrapper: {
-      width: "64px",
-      height: "64px",
-      background: "rgba(197,157,95,0.1)",
-      borderRadius: "50%",
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-      margin: "0 auto 16px",
-      transition: "background 0.3s ease",
-    },
-    statNumber: {
-      fontSize: "36px",
-      fontWeight: 700,
-      color: "#222",
-      marginBottom: "8px",
-    },
-    statLabel: {
-      fontSize: "16px",
-      color: "#666",
-      fontWeight: 500,
-    },
-    // Responsive
-    responsiveLg: {
-      "@media(min-width: 1024px)": {
-        gridTemplateColumns: "repeat(4, 1fr)",
-      },
-    },
-  };
-
   return (
-    <section id="about" style={styles.section}>
-      <div style={styles.container}>
-        {/* Top text block */}
+    <section className="about-section">
+
+      {/* CSS */}
+      <style>{`
+        .about-section {
+          padding: 96px 0;
+          background: linear-gradient(to bottom, white, #fff8f2);
+        }
+
+        .container {
+          max-width: 1280px;
+          margin: 0 auto;
+          padding: 0 24px;
+        }
+
+        .badge {
+          display: inline-block;
+          padding: 8px 24px;
+          background: rgba(197, 157, 95, 0.1);
+          color: #c59d5f;
+          border-radius: 999px;
+          margin-bottom: 16px;
+          font-weight: 600;
+        }
+
+        .heading {
+          font-size: 40px;
+          font-weight: 700;
+          margin-bottom: 24px;
+          line-height: 1.2;
+        }
+
+        .highlight {
+          color: #c59d5f;
+        }
+
+        .paragraph {
+          color: #555;
+          font-size: 18px;
+          max-width: 700px;
+          margin: 0 auto;
+          line-height: 1.7;
+        }
+
+        /* GRID DEFAULT (DESKTOP) */
+        .stats-grid {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          gap: 24px;
+          margin-top: 48px;
+        }
+
+        .stat-card {
+          background: white;
+          padding: 32px;
+          border-radius: 20px;
+          box-shadow: 0px 4px 20px rgba(0,0,0,0.1);
+          text-align: center;
+          transition: 0.3s ease;
+        }
+
+        .stat-card:hover {
+          transform: translateY(-8px);
+          box-shadow: 0px 10px 30px rgba(0,0,0,0.15);
+        }
+
+        .icon-wrapper {
+          width: 64px;
+          height: 64px;
+          background: rgba(197,157,95,0.1);
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin: 0 auto 16px;
+          transition: 0.3s;
+        }
+
+        .stat-card:hover .icon-wrapper {
+          background: rgba(197,157,95,0.2);
+        }
+
+        .stat-number {
+          font-size: 36px;
+          font-weight: 700;
+          color: #222;
+          margin-bottom: 8px;
+        }
+
+        .stat-label {
+          font-size: 16px;
+          color: #666;
+        }
+
+        /* TABLET */
+        @media (max-width: 1024px) {
+          .stats-grid {
+            grid-template-columns: repeat(2, 1fr);
+          }
+
+          .heading {
+            font-size: 34px;
+          }
+        }
+
+        /* MOBILE */
+        @media (max-width: 600px) {
+          .about-section {
+            padding: 60px 0;
+          }
+
+          .heading {
+            font-size: 26px;
+            line-height: 1.3;
+          }
+
+          .paragraph {
+            font-size: 15px;
+          }
+
+          .stats-grid {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 14px;
+          }
+
+          .stat-card {
+            padding: 18px;
+          }
+
+          .stat-number {
+            font-size: 24px;
+          }
+
+          .icon-wrapper {
+            width: 50px;
+            height: 50px;
+          }
+
+          .stat-label {
+            font-size: 13px;
+          }
+        }
+      `}</style>
+
+      <div className="container">
+
+        {/* HEADER */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -100,58 +164,42 @@ export function AboutSection() {
           transition={{ duration: 0.8 }}
           style={{ textAlign: "center", marginBottom: "64px" }}
         >
-          <span style={styles.badge}>About Us</span>
+          <span className="badge">About Us</span>
 
-          <h2 style={styles.heading}>
+          <h2 className="heading">
             Creating Unforgettable <br />
-            <span style={styles.headingHighlight}>
+            <span className="highlight">
               Celebrations Since 2010
             </span>
           </h2>
 
-          <p style={styles.paragraph}>
+          <p className="paragraph">
             At Royal Celebration Party Hall, we believe every event deserves to
-            be extraordinary. With our elegant venues, exceptional service, and
-            attention to detail, we transform your special moments into cherished
-            memories that last a lifetime.
+            be extraordinary. With elegant venues, exceptional service, and
+            attention to detail, we create unforgettable memories.
           </p>
         </motion.div>
 
-        {/* Stats */}
-        <div style={styles.statsGrid}>
+        {/* STATS (SAME LAYOUT, ONLY RESPONSIVE GRID CHANGES) */}
+        <div className="stats-grid">
           {stats.map((stat, index) => {
             const Icon = stat.icon;
 
             return (
               <motion.div
                 key={index}
+                className="stat-card"
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1, duration: 0.6 }}
-                whileHover={{ y: -10 }}
-                style={styles.statCard}
-                onMouseOver={(e) => {
-                  e.currentTarget.style.boxShadow =
-                    "0px 8px 30px rgba(0,0,0,0.15)";
-                  e.currentTarget
-                    .querySelector(".icon-wrapper").style.background =
-                    "rgba(197,157,95,0.2)";
-                }}
-                onMouseOut={(e) => {
-                  e.currentTarget.style.boxShadow =
-                    "0px 4px 20px rgba(0,0,0,0.1)";
-                  e.currentTarget
-                    .querySelector(".icon-wrapper").style.background =
-                    "rgba(197,157,95,0.1)";
-                }}
               >
-                <div className="icon-wrapper" style={styles.iconWrapper}>
-                  <Icon size={32} color="#c59d5f" />
+                <div className="icon-wrapper">
+                  <Icon size={28} color="#c59d5f" />
                 </div>
 
-                <h3 style={styles.statNumber}>{stat.number}</h3>
-                <p style={styles.statLabel}>{stat.label}</p>
+                <h3 className="stat-number">{stat.number}</h3>
+                <p className="stat-label">{stat.label}</p>
               </motion.div>
             );
           })}
