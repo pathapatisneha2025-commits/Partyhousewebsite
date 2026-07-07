@@ -130,8 +130,9 @@ export function ContactSection() {
           }
         }
 
-      @media (max-width: 600px) {
-
+        /* MOBILE */
+        /* MOBILE */
+@media (max-width: 600px) {
   .contact-section {
     padding: 60px 0;
   }
@@ -155,14 +156,14 @@ export function ContactSection() {
   }
 
   .info-box {
-    width: 100%;
-    margin: 0 auto;
-    padding: 30px 20px;
+    margin-left: 12px;
+    margin-right: 20px;
+    padding: 28px 40px;
+    width: calc(100% - 24px);
     box-sizing: border-box;
     align-items: center;
     text-align: center;
   }
-}
 }
         }
       `}</style>
