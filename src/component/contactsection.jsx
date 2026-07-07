@@ -109,15 +109,11 @@ export function ContactSection() {
         }
 
         /* INFO BOX */
-     .info-box {
-  background:#fff5ec;
-  width:100%;
-  padding:24px;
-  border-radius:22px;
-  display:flex;
-  flex-direction:column;
-  gap:28px;
-  box-sizing:border-box;
+      .info-box {
+  width: 100%;
+  margin: 0;
+  padding: 24px;
+  box-sizing: border-box;
 }
 
         /* TABLET */
