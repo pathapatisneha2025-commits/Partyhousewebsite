@@ -131,16 +131,7 @@ export function ContactSection() {
         }
 
         /* MOBILE */
-        /* MOBILE */
-@media (max-width: 600px) {
-  .contact-section {
-    padding: 60px 0;
-  }
-
-  .container {
-    padding: 0 20px;
-  }
-
+       @media (max-width: 600px) {
   .form-row {
     grid-template-columns: 1fr;
   }
@@ -149,20 +140,19 @@ export function ContactSection() {
     padding: 22px;
   }
 
-  input,
-  select,
-  textarea {
+  input, select, textarea {
     font-size: 14px;
   }
 
+  .contact-grid {
+    width: 100%;
+  }
+
   .info-box {
-    margin-left: 12px;
-    margin-right: 20px;
-    padding: 28px 20px;
-    width: calc(100% - 24px);
+    width: calc(100% - 32px);
+    margin: 0 auto;
+    padding: 24px;
     box-sizing: border-box;
-    align-items: center;
-    text-align: center;
   }
 }
         }
