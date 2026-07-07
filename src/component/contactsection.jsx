@@ -119,43 +119,67 @@ export function ContactSection() {
           height: fit-content;
         }
 
-        /* TABLET */
-        @media (max-width: 1024px) {
-          .contact-grid {
-            grid-template-columns: 1fr;
-          }
+       /* TABLET */
+@media (max-width: 1024px) {
+  .contact-grid {
+    grid-template-columns: 1fr;
+  }
 
-          .form-card {
-            padding: 32px;
-          }
-        }
+  .form-card {
+    padding: 32px;
+  }
 
-        /* MOBILE */
-      @media (max-width: 600px) {
+  .info-box {
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+}
+
+/* MOBILE */
+@media (max-width: 600px) {
+  .contact-section {
+    padding: 60px 0;
+  }
+
+  .container {
+    padding: 0 16px;
+  }
+
+  .contact-grid {
+    grid-template-columns: 1fr;
+    justify-items: center; /* centers grid children */
+    gap: 30px;
+  }
+
   .form-row {
     grid-template-columns: 1fr;
   }
 
   .form-card {
+    width: 100%;
     padding: 22px;
-  }
-
-  input, select, textarea {
-    font-size: 14px;
+    box-sizing: border-box;
   }
 
   .info-box {
-    padding: 24px;
     width: 100%;
-    max-width: 340px;
-    margin: 0 auto; /* centers the box */
-    box-sizing: border-box;
+    max-width: 340px; /* controls mobile size */
+    padding: 28px 20px;
+    margin: 0 auto; /* centers box */
     align-items: center;
     text-align: center;
+    box-sizing: border-box;
   }
 
-  .contact-grid {
-    justify-items: center; /* centers grid children */
+  .info-box h3 {
+    margin-bottom: 5px;
+  }
+
+  input,
+  select,
+  textarea {
+    font-size: 14px;
   }
 }
         }
