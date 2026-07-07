@@ -110,15 +110,15 @@ export function ContactSection() {
 
         /* INFO BOX */
         .info-box {
-  background: #fff5ec;
-  padding: 40px 30px;
-  border-radius: 22px;
-  display: flex;
-  flex-direction: column;
-  gap: 32px;
-  height: fit-content;
-  box-sizing: border-box;
-}
+          background: #fff5ec;
+          padding: 40px 30px;
+          border-radius: 22px;
+          display: flex;
+          flex-direction: column;
+          gap: 28px;
+          height: fit-content;
+        }
+
         /* TABLET */
         @media (max-width: 1024px) {
           .contact-grid {
@@ -130,72 +130,33 @@ export function ContactSection() {
           }
         }
 
-      /* MOBILE */
-@media (max-width: 600px) {
-
-  .contact-section {
-    padding: 60px 0;
-  }
-
-  .container {
-    padding: 0 16px;
-  }
-
-  .contact-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
-    align-items: center;
+        /* MOBILE */
+      @media (max-width: 600px) {
+  .form-row {
+    grid-template-columns: 1fr;
   }
 
   .form-card {
-    width: 100%;
-    padding: 20px;
-    box-sizing: border-box;
+    padding: 22px;
   }
 
-  .form-row {
-    grid-template-columns: 1fr;
-    gap: 16px;
-  }
-
-  input,
-  select,
-  textarea {
+  input, select, textarea {
     font-size: 14px;
-    padding: 12px;
   }
 
-  /* INFO BOX FIX */
   .info-box {
+    padding: 24px;
     width: 100%;
-    max-width: 350px;
-    padding: 30px 20px;
-    margin: 0 auto;
-    border-radius: 22px;
-    gap: 35px;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
+    max-width: 340px;
+    margin: 0 auto; /* centers the box */
     box-sizing: border-box;
+    align-items: center;
+    text-align: center;
   }
 
-  .info-box > div {
-    width: 100%;
-    margin: 0;
+  .contact-grid {
+    justify-items: center; /* centers grid children */
   }
-
-  .info-box h3 {
-    margin: 10px 0 5px;
-    font-size: 20px;
-  }
-
-  .info-box p {
-    margin: 0;
-    line-height: 1.5;
-    word-break: break-word;
-  }
-}
 }
         }
       `}</style>
