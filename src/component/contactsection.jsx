@@ -157,8 +157,8 @@ export function ContactSection() {
 
   .info-box {
     margin-left: 12px;
-    margin-right: 40px;
-    padding: 28px 40px;
+    margin-right: 20px;
+    padding: 28px 20px;
     width: calc(100% - 24px);
     box-sizing: border-box;
     align-items: center;
