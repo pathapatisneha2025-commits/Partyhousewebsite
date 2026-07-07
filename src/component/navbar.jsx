@@ -21,7 +21,6 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // active link style function
   const activeStyle = ({ isActive }) => ({
     color: isActive ? "#c59d5f" : "#000",
     borderBottom: isActive ? "2px solid #c59d5f" : "none",
@@ -29,82 +28,91 @@ export default function Navbar() {
   });
 
   return (
-    <nav className={`navbar ${shrink ? "shrink" : ""}`}>
-      <div className="nav-container">
+    <>
+      <nav className={`navbar ${shrink ? "shrink" : ""}`}>
+        <div className="nav-container">
 
-        {/* Logo */}
-        <NavLink to="/" className="logo">
-          <img src="/Logoimage.jpeg" alt="Logo" />
-        </NavLink>
+          {/* Logo */}
+          <NavLink to="/" className="logo">
+            <img src="/Logoimage.jpeg" alt="Logo" />
+          </NavLink>
 
-        {/* Mobile Icon */}
-        <div
-          className="mobile-menu-icon"
-          onClick={() => setMobileOpen(!mobileOpen)}
-        >
-          {mobileOpen ? <FiX size={28} /> : <FiMenu size={28} />}
+
+          {/* Mobile Menu Icon */}
+          <div
+            className="mobile-menu-icon"
+            onClick={() => setMobileOpen(!mobileOpen)}
+          >
+            {mobileOpen ? <FiX size={28} /> : <FiMenu size={28} />}
+          </div>
+
+
+          {/* Links */}
+          <ul className={`nav-links ${mobileOpen ? "open" : ""}`}>
+
+            <li>
+              <NavLink to="/" style={activeStyle}>
+                Home
+              </NavLink>
+            </li>
+
+            <li>
+              <NavLink to="/about" style={activeStyle}>
+                About Us
+              </NavLink>
+            </li>
+
+            <li>
+              <NavLink to="/rooms" style={activeStyle}>
+                Rooms
+              </NavLink>
+            </li>
+
+            <li>
+              <NavLink to="/bookingpage" style={activeStyle}>
+                Bookings
+              </NavLink>
+            </li>
+
+            <li>
+              <NavLink to="/services" style={activeStyle}>
+                Services
+              </NavLink>
+            </li>
+
+            <li>
+              <NavLink to="/contact" style={activeStyle}>
+                Contact
+              </NavLink>
+            </li>
+
+          </ul>
+
         </div>
+      </nav>
 
-        {/* Nav Links */}
-        <ul className={`nav-links ${mobileOpen ? "open" : ""}`}>
 
-          <li>
-            <NavLink to="/" style={activeStyle}>
-              Home
-            </NavLink>
-          </li>
-
-          <li>
-            <NavLink to="/about" style={activeStyle}>
-              About Us
-            </NavLink>
-          </li>
-
-          <li>
-            <NavLink to="/rooms" style={activeStyle}>
-              Rooms
-            </NavLink>
-          </li>
-
-          <li>
-            <NavLink to="/bookingpage" style={activeStyle}>
-              Bookings
-            </NavLink>
-          </li>
-
-          <li>
-            <NavLink to="/services" style={activeStyle}>
-              Services
-            </NavLink>
-          </li>
-
-          <li>
-            <NavLink to="/contact" style={activeStyle}>
-              Contact
-            </NavLink>
-          </li>
-
-        </ul>
-
-      </div>
-
-      {/* Styles */}
       <style jsx="true">{`
+
+        /* FIXED HEADER */
         .navbar {
-          position: sticky;
+          position: fixed;
           top: 0;
+          left: 0;
           width: 100%;
-          background: rgba(255, 255, 255, 0.95);
+          background: rgba(255,255,255,0.95);
           backdrop-filter: blur(12px);
           border-bottom: 1px solid #e0dede;
           transition: 0.3s ease;
           z-index: 1000;
         }
 
+
         .navbar.shrink .logo img {
           width: 90px;
           height: 45px;
         }
+
 
         .nav-container {
           display: flex;
@@ -114,6 +122,7 @@ export default function Navbar() {
           position: relative;
         }
 
+
         .logo img {
           width: 120px;
           height: 60px;
@@ -121,66 +130,91 @@ export default function Navbar() {
           transition: 0.3s ease;
         }
 
+
         .nav-links {
-          display: flex;
-          gap: 30px;
-          list-style: none;
-          padding: 0;
-          margin: 0;
+          display:flex;
+          gap:30px;
+          list-style:none;
+          padding:0;
+          margin:0;
         }
+
 
         .nav-links li a {
-          text-decoration: none;
-          font-weight: 600;
-          padding: 10px;
-          border-radius: 8px;
-          transition: 0.3s ease;
+          text-decoration:none;
+          font-weight:600;
+          padding:10px;
+          border-radius:8px;
+          transition:0.3s ease;
         }
 
-        /* Mobile */
+
+        /* Mobile Icon */
         .mobile-menu-icon {
-          display: none;
-          cursor: pointer;
+          display:none;
+          cursor:pointer;
         }
 
-        @media (max-width: 768px) {
-          .mobile-menu-icon {
-            display: block;
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 1100;
-            background: white;
-            border-radius: 8px;
-            padding: 4px;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+
+
+        /* MOBILE */
+        @media(max-width:768px){
+
+          .nav-container{
+            padding:15px 20px;
           }
 
-          .nav-links {
-            flex-direction: column;
-            overflow: hidden;
-            max-height: 0;
-            transition: max-height 0.4s ease;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(12px);
-            width: 100%;
-            position: absolute;
-            top: 70px;
-            left: 0;
-            gap: 12px;
+
+          .logo img{
+            width:90px;
+            height:45px;
           }
 
-          .nav-links.open {
-            max-height: 500px;
+
+          .mobile-menu-icon{
+            display:block;
+            position:absolute;
+            right:20px;
+            top:50%;
+            transform:translateY(-50%);
+            background:white;
+            border-radius:8px;
+            padding:5px;
+            box-shadow:0 2px 8px rgba(0,0,0,0.15);
+            z-index:1200;
           }
 
-          .nav-links li a {
-            text-align: center;
-            padding: 15px 0;
-            display: block;
+
+
+          .nav-links{
+            position:absolute;
+            top:75px;
+            left:0;
+            width:100%;
+            flex-direction:column;
+            gap:0;
+            background:white;
+            overflow:hidden;
+            max-height:0;
+            transition:max-height .4s ease;
+            box-shadow:0 8px 20px rgba(0,0,0,0.1);
           }
+
+
+          .nav-links.open{
+            max-height:500px;
+          }
+
+
+          .nav-links li a{
+            display:block;
+            text-align:center;
+            padding:16px 0;
+          }
+
         }
+
       `}</style>
-    </nav>
+    </>
   );
 }
