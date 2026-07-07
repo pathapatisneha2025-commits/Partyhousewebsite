@@ -109,15 +109,12 @@ export function ContactSection() {
         }
 
         /* INFO BOX */
-        .info-box {
-          background: #fff5ec;
-          padding: 40px 30px;
-          border-radius: 22px;
-          display: flex;
-          flex-direction: column;
-          gap: 28px;
-          height: fit-content;
-        }
+      .info-box {
+  width: 100%;
+  margin: 0;
+  padding: 24px;
+  box-sizing: border-box;
+}
 
         /* TABLET */
         @media (max-width: 1024px) {
@@ -130,8 +127,12 @@ export function ContactSection() {
           }
         }
 
-        /* MOBILE */
        @media (max-width: 600px) {
+
+  .container {
+    padding: 0 16px;
+  }
+
   .form-row {
     grid-template-columns: 1fr;
   }
@@ -140,20 +141,19 @@ export function ContactSection() {
     padding: 22px;
   }
 
-  input, select, textarea {
+  input, 
+  select, 
+  textarea {
     font-size: 14px;
   }
 
-  .contact-grid {
-    width: 100%;
-  }
-
   .info-box {
-    width: calc(100% - 32px);
-    margin: 0 auto;
+    width: 100%;
+    margin: 0;
     padding: 24px;
     box-sizing: border-box;
   }
+}
 }
         }
       `}</style>
