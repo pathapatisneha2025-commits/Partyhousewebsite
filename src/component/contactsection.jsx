@@ -127,33 +127,42 @@ export function ContactSection() {
           }
         }
 
-       @media (max-width: 600px) {
+      @media (max-width: 600px) {
 
   .container {
     padding: 0 16px;
+  }
+
+  .contact-grid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+
+  .form-card {
+    width: 100%;
+    padding: 22px;
+    box-sizing: border-box;
   }
 
   .form-row {
     grid-template-columns: 1fr;
   }
 
-  .form-card {
-    padding: 22px;
-  }
-
-  input, 
-  select, 
+  input,
+  select,
   textarea {
     font-size: 14px;
   }
 
   .info-box {
     width: 100%;
-    margin: 0;
+    max-width: 380px;
+    margin: 0 auto;
     padding: 24px;
     box-sizing: border-box;
   }
-}
 }
         }
       `}</style>
