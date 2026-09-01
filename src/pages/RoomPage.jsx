@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Footer } from "../component/footersection";
 import { useNavigate } from "react-router-dom";
 
-const BASE_URL = "https://partyhousedatabase-rpft.onrender.com";
+const BASE_URL = "https://api.ajpartyhouse.in";
 
 export default function RoomsPage() {
   const navigate = useNavigate();

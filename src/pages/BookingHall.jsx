@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Footer } from "../component/footersection";
 
-const BASE_URL = "https://partyhousedatabase-rpft.onrender.com";
+const BASE_URL = "https://api.ajpartyhouse.in";
 
 export function BookingHall() {
   const { id } = useParams();

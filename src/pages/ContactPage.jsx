@@ -30,7 +30,7 @@ export default function ContactPage() {
 
     try {
       const response = await fetch(
-        "https://partyhousedatabase-rpft.onrender.com/contact/send",
+        "https://api.ajpartyhouse.in/contact/send",
         {
           method: "POST",
           headers: {
